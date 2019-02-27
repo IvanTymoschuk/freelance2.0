@@ -24,7 +24,7 @@ namespace BLLViews.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-
+        public virtual DbSet<Job> Jobs { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
