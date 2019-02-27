@@ -32,10 +32,10 @@
 
 
 
-            @RenderBody()
+    @RenderBody()
 
-            @Scripts.Render("~/bundles/jquery")
-            @Scripts.Render("~/bundles/MetroUI")
-  
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/MetroUI")
+    @RenderSection("scripts", required: false)
 </body>
 </html>
