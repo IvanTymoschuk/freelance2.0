@@ -19,12 +19,16 @@ namespace BLLViews
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+            bundles.Add(new ScriptBundle("~/bundles/MetroUI").Include(
+                      "~/Scripts/metro.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/metro-all.css",
+                        "~/Content/metro-colors.css",
+                          "~/Content/metro-icons.css",
+                            "~/Content/metro-rtl.css",
+                      "~/Content/less/schemes/red-dark.css",
+                                "~/Content/site.css"));
         }
     }
 }

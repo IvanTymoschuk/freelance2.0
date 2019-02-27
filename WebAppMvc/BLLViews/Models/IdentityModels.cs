@@ -29,5 +29,6 @@ namespace BLLViews.Models
         {
             return new ApplicationDbContext();
         }
+   
     }
 }
