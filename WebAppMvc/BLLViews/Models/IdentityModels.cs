@@ -32,11 +32,11 @@ namespace BLLViews.Models
     {
         public Category()
         {
-            Jobs = new List<Job>();
+            Jobs = new List<Jobs>();
         }
         public int ID { get; set; }
         public string Name { get; set; }
-        public ICollection<Job> Jobs { get; set; }
+        public ICollection<Jobs> Jobs { get; set; }
     }
     public class Jobs
     {

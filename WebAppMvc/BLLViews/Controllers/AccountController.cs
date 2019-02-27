@@ -166,7 +166,7 @@ namespace BLLViews.Controllers
                     await UserManager.SendEmailAsync(user.Id, "Email Confirmation",
                                "To complete registration, go to the link:: <a href=\""
                                                                + callbackUrl + "\">complete the registration </a>");
-                    return View("/account/login");
+                    return RedirectToAction("Login","Account");
                 }
                 AddErrors(result);
             }
