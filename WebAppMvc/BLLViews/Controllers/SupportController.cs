@@ -51,7 +51,7 @@ namespace BLLViews.Controllers
                         ctx.Tickets.FirstOrDefault(x => x.ID == model.ticket.ID).ticketMSGs.Add(new TicketMSG() { Text = model.mSG.Text, UserID = model.uid, Date = DateTime.Now });
                          ctx.Tickets.FirstOrDefault(x => x.ID == model.ticket.ID).LastUpdate = DateTime.Now;
                          ctx.Tickets.FirstOrDefault(x => x.ID == model.ticket.ID).Status = model.newStatus;
-                        UserManager.SendEmail(ctx.Tickets.FirstOrDefault(x => x.ID == model.ticket.ID).OwnerID, "Support", "Your request has been answered!");
+                        UserManager.SendEmail(ctx.Tickets.FirstOrDefault(x => x.ID == model.ticket.ID).OwnerID, "Support" +DateTime.Now, "Your request has been answered!");
                        
                        ctx.SaveChanges();
                     }
@@ -133,7 +133,8 @@ namespace BLLViews.Controllers
                     Theme = model.ticket.Theme,
                     };
                     ctx.TicketMSGs.Add(new TicketMSG() { ticket = ticket, Text = model.mSG.Text, Date = DateTime.Now, UserID = model.uid});
-                    ctx.SaveChanges();
+                UserManager.SendEmail(model.uid, "We received a request from you" + DateTime.Now, "Hello");
+                ctx.SaveChanges();
                 }
                 return Redirect("~/support/mytickets/" + model.uid);
             }

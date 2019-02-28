@@ -163,7 +163,7 @@ namespace BLLViews.Controllers
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code },
                                protocol: Request.Url.Scheme);
                
-                    await UserManager.SendEmailAsync(user.Id, "Email Confirmation",
+                    await UserManager.SendEmailAsync(user.Id, "Email Confirmation"+DateTime.Now,
                                "To complete registration, go to the link:: <a href=\""
                                                                + callbackUrl + "\">complete the registration </a>");
                     return RedirectToAction("Login","Account");
