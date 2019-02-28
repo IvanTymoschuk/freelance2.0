@@ -3,18 +3,44 @@
 @{
     ViewBag.Title = "Home Page";
 }
+<style>
+    .stCanvas{
+        height:200px;
+        width: 400px;
+    }
+
+</style>
 
 <div data-role="cube" data-rules="myDemoRules2"></div>
 <h2 class="text-center">This page is in development!!!</h2>
-<script>
-    var myDemoRules2 = [
-        {on: {'top': [1, 2, 5], 'left': [9, 13, 14], 'right': [15, 12, 16]}},
-        {on: {'top': [9, 6, 3], 'left': [5, 10, 15], 'right': [14, 11, 8]}},
-        {on: {'top': [13, 4],   'left': [1, 16],     'right': [13, 4]}},
-        {on: {'top': [10, 7],   'left': [6, 11],     'right': [10, 7]}},
-        {on: {'top': [8, 14],   'left': [2, 12],     'right': [9, 3]}},
-        {on: {'top': [11],      'left': [7],         'right': [6]}},
-        {on: {'top': [12, 15],  'left': [3, 8],      'right': [2, 5]}},
-        {on: {'top': [16],      'left': [4],         'right': [1]}}
-    ];
-</script>
+
+
+<div class="float-left" style="width: 30%">
+
+    <p><h1> Hire freelancers.</h1></p>
+    <p><h1>  Make things</h1></p>
+    <p><h1>   happen.</h1></p>
+   
+
+    <h3>Grow your business through the top freelancing website. Hire talent nearby or worldwide.</h3>
+
+</div>
+
+
+    <div class="float-left" style="width:60%">
+       
+        <div class="stCanvas">
+            <script>
+                var myDemoRules2 = [
+                    { on: { 'top': [1, 2, 5], 'left': [9, 13, 14], 'right': [15, 12, 16] } },
+                    { on: { 'top': [9, 6, 3], 'left': [5, 10, 15], 'right': [14, 11, 8] } },
+                    { on: { 'top': [13, 4], 'left': [1, 16], 'right': [13, 4] } },
+                    { on: { 'top': [10, 7], 'left': [6, 11], 'right': [10, 7] } },
+                    { on: { 'top': [8, 14], 'left': [2, 12], 'right': [9, 3] } },
+                    { on: { 'top': [11], 'left': [7], 'right': [6] } },
+                    { on: { 'top': [12, 15], 'left': [3, 8], 'right': [2, 5] } },
+                    { on: { 'top': [16], 'left': [4], 'right': [1] } }
+                ];
+            </script>
+        </div>
+    </div>
