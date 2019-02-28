@@ -1,0 +1,23 @@
+﻿@model BLLViews.Models.NewTicketModel
+@{
+                /**/
+
+                ViewBag.Title = "New Ticket";
+}
+<div class="container">
+    <br />
+    <h2 style="text-align:center">@ViewBag.Title</h2>
+
+    <br />
+    <hr />
+    @using (Html.BeginForm("NewTicket", "Support", FormMethod.Post))
+    {
+        @Html.TextBoxFor(model => Model.uid, new { @type = "hidden" })
+
+        @Html.TextBoxFor(model => Model.ticket.Theme, new { @class = "cell-12", data_role = "input", data_prepend = "Ticket theme: " })
+        <br />
+        @Html.TextAreaFor(Model => Model.mSG.Text, new { data_role = "textarea", data_default_value = "You must enter text" })
+        <br />
+        <button class="button alert outline cell-12">CREATE</button>
+    }
+</div>

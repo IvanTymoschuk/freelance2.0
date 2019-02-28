@@ -57,11 +57,11 @@ namespace BLLViews.Models
             ticketMSGs = new List<TicketMSG>();
         }
         public int ID { get; set; }
+        public string OwnerID { get; set; }
         public string Status { get; set; }
-        public virtual ApplicationUser Owner { get; set; }
-        public virtual ICollection<TicketMSG> ticketMSGs { get; set; }
         public DateTime LastUpdate { get; set; }
         public string Theme { get; set; }
+        virtual public ICollection<TicketMSG> ticketMSGs { get; set; }
     }
 
     public class TicketMSG
@@ -69,7 +69,7 @@ namespace BLLViews.Models
         public int ID { get; set; }
         public string Text { get; set; }
         public virtual Ticket ticket { get; set; }
-        public ApplicationUser User { get; set; }
+        public string UserID { get; set; }
         public DateTime Date { get; set; }
     }
 
@@ -90,10 +90,28 @@ namespace BLLViews.Models
         }
    
     }
-    class MyContextInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
+    class MyContextInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
     {
         protected override void Seed(ApplicationDbContext db)
         {
+
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+            var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(db));
+
+            var role1 = new IdentityRole { Name = "Admin" };
+            var role2 = new IdentityRole { Name = "User" };
+            var role3 = new IdentityRole { Name = "Support" };
+            var support = new ApplicationUser { Email = "Support@freelance.localhost", UserName = "Support@freelance.localhost" };
+            string password = "Test228";
+            support.EmailConfirmed = true;
+            var result = userManager.Create(support, password);
+            roleManager.Create(role1);
+            roleManager.Create(role2);
+            roleManager.Create(role3);
+            if (result.Succeeded)
+            {
+                userManager.AddToRole(support.Id, role3.Name);
+            }
 
             db.SaveChanges();
         }

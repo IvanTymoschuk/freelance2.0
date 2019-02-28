@@ -1,0 +1,64 @@
+﻿@model BLLViews.Models.AdmTicketModel
+@{
+    /**/
+
+    ViewBag.Title = "Requests";
+}
+<div class="container">
+    <br />
+    <h2 style="text-align:center">ID @Model.ticket.ID : @Model.ticket.Theme</h2>
+    <h4>Status: @Model.ticket.Status</h4>
+    <h4>LastUpdate: @Model.ticket.LastUpdate</h4>
+    <br />
+    <hr />
+    <br />
+    @foreach (var el in Model.ticketMSGs)
+    {
+        if (@el.UserID == @Model.uid)
+        {
+            <div data-role="panel"
+                 class="cell-7 fg-white text-bold float-left"
+                 data-title-caption="You"
+                 data-collapsible="true">
+                @el.Text
+                <br />
+                <p>@el.Date</p>
+            </div>
+            <br />
+        }
+        else
+        {
+            <br />
+            <div data-role="panel"
+                 class="cell-7 fg-white text-bold float-right"
+                 data-title-caption="User"
+                 data-collapsible="true"
+                 data-cls-title="fg-yellow text-bold">
+                @el.Text
+                <br />
+                <p>@el.Date</p>
+            </div>
+
+        }
+    }
+    <br />
+</div>
+<hr />
+<br />
+
+<div class="container">
+
+       @using (Html.BeginForm("Admticket", "Support", FormMethod.Post))
+        {
+            @Html.TextBoxFor(model => Model.uid, new { @type = "hidden" })
+            @Html.TextBoxFor(model => Model.ticket.ID, new { @type = "hidden" })
+            <br />
+            @Html.TextAreaFor(Model => Model.mSG.Text, new { data_role = "textarea", data_default_value = "Text" })
+            <br />
+            @Html.Label("SELECT STATUS: ")
+            @Html.DropDownListFor(Model => Model.newStatus, Model.listStatus);
+            <br />
+            <button class="button alert outline cell-12">SEND</button>
+        }
+    
+</div>
