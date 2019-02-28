@@ -3,14 +3,21 @@
     ViewBag.Title = "Register";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+
+    .stLoginInput {
+        margin-left: 30%;
+        margin-right: 30%;
+    }
+</style>
 
     <div class="container">
-        <h2 class="text-center">@ViewBag.Title.</h2>
+        <h2 class="text-center">@ViewBag.Title</h2>
 
-        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal stLoginInput", role = "form" }))
         {
             @Html.AntiForgeryToken()
-            <h4 class="text-center">Create a new account.</h4>
+            <h4 class="text-center">Create a new account</h4>
             <hr />
             @Html.ValidationSummary("", new { @class = "fg-white" })
 
