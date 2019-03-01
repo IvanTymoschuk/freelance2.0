@@ -25,7 +25,7 @@
                         <td>@el.Status</td>
                         <td>@el.Theme</td>
                         <td>@el.LastUpdate</td>
-                        <td><a href="/support/ticket/@Model.uid/@el.ID" class="cell-12 button alert outline" style="font-size:14px">INFO</a></td>
+                        <td><a href="/support/ticket/@el.ID" class="cell-12 button alert outline" style="font-size:14px">INFO</a></td>
                     </tr>
                 }
             </tbody>
@@ -35,7 +35,7 @@
         <br />
         <div class="row">
             <h3 class="cell-6">Help is needed?</h3>
-            <a href="/support/newticket/@Model.uid" class="cell-6 button alert outline" style="font-size:24px">GET SUPPORT</a>
+            <a href="/support/newticket" class="cell-6 button alert outline" style="font-size:24px">GET SUPPORT</a>
             <h5 class="cell-4">
                 Describe the situation - and our team will be happy to help you.
             </h5>
@@ -43,6 +43,6 @@
         <br />
         @if (Model.IsSupport)
         {
-            <a href="/support/Tickets/@Model.uid" class="cell-6 button alert outline" style="font-size:24px">SUPPORT</a>
+            <a href="/support/Tickets" class="cell-6 button alert outline" style="font-size:24px">SUPPORT</a>
         }
     </div>

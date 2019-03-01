@@ -12,7 +12,6 @@
     <hr />
     @using (Html.BeginForm("NewTicket", "Support", FormMethod.Post))
     {
-        @Html.TextBoxFor(model => Model.uid, new { @type = "hidden" })
 
         @Html.TextBoxFor(model => Model.ticket.Theme, new { @class = "cell-12", data_role = "input", data_prepend = "Ticket theme: " })
         <br />

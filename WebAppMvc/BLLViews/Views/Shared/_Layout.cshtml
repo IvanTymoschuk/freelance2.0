@@ -7,6 +7,9 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    @Scripts.Render("~/bundles/jquery")
+
     <style>
         .app-bar-menu li {
             list-style: none !important;
@@ -33,8 +36,6 @@
 
 
     @RenderBody()
-
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/MetroUI")
     @RenderSection("scripts", required: false)
 </body>

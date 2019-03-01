@@ -109,4 +109,10 @@ namespace BLLViews.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
+
+    public class BannedModel
+    {
+        public BansList Ban { get; set; }
+        public ApplicationUser User { get; set; }
+    }
 }

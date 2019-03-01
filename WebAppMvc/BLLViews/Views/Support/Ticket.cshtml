@@ -51,7 +51,6 @@
     {
         using (Html.BeginForm("Ticket", "Support", FormMethod.Post))
         {
-            @Html.TextBoxFor(model => Model.uid, new { @type = "hidden" })
             @Html.TextBoxFor(model => Model.ticket.ID, new { @type = "hidden" })
             <br />
             @Html.TextAreaFor(Model => Model.mSG.Text, new { data_role = "textarea", data_default_value = "Text" })

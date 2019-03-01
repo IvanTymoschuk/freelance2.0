@@ -1,0 +1,29 @@
+﻿@model BLLViews.Models.BannedModel
+
+@{
+    ViewBag.Title = "Banned";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <div class="container">
+        <h2 class="text-center">Banned</h2>
+
+        <h2 class="text-center">Hello @Model.User.UserName</h2>
+        <h3 class="text-center">Your account has been banned!</h3>
+        <h5>Reason:@Model.Ban.Reason</h5>
+        @if (Model.Ban.IsPermanent == true)
+        {
+            <h5>To Time: PERMANENT</h5>
+        }
+        else
+        {
+            <h5>To Time: @Model.Ban.ToDate</h5>
+        }
+        <h5>Time ban:@Model.Ban.DateBan</h5>
+        <h4>
+
+            <i class="text-center">You can submit an apology in <a class="fg-darkRed" href="~/support/MyTickets/@Model.User.Id">support</a>! </i>
+        </h4>
+
+    </div>

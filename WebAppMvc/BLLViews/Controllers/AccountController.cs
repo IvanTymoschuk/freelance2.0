@@ -53,6 +53,16 @@ namespace BLLViews.Controllers
             }
         }
 
+
+        [Authorize(Roles ="Banned")]
+        public ActionResult Banned()
+        {
+            BannedModel model = new BannedModel();
+            model.User = UserManager.FindById(User.Identity.GetUserId());
+            model.Ban = UserManager.FindById(User.Identity.GetUserId()).Ban;
+            return View(model);
+        }
+
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -76,8 +86,27 @@ namespace BLLViews.Controllers
                 {
                     if (user.EmailConfirmed == true)
                     {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        return RedirectToLocal(returnUrl);
+                        if (user.Ban != null)
+                        {
+                            if (user.Ban.ToDate < DateTime.Now)
+                            {
+                                UserManager.RemoveFromRole(user.Id, "Banned");
+                                UserManager.AddToRole(user.Id, "User");
+
+                                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                                return RedirectToLocal(returnUrl);
+                            }
+                            else
+                            {
+                                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                                return Redirect("~/account/banned");
+                            }
+                        }
+                        else
+                        {
+                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                            return RedirectToLocal(returnUrl);
+                        }
                     }
                     else
                     {
@@ -162,7 +191,7 @@ namespace BLLViews.Controllers
      
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code },
                                protocol: Request.Url.Scheme);
-               
+                    UserManager.AddToRole(user.Id, "User");
                     await UserManager.SendEmailAsync(user.Id, "Email Confirmation"+DateTime.Now,
                                "To complete registration, go to the link:: <a href=\""
                                                                + callbackUrl + "\">complete the registration </a>");
@@ -388,12 +417,12 @@ namespace BLLViews.Controllers
 
         //
         // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+
         public ActionResult LogOff()
         {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            var AuthenticationManager = HttpContext.GetOwinContext().Authentication;
+            AuthenticationManager.SignOut();
+            return Redirect("/");
         }
 
         //

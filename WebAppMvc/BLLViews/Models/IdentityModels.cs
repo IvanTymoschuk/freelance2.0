@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using static BLLViews.Models.MyContextInitializer;
 
 namespace BLLViews.Models
 {
@@ -16,7 +17,8 @@ namespace BLLViews.Models
         public City City { get; set; }
         public string AvaPath { get; set; }
         public double Raiting { get; set; }
-
+        virtual public List<Jobs> Bets { get; set; }
+        virtual public BansList Ban { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
@@ -63,6 +65,14 @@ namespace BLLViews.Models
         public string Theme { get; set; }
         virtual public ICollection<TicketMSG> ticketMSGs { get; set; }
     }
+    public class BansList
+    {
+        public int ID { get; set; }
+        public string Reason { get; set; }
+        public DateTime ToDate { get; set; }
+        public DateTime DateBan { get; set; }
+        public bool IsPermanent { get; set; }
+    }
 
     public class TicketMSG
     {
@@ -73,24 +83,26 @@ namespace BLLViews.Models
         public DateTime Date { get; set; }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
-    {
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
-        {
-        }
-        public virtual DbSet<Jobs> Jobs { get; set; }
-        public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<City> Cities { get; set; }
-        public virtual DbSet<Ticket> Tickets { get; set; }
-        public virtual DbSet<TicketMSG> TicketMSGs { get; set; }
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
-        }
    
-    }
-    class MyContextInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
+        public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+        {
+            public ApplicationDbContext()
+                : base("DefaultConnection", throwIfV1Schema: false)
+            {
+            }
+            public virtual DbSet<Jobs> Jobs { get; set; }
+            public virtual DbSet<Category> Categories { get; set; }
+            public virtual DbSet<City> Cities { get; set; }
+            public virtual DbSet<BansList> Bans { get; set; }
+            public virtual DbSet<Ticket> Tickets { get; set; }
+            public virtual DbSet<TicketMSG> TicketMSGs { get; set; }
+            public static ApplicationDbContext Create()
+            {
+                return new ApplicationDbContext();
+            }
+   
+        }
+    class MyContextInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
     {
         protected override void Seed(ApplicationDbContext db)
         {
@@ -101,6 +113,7 @@ namespace BLLViews.Models
             var role1 = new IdentityRole { Name = "Admin" };
             var role2 = new IdentityRole { Name = "User" };
             var role3 = new IdentityRole { Name = "Support" };
+            var role4 = new IdentityRole { Name = "Banned" };
             var support = new ApplicationUser { Email = "Support@freelance.localhost", UserName = "Support@freelance.localhost" };
             string password = "Test228";
             support.EmailConfirmed = true;
@@ -108,12 +121,15 @@ namespace BLLViews.Models
             roleManager.Create(role1);
             roleManager.Create(role2);
             roleManager.Create(role3);
+            roleManager.Create(role4);
             if (result.Succeeded)
             {
                 userManager.AddToRole(support.Id, role3.Name);
+                userManager.AddToRole(support.Id, role4.Name);
             }
 
-            db.SaveChanges();
+            base.Seed(db);
         }
     }
+
 }

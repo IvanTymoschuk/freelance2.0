@@ -1,0 +1,56 @@
+﻿@model BLLViews.Models.BanControlModels
+
+<script>
+
+      $(function () {
+              $("#test").hide();
+            $("#BanOrUnban").change(function () {
+                if (this.checked) {
+                    $("#test").show();
+                    $("#SEND").text("BAN");
+                }
+                else {
+                    $("#test").hide();
+                    $("#SEND").text("UNBAN");
+                }
+            });
+        });
+
+</script>
+@{
+    ViewBag.Title = "PanelControl";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <h2>PanelControl</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "fg-darkred" })
+        @Html.EditorFor(model => model.IdOrEmail, new { htmlAttributes = new { data_role = "input", data_prepend = "User ID or Email: " } })
+        @Html.ValidationMessageFor(model => model.IdOrEmail, "", new { @class = "fg-darkred" })
+
+        @Html.CheckBoxFor(Model => Model.BanOrUnban, new { @class = "BanOrUnban", type = "checkbox", data_role = "checkbox" })
+        @Html.Label("Ban - checked | Unban - uncheked")
+        <br />
+        <hr />
+        <div id="test">
+            <h5 class="text-center">Ban settings</h5>
+
+            @Html.ValidationMessageFor(model => model.IdOrEmail, "", new { @class = "fg-darkred" })
+            @Html.EditorFor(model => model.IdOrEmail, new { htmlAttributes = new { data_role = "input", data_prepend = "Reason: " } })
+            <br />
+
+            @Html.CheckBoxFor(Model => Model.Ban.IsPermanent, new { @class = "isPermanent", type = "checkbox", data_role = "checkbox" })
+            @Html.Label("IsPermanent")
+            <br />
+            @Html.ValidationMessageFor(model => model.CountHour, "", new { @class = "fg-darkred" })
+            @Html.TextBoxFor(model => model.CountHour, htmlAttributes: new { type = "numbers", data_role = "input", data_default_value = "1", data_prepend = "Count hours: " })
+
+        </div>
+        <button id="SEND" class="cell-12 button alert outline" style="font-size:14px">UNBAN</button>
+
+    }
+</div>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -40,7 +41,7 @@ namespace BLLViews.Models
         public string newStatus { get; set; }
         public ICollection<SelectListItem> listStatus { get; set; }
     }
-       
+
 
     public class NewTicketModel
     {
@@ -60,4 +61,14 @@ namespace BLLViews.Models
         public TicketMSG mSG { get; set; }
         public string uid { get; set; }
     }
+    public class BanControlModels
+    {
+        [Required(ErrorMessage = "IdOrEmail is Required")]
+        public string IdOrEmail { get; set; }
+        public bool BanOrUnban { get; set; }
+        public BansList Ban { get; set; }
+        [Required(ErrorMessage = "CountHour is Required")]
+        public int CountHour { get; set; }
+    }
+
 }
