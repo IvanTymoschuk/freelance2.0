@@ -102,7 +102,7 @@ namespace BLLViews.Models
             }
    
         }
-    class MyContextInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
+    class MyContextInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
     {
         protected override void Seed(ApplicationDbContext db)
         {
@@ -130,9 +130,13 @@ namespace BLLViews.Models
 
 
             //Ivan
-            var user = new ApplicationUser { Email = "lox@mail.com", UserName = "lox vadim",Raiting = 7};
-            userManager.Create(user, "Ii111111");
-            userManager.AddToRole(user.Id, role2.Name);
+            var user = new ApplicationUser { Email = "lox@mail.com", UserName = "lox@mail.com", Raiting = 4};
+            user.EmailConfirmed = true;
+            var res =   userManager.Create(user, "Ii111111");
+            if (res.Succeeded)
+            {
+                userManager.AddToRole(user.Id, role2.Name);
+            }
             
             db.Jobs.Add(new Job(){Name = "Make clean",
                                     Category = new Category(){Name = "Home"},

@@ -5,7 +5,11 @@
         <a href="~/support/MyTickets"> Support</a>
     </li>
     <li>
-        @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        @Html.ActionLink("Cabinet", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        
+    </li>
+    <li>
+        @Html.ActionLink(User.Identity.GetUserName(), $"UserInfo/{User.Identity.GetUserId()}","Account", routeValues: null, htmlAttributes: null)
     </li>
     <li>
         @Html.AntiForgeryToken()

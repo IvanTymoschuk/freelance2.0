@@ -115,4 +115,13 @@ namespace BLLViews.Models
         public BansList Ban { get; set; }
         public ApplicationUser User { get; set; }
     }
+    public class UserInfoModel
+    {
+        public UserInfoModel()
+        {
+            jobs = new List<Job>();
+        }
+        public ApplicationUser user { get; set; }
+        public ICollection<Job> jobs { get; set; }
+    }
 }

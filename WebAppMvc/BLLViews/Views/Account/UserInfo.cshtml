@@ -1,0 +1,66 @@
+﻿@model BLLViews.Models.UserInfoModel
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <div class="container">
+        <br />
+        <br />
+        <div class="row">
+            <div class="img-container cell-2">
+                <div data-role="panel" data-width="300" data-height="300">
+                    <img style="width:280px; height:280px" src="@Model.user">
+                    <div class="image-overlay op-black"></div>
+                </div>
+            </div>
+            <div class="cell-9">
+                <ul class="app-bar-present pos-absolute fg-white bg-darkRed" data-role="materialtabs">
+                    <li><a style="font-size:24px" href="#MyJob">Jobs</a></li>
+                    <li><a style="font-size:24px" href="#MyWork">DEV</a></li>
+                </ul>
+                <div style="margin-top: 112px">
+                    <div id="MyJob">
+                        <div class="row">
+                            @foreach (var el in Model.jobs)
+                            {
+                                <div class="card cell-3">
+                                    <div class="card-header">
+                                        <div class="avatar">
+                                            <img style="width:68px; height:68px" src="@Model.user.AvaPath">
+                                        </div>
+                                        <div class="name">@el.</div>
+                                        <div class="date">@el.Date</div>
+                                    </div>
+                                    <div class="card-content p-2">
+                                        <p>@el.Description</p>
+                                        <p><b>SALARY: @el.Salary</b></p>
+                                    </div>
+                                    <div class="card-footer">
+                                        @Html.ActionLink("MERO INFO", null, null, new { @class = "button alert outline cell-10" })
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                    <div id="MyWork">
+                        <h2 style="text-align:center">PAGE IN DEV</h2>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <br />
+        <h3>@Model.user.FullName </h3>
+
+<h5><input data-role="rating" data-value="@Model.user.Raiting" readonly disabled data-star-color="violet" data-stared-color="red" data-round-func="floor"></h5>
+
+<h5>City: NULL@*@Model.user.City.Name*@</h5>
+        @if (Model.user.Id == User.Identity.GetUserId())
+        {
+          @Html.ActionLink("EDIT","Index","Manage",null,new { @class = "button alert outline cell-2" })
+        }
+    </div>
