@@ -288,6 +288,10 @@
     <Content Include="Views\Home\JobsList.cshtml" />
     <Content Include="Views\Home\CreateJobs.cshtml" />
     <Content Include="Views\Account\UserInfo.cshtml" />
+    <Content Include="Views\Home\AboutCarrers.cshtml" />
+    <Content Include="Views\Home\AboutOurTeam.cshtml" />
+    <Content Include="Views\Home\AboutPress.cshtml" />
+    <Content Include="Views\Home\AboutContactUs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -17,13 +17,14 @@
 </div>
 <div class="text-center stmenu ">
     <ul class="h-menu">
-        <li><a class="current-select" @Html.ActionLink("Home", "Index", "Home")>About Us</a></li>
-        <li><a href="#">Carrers</a></li>
-        <li><a href="#">Our Team</a></li>
-        <li><a href="#">Press</a></li>
-        <li><a href="#">Contact Us</a></li>
+        <li> @Html.ActionLink("About Us", "About", "Home")</li>
+        <li>@Html.ActionLink("Carrers", "AboutCarrers", "Home")</li>
+        <li>@Html.ActionLink("Our Team", "AboutOurTeam", "Home")</li>
+        <li>@Html.ActionLink("Press", "AboutPress", "Home")</li>
+        <li>@Html.ActionLink("Contact Us", "AboutContactUs", "Home")</li>
     </ul>
 </div>
+
 <div class="float-left" style="width : 30%;">
     <button class="disabled"></button>
 </div>

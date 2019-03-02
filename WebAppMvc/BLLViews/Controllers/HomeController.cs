@@ -20,6 +20,31 @@ namespace BLLViews.Controllers
 
             return View();
         }
+        public ActionResult AboutCarrers()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+        public ActionResult AboutOurTeam()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+        public ActionResult AboutPress()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+        public ActionResult AboutContactUs()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+
 
         public ActionResult Contact()
         {
