@@ -27,7 +27,20 @@ namespace BLLViews.Controllers
 
             return View();
         }
+        public ActionResult CreateJobs()
+        {
+            using (ApplicationDbContext ctx = new ApplicationDbContext())
+            {
+                var model = new JobsListModel()
+                {
 
+                    jobs = ctx.Jobs.Include("Category").Include("City").ToList(),
+                    Categories = ctx.Categories.ToList(),
+                    Cities = ctx.Cities.ToList()
+                };
+                return View(model);
+            }
+        }
         public ActionResult JobsList()
         {
             using (ApplicationDbContext ctx = new ApplicationDbContext())
