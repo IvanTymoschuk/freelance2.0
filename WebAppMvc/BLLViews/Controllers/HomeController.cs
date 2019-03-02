@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BLLViews.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,7 @@ namespace BLLViews.Controllers
         {
             return View();
         }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -24,6 +26,23 @@ namespace BLLViews.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult JobsList()
+        {
+            using (ApplicationDbContext ctx = new ApplicationDbContext())
+            {
+                var model = new JobsListModel()
+                {
+
+                    jobs = ctx.Jobs.Include("Category").Include("City").ToList(),
+                    Categories = ctx.Categories.ToList(),
+                    Cities = ctx.Cities.ToList()
+                };
+                return View(model);
+            }
+
+            ;
         }
     }
 }

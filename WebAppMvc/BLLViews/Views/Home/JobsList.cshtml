@@ -1,0 +1,121 @@
+﻿@model BLLViews.Models.JobsListModel
+@{
+    ViewBag.Title = "JobsList";
+}
+
+<style>
+
+  
+    .style_list {
+        top: 1rem;
+
+    }
+
+    .style_item {
+        margin: 2px;
+        padding: 5px;
+        border-style: solid;
+        border-width: 1px;
+        border-color: darkred;
+        transition: padding 0.4s linear, background 0.2s linear;
+    }
+    .style_item:hover {
+        padding: 8px;
+        background: darkslategray;
+    }
+
+
+
+
+
+</style>
+
+
+<br />
+<div class="grid container">
+    <div class="row">
+        <div class="cell-4">
+            <h2> JobsList</h2>
+        </div>
+        <div class="cell-4">
+            @Html.TextBox("searchtextbox", "", new { placeholder = "Search", data_role = "input", data_search_button = "true" })
+        </div>
+        <div class="cell-2 offset-2">
+            <button class="button">Create Job</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="cell-4">
+            <select data-role="select">
+                @foreach (var el in Model.Categories)
+                {
+                    <option>@el.Name</option>
+                }
+            </select>
+        </div>
+        <div class="cell-4">
+            <select data-role="select">
+                @foreach (var el in Model.Cities)
+                {
+                    <option>@el.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row style_list">
+
+
+        @foreach (var el in Model.jobs)
+        {
+            <div class="container row style_item">
+                
+
+
+
+                <div class="cell-9" >
+                    <div class="row">
+                        <div class="cell-4">
+                            <p>@el.Date</p>
+                        </div>
+                        <div class="cell-4">
+                            <p>@el.UserOwner.FullName</p>
+                        </div>
+                        <div class="cell-4">
+                            <p>@el.UserOwner.Raiting</p>
+                        </div>
+                      
+                        <div class="row container">
+                            <p style="font-size: 1.5rem">@el.Name</p>
+                        </div>
+                        <div class="row container">
+                            <p>@el.Description</p>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="cell-3">
+                        
+                    <div class="row container">
+                        <p style="color: greenyellow">@el.Category.Name</p>
+
+                    </div>
+                    <div class="row container">
+                        <p style="font-size: 1.5rem">@el.Salary</p>
+                    </div>
+                    <div class="row container">
+                        <p>@el.City.Name</p>
+
+                    </div>
+                        
+
+                </div>
+               
+
+            </div>
+
+        }
+
+    </div>
+</div>
+
+

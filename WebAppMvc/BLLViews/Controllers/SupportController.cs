@@ -30,6 +30,7 @@ namespace BLLViews.Controllers
         {
             using (ApplicationDbContext ctx = new ApplicationDbContext())
             {
+                
                 AdmTicketModel model = new AdmTicketModel();
                 model.ticket = ctx.Tickets.FirstOrDefault(x => x.ID == id);
                 model.ticketMSGs = ctx.TicketMSGs.Where(x => x.ticket == ctx.Tickets.FirstOrDefault(y => y.ID == id)).ToList();

@@ -17,7 +17,7 @@ namespace BLLViews.Models
         public City City { get; set; }
         public string AvaPath { get; set; }
         public double Raiting { get; set; }
-        virtual public List<Jobs> Bets { get; set; }
+        virtual public List<Job> Bets { get; set; }
         virtual public BansList Ban { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -34,13 +34,13 @@ namespace BLLViews.Models
     {
         public Category()
         {
-            Jobs = new List<Jobs>();
+            Jobs = new List<Job>();
         }
         public int ID { get; set; }
         public string Name { get; set; }
-        public ICollection<Jobs> Jobs { get; set; }
+        public ICollection<Job> Jobs { get; set; }
     }
-    public class Jobs
+    public class Job
     {
         public int ID { get; set; }
         public string Name { get; set; }
@@ -90,7 +90,7 @@ namespace BLLViews.Models
                 : base("DefaultConnection", throwIfV1Schema: false)
             {
             }
-            public virtual DbSet<Jobs> Jobs { get; set; }
+            public virtual DbSet<Job> Jobs { get; set; }
             public virtual DbSet<Category> Categories { get; set; }
             public virtual DbSet<City> Cities { get; set; }
             public virtual DbSet<BansList> Bans { get; set; }
@@ -106,7 +106,7 @@ namespace BLLViews.Models
     {
         protected override void Seed(ApplicationDbContext db)
         {
-
+            //Andriy
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
             var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(db));
 
@@ -114,7 +114,7 @@ namespace BLLViews.Models
             var role2 = new IdentityRole { Name = "User" };
             var role3 = new IdentityRole { Name = "Support" };
             var role4 = new IdentityRole { Name = "Banned" };
-            var support = new ApplicationUser { Email = "Support@freelance.localhost", UserName = "Support@freelance.localhost" };
+            var support = new ApplicationUser { Email = "Support@freelance.localhost", UserName = "Support@freelance.localhost"};
             string password = "Test228";
             support.EmailConfirmed = true;
             var result = userManager.Create(support, password);
@@ -127,6 +127,20 @@ namespace BLLViews.Models
                 userManager.AddToRole(support.Id, role3.Name);
                 userManager.AddToRole(support.Id, role4.Name);
             }
+
+
+            //Ivan
+            var user = new ApplicationUser { Email = "lox@mail.com", UserName = "lox vadim",Raiting = 7};
+            userManager.Create(user, "Ii111111");
+            userManager.AddToRole(user.Id, role2.Name);
+            
+            db.Jobs.Add(new Job(){Name = "Make clean",
+                                    Category = new Category(){Name = "Home"},
+                                    City = new City(){Name="Rivne"},
+                                    Date = DateTime.Now,Description = "blabla",
+                                    Salary = 1200,UserOwner = userManager.FindByEmail("lox@mail.com")
+            });
+
 
             base.Seed(db);
         }
