@@ -64,17 +64,33 @@ namespace BLLViews.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
+
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                user = UserManager.FindById(userId)
+                
+
             };
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult Index( IndexViewModel model)
+        {
+            var userId = User.Identity.GetUserId();
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                db.Users.FirstOrDefault(x => x.Id == userId).AvaPath = model.user.AvaPath;
+                db.Users.FirstOrDefault(x => x.Id == userId).FullName = model.user.FullName;
+                db.SaveChanges();
+            }
+            return Redirect("/account/UserInfo/" + userId);
+        }
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]

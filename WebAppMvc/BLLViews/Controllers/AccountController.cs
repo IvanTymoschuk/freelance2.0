@@ -72,6 +72,21 @@ namespace BLLViews.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public ActionResult UserInfo(string id)
+        {
+            UserInfoModel model = new UserInfoModel();
+            var user = UserManager.FindById(id);
+            if (user == null)
+                return HttpNotFound("User with id " + id + " not found!");
+            model.user = user;
+            string userID = user.Id;
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                model.jobs = db.Jobs.Where(x => x.UserOwner.Id == userID).ToList();
+            }
+            return View(model);
+        }
         //
         // POST: /Account/Login
         [HttpPost]
