@@ -70,17 +70,17 @@ namespace BLLViews.Controllers
         {
             using (ApplicationDbContext ctx = new ApplicationDbContext())
             {
+
                 var model = new JobsListModel()
                 {
 
-                    jobs = ctx.Jobs.Include("Category").Include("City").ToList(),
+                    jobs = ctx.Jobs.Include("UserOwner").Include("Category").Include("City").ToList(),
                     Categories = ctx.Categories.ToList(),
-                    Cities = ctx.Cities.ToList()
+                    Cities = ctx.Cities.ToList(),
+                    Users = ctx.Users.ToList()
                 };
                 return View(model);
-            }
-
-            ;
+            }    
         }
     }
 }
