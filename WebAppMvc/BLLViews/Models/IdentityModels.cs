@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -12,7 +13,11 @@ namespace BLLViews.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        public ApplicationUser()
+        {
+            Bets = new List<Job>();
 
+        }
         public string FullName { get; set; }
         public City City { get; set; }
         public string AvaPath { get; set; }
@@ -21,6 +26,7 @@ namespace BLLViews.Models
         virtual public BansList Ban { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
+            
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             return userIdentity;
         }
@@ -128,21 +134,21 @@ namespace BLLViews.Models
                 userManager.AddToRole(support.Id, role4.Name);
             }
 
-
+           
             //Ivan
-            var user = new ApplicationUser { Email = "lox@mail.com", UserName = "lox@mail.com", Raiting = 4};
+            var user = new ApplicationUser { Email = "lox@mail.com",FullName = "Psina",Raiting = 4};
             user.EmailConfirmed = true;
-            var res =   userManager.Create(user, "Ii111111");
+            var res = userManager.Create(user, "Ii111111");
             if (res.Succeeded)
             {
                 userManager.AddToRole(user.Id, role2.Name);
-            }
+            } 
             
             db.Jobs.Add(new Job(){Name = "Make clean",
                                     Category = new Category(){Name = "Home"},
                                     City = new City(){Name="Rivne"},
                                     Date = DateTime.Now,Description = "blabla",
-                                    Salary = 1200,UserOwner = userManager.FindByEmail("lox@mail.com")
+                                    Salary = 1200,UserOwner = userManager.Users.ToList()[1]
             });
 
 

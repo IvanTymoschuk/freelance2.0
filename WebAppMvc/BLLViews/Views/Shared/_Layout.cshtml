@@ -11,9 +11,15 @@
     @Scripts.Render("~/bundles/jquery")
 
     <style>
+        .app-bar {
+            border-bottom: red solid 3px;
+        }
+
+    
         .app-bar-menu li {
             list-style: none !important;
         }
+    
     </style>
 </head>
 <body>
@@ -26,7 +32,7 @@
         </a>
 
         <ul class="app-bar-menu">
-            <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">@Html.ActionLink("Home", "Index", "Home")</li>
+            <li >@Html.ActionLink("Home", "Index", "Home")</li>
             <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">@Html.ActionLink("About", "About", "Home")</li>
             @Html.Partial("_LoginPartial")
         </ul>
