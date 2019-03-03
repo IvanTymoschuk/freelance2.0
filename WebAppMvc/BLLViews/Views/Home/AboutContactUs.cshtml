@@ -1,7 +1,95 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "AboutContactUs";
 }
+<style>
+    .stmenu {
+        margin-left: 36%;
+        margin-right: 36%;
+    }
 
-<h2>AboutContactUs</h2>
+    .stText {
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+</style>
+<div class="text-center">
+    <h1>Contact Freelance</h1>
+</div>
+<div class="text-center stmenu ">
+    <ul class="h-menu">
+        <li>@Html.ActionLink("About Us", "About", "Home")</li>
+        <li>@Html.ActionLink("Carrers", "AboutCarrers", "Home")</li>
+        <li>@Html.ActionLink("Our Team", "AboutOurTeam", "Home")</li>
+        <li>@Html.ActionLink("Press", "AboutPress", "Home")</li>
+        <li>@Html.ActionLink("Contact Us", "AboutContactUs", "Home")</li>
+    </ul>
+</div>
+<div class="stText text-center">
+    <div style="width:30%;" class="float-left">
+        <div class="card image-header">
+            <div class="card-header fg-white"
+                 style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfPWzIUamKMPlQRn1MIMBq8_TfiFSU7A8AErlxokdXrqLS6pSOVQ)">
+                <a href="//www.google.com/maps/place/Ukraine+Rivne+Komp'yuterna+Akademiya+Shah">Click</a>
+            </div>
+            <div class="card-content p-2" style="height:140px;">
+                <p class="fg-gray">Posted on March 03, 2019</p>
+                Our offices in Ukraine, Rivne.
+            </div>
+            <div class="card-footer">
+                <button class="button secondary">Read more information</button>
+            </div>
+        </div>
+    </div>
+    <div style="width:30%;" class="float-left">
+        <div class="card image-header">
+            <div class="card-header fg-white"
+                 style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfPWzIUamKMPlQRn1MIMBq8_TfiFSU7A8AErlxokdXrqLS6pSOVQ)">
+                <a href="//www.google.com/maps/place/Ukraine+Rivne+Komp'yuterna+Akademiya+Shah">Click</a>
+            </div>
+            <div class="card-content p-2" style="height:140px;">
+                <p class="fg-gray">Posted on March 03, 2019</p>
+                Our offices in Ukraine, Lviv.
+            </div>
+            <div class="card-footer text-center">
+                <button class="button secondary">Read more information</button>
+            </div>
+        </div>
+    </div>
+    <div style="width:35%;" class="float-left">
+        <div class="card image-header">
+            <div class="card-header fg-white"
+                 style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfPWzIUamKMPlQRn1MIMBq8_TfiFSU7A8AErlxokdXrqLS6pSOVQ)">
+                <a href="//www.google.com/maps/place/Ukraine+Rivne+Komp'yuterna+Akademiya+Shah">Click</a>
+            </div>
+            <div class="card-content p-2" style="height:140px;">
+                <p class="fg-gray">Posted on March 03, 2019</p>
+                Our offices in Ukraine, Kyiv.
+            </div>
+            <div class="card-footer">
+                <button class="button secondary">Read more information</button>
+            </div>
+        </div>
+    </div>
+    <h2>Developers contacts</h2>
+    <div>
+
+        <ul   data-role="listview" data-view="icons-medium">
+            <li data-caption="GitHub our developers" >
+                <ul>
+                    <li style="width: 20%;" data-icon="<span class='mif-github fg-green'>"><a href="https://github.com/IvanTymoschuk">Ivan Tymoschuk</a></li>
+                    <li style="width: 20%;" data-icon="<span class='mif-github fg-cyan'>"><a href="https://github.com/AnonimVadim">Vadim Boyarchuk"></a></li>
+                    <li style="width: 20%;" data-icon="<span class='mif-github fg-green'>"><a href="https://github.com/Andriy22">Andriy Alexandruk"></a></li>
+                </ul>
+            </li>
+            <li data-caption="E-mail our developers">
+                <ul>
+                    <li style="width: 20%;" data-icon="<span class='mif-google fg-green'>"  data-caption="Ivan Tymoschuk">ivantymo99@gmail.com</li>
+                    <li style="width: 20%;" data-icon="<span class='mif-google fg-cyan'>" data-caption="Vadim Boyarchuk">vadimca1.boyarchuc@gmail.com</li>
+                    <li style="width: 20%;" data-icon="<span class='mif-google fg-green'>" data-caption="Andriy Alexandruk">istep.andriy@gmail.com</li>
+                </ul>
+            </li>
+        </ul>
+
+    </div>
+</div>
 
