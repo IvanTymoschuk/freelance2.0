@@ -33,10 +33,10 @@
 <body>
 
     <div data-role="appbar" data-expand-point="md" class="bg-black fg-white app-bar fixed-top pos-absolute">
-        
-        
-          
-       
+
+
+
+
         <a href="#" class="brand no-hover">
             <span>
                 Freelance<sup>.com</sup>
@@ -45,69 +45,41 @@
 
         <ul class="app-bar-menu">
             <li>@Html.ActionLink("Home", "Index", "Home")</li>
-           
+
             <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">@Html.ActionLink("CreateJobs", "CreateJobs", "Home")</li>
-           
+
         </ul>
-        
-        <button class="button pos-absolute pos-right-center bg-black"
-                id="sidebar-toggle-2">
-            <span class="mif-menu"></span>
-        </button>
-    </div>
-    
-
-
-    <aside class="sidebar pos-absolute z-2  bg-black" data-role="sidebar" data-toggle="#sidebar-toggle-2">
-        <br />
-        <br />
-        <br />
-
-        <div class="sidebar-header  bg-black" data-image="">
-            <div class="avatar bg-darkRed">
-
-            </div>
-            <span class="title fg-white">Metro 4 Components Library</span>
-            <span class="subtitle fg-white"> 2018 © Sergey Pimenov</span>
-        </div>
-        
-        <ul class="sidebar-menu">
-
-
-            @using Microsoft.AspNet.Identity
-            @if (Request.IsAuthenticated)
-            {
-                <li>
-                    <a href="~/support/MyTickets"> Support</a>
-                </li>
-                <li>
-                    @Html.ActionLink("Cabinet", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-
-                </li>
-                <li>
-                    @Html.ActionLink(User.Identity.GetUserName(), $"UserInfo/{User.Identity.GetUserId()}", "Account", routeValues: null, htmlAttributes: null)
-                </li>
-                <li>
-                    @Html.AntiForgeryToken()
-                    @Html.ActionLink("LOG OFF", "LogOff", "Account", routeValues: null, htmlAttributes: null)
-                </li>
-            }
-            else
-            {
-
+        @if (User.Identity.IsAuthenticated)
+        {
+            <button class="button pos-absolute pos-right-center bg-black"
+                    id="sidebar-toggle-2">
+                <span class="mif-menu"></span>
+            </button>
+        }
+        else
+        {
+            <ul class="pos-absolute pos-right-center bg-black app-bar-menu">
                 <li> @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" }) </li>
                 <li> @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) </li>
+            </ul>
+        }
 
-            }
+    </div>
 
-            <li class="divider"></li>
-            <li> @Html.ActionLink("About", "About", "Home")</li>
-        </ul>
-    </aside>
 
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.Partial("_LoginPartial")
+    }
+
+    <div class="shifted-content-2 h-100 p-ab">
     
-    @RenderBody()
-@Scripts.Render("~/bundles/MetroUI")
-@RenderSection("scripts", required: false)
+
+        <div class="h-100 p-4">
+            @RenderBody()
+            </div>
+        </div>
+            @Scripts.Render("~/bundles/MetroUI")
+            @RenderSection("scripts", required: false)
 </body>
 </html>
