@@ -1,7 +1,27 @@
-﻿
-@{
-    ViewBag.Title = "AboutOurTeam";
+﻿@{
+                ViewBag.Title = "AboutOurTeam";
 }
+<style>
+    .stmenu {
+        margin-left: 36%;
+        margin-right: 36%;
+    }
 
-<h2>AboutOurTeam</h2>
+</style>
+<div class="text-center">
+    <h1> Our team</h1>
+    <h4>Here are all stakeholders focused on building our community.</h4>
+</div>
+<div class="text-center stmenu ">
+    <ul class="h-menu">
+        <li>@Html.ActionLink("About Us", "About", "Home")</li>
+        <li>@Html.ActionLink("Carrers", "AboutCarrers", "Home")</li>
+        <li>@Html.ActionLink("Our Team", "AboutOurTeam", "Home")</li>
+        <li>@Html.ActionLink("Press", "AboutPress", "Home")</li>
+        <li>@Html.ActionLink("Contact Us", "AboutContactUs", "Home")</li>
+    </ul>
+</div>
+<div class="text-center">
+    <h1>This page is in development.</h1>
+</div>
 
