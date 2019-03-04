@@ -54,11 +54,16 @@ namespace BLLViews.Controllers
         }
         public ActionResult CreateJobs()
         {
+            if(User.IsInRole("Banned"))
+            {
+                return Redirect("~/Account/banned");
+            }
             using (ApplicationDbContext ctx = new ApplicationDbContext())
             {
+
                 var model = new JobsListModel()
                 {
-
+                   
                     jobs = ctx.Jobs.Include("Category").Include("City").ToList(),
                     Categories = ctx.Categories.ToList(),
                     Cities = ctx.Cities.ToList()
@@ -68,6 +73,10 @@ namespace BLLViews.Controllers
         }
         public ActionResult JobsList()
         {
+            if (User.IsInRole("Banned"))
+            {
+                return Redirect("~/Account/banned");
+            }
             using (ApplicationDbContext ctx = new ApplicationDbContext())
             {
 

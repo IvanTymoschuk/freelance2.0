@@ -39,8 +39,8 @@
         <div id="test">
             <h5 class="text-center">Ban settings</h5>
 
-            @Html.ValidationMessageFor(model => model.IdOrEmail, "", new { @class = "fg-darkred" })
-            @Html.EditorFor(model => model.IdOrEmail, new { htmlAttributes = new { data_role = "input", data_prepend = "Reason: " } })
+            @Html.ValidationMessageFor(model => model.Ban.Reason, "", new { @class = "fg-darkred" })
+            @Html.EditorFor(model => model.Ban.Reason, new { htmlAttributes = new { data_role = "input", data_prepend = "Reason: " } })
             <br />
 
             @Html.CheckBoxFor(Model => Model.Ban.IsPermanent, new { @class = "isPermanent", type = "checkbox", data_role = "checkbox" })
