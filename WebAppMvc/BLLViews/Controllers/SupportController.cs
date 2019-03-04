@@ -79,7 +79,8 @@ namespace BLLViews.Controllers
         {
             using (ApplicationDbContext ctx = new ApplicationDbContext())
             {
-                ctx.Tickets.FirstOrDefault(x => x.ID == model.ticket.ID).ticketMSGs.Add(new TicketMSG() { Text = model.mSG.Text, UserID = model.uid, Date = DateTime.Now });
+                ctx.Tickets.FirstOrDefault(x => x.ID == model.ticket.ID).ticketMSGs.Add(new TicketMSG() { Text = model.mSG.Text, UserID = User.Identity.GetUserId(), Date = DateTime.Now });
+                ctx.Tickets.FirstOrDefault(x => x.ID == model.ticket.ID).LastUpdate = DateTime.Now;
                 ctx.SaveChanges();
             }
             return Redirect("~/support/ticket/" + model.ticket.ID);
