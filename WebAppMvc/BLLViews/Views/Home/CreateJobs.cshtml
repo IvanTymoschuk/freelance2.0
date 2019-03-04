@@ -32,6 +32,9 @@
         text-align: center;
         width: 150px;
     }
+    .stli{
+        height:50px;
+    }
 </style>
 
 <div class="text-center">
@@ -41,15 +44,16 @@
 <div class="float-left" style="width : 40%;">
     <div class="stMenuleft">
         <a class="button stMenuleft" style="height:70px " id="context_toggle"><h6><span class="mif-warning ani-flash"></span> Before you add your advertisement you must do few this requirements:<span class="mif-warning ani-flash"></span></h6>  </a>
-        <ul class="d-menu " data-role="dropdown" data-toggle-element="#context_toggle">
-            @*class="context"*@
-            <li><a href="#">You must be logged in.<span class="mif-user icon"></span></a></li> @*Must be href to log in*@
-            <li><a href="">You must fill all your profile.<span class="mif-profile icon"></span></a></li>  @*Must be href to profile*@
-            <li><a href="#">You must confirm your e-mail.<span class="mif-mail icon"></span></a></li>    @*Must be href to profile*@
-            <li><a href="#">You must be registered on the site for more than a week.<span class="mif-calendar icon"></span></a></li>
+        <ul class="d-menu  " data-role="dropdown" data-toggle-element="#context_toggle">
+            @*class="context"*@ 
+            @*IF add this context to ul class span and href will be in 1 line*@
+            <li class="stli"> <div class="container"><div class="row"><span class="mif-user icon"></span>@Html.ActionLink("You must be logged in.", "About", "Home") </div> </div> </li>
+            <li class="stli"> <div class="container"><div class="row"><span class="mif-profile icon"></span>@Html.ActionLink("You must fill all your profile.", "About", "Home") </div> </div> </li>
+            <li class="stli"> <div class="container"><div class="row"><span class="mif-mail icon"></span>@Html.ActionLink("You must confirm your e-mail.", "About", "Home") </div> </div> </li>
+            <li class="stli"> <div class="container"><div class="row"><span class="mif-calendar icon"></span>@Html.ActionLink("You must be registered on the site for more than a week.", "About", "Home") </div> </div> </li>
             <li class="divider"></li>
-            <li><a href="#"><span class="mif-books icon"></span>Example AD.</a></li>  @*Must be href to example page*@
-            <li><a href="#"><span class="mif-help icon"></span>Help.</a></li> @*Must be href to page help*@
+            <li class="stli"> <div class="container"><div class="row"><span class="mif-books icon"></span>@Html.ActionLink("Example AD.", "About", "Home") </div> </div> </li>
+            <li class="stli"> <div class="container"><div class="row"><span class="mif-help icon"></span>@Html.ActionLink("Help", "About", "Home") </div> </div> </li>
         </ul>
     </div>
     @*<h3> Before you add your advertisement you must do few this requirements:</h3>
@@ -157,9 +161,8 @@
     </div>
 
 
-    <div>
-
-        <button class="button success stbutt"> Add new AD</button>
-        <button class="button success stbutt">Clear form</button>
+    <div class="text-center">
+        <button class="button alert outline cell-12 stbutt">Add new AD</button>
+        <button class="button alert outline cell-12 stbutt">Clear form</button>
     </div>
 </div>
