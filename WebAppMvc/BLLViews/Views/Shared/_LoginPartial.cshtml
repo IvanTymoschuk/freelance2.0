@@ -18,6 +18,7 @@
         @using Microsoft.AspNet.Identity
         @if (Request.IsAuthenticated)
         {
+            <li class="group-title fg-white">Main</li>
             <li>
                 <a href="~/support/MyTickets"> Support</a>
             </li>
@@ -26,12 +27,27 @@
 
             </li>
             <li>
-                @Html.ActionLink(User.Identity.GetUserName(), $"UserInfo/{User.Identity.GetUserId()}", "Account", routeValues: null, htmlAttributes: null)
+                @Html.ActionLink("PROFILE", $"UserInfo/{User.Identity.GetUserId()}", "Account", routeValues: null, htmlAttributes: null)
             </li>
-            <li>
-                @Html.AntiForgeryToken()
-                @Html.ActionLink("LOG OFF", "LogOff", "Account", routeValues: null, htmlAttributes: null)
-            </li>
+            <li class="divider"></li>
+            if (User.IsInRole("Admin") || User.IsInRole("Support") || User.IsInRole("Banned"))
+            {
+                <li class="group-title fg-white">Pannels</li>
+                if (User.IsInRole("Support"))
+                {
+
+                    <li> @Html.ActionLink("Support", "Tickets", "Support", routeValues: null, htmlAttributes: new { title = "support" })</li>
+                }
+                if (User.IsInRole("Admin"))
+                {
+                    <li> @Html.ActionLink("Admin", "Index", "Admin", routeValues: null, htmlAttributes: new { title = "Admin" })</li>
+                }
+                if (User.IsInRole("Banned"))
+                {
+                    <li> @Html.ActionLink("Banned", "Banned", "Account", routeValues: null, htmlAttributes: new { title = "Admin" })</li>
+                }
+            }
+
         }
         else
         {
@@ -42,7 +58,11 @@
         }
 
         <li class="divider"></li>
-        <li> @Html.ActionLink("About", "About", "Home")</li>
+
+        <li>
+            @Html.AntiForgeryToken()
+            @Html.ActionLink("LOG OFF", "LogOff", "Account", routeValues: null, htmlAttributes: null)
+        </li>
     </ul>
 </aside>
 <script>

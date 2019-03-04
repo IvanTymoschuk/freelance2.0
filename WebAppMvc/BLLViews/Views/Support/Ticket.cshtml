@@ -47,7 +47,7 @@
 <br />
 
 <div class="container">
-    @if (Model.ticket.Status == "Open")
+    @if (Model.ticket.Status != "Closed")
     {
         using (Html.BeginForm("Ticket", "Support", FormMethod.Post))
         {

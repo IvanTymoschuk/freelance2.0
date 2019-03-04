@@ -47,7 +47,7 @@
             <li>@Html.ActionLink("Home", "Index", "Home")</li>
 
             <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">@Html.ActionLink("CreateJobs", "CreateJobs", "Home")</li>
-
+            <li> @Html.ActionLink("About", "About", "Home")</li>
         </ul>
         @if (User.Identity.IsAuthenticated)
         {
