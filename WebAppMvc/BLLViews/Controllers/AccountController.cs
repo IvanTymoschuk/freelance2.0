@@ -104,6 +104,8 @@ namespace BLLViews.Controllers
                 {
                     if (user.EmailConfirmed == true)
                     {
+                        ViewBag.UserAva = user.AvaPath;
+                        ViewBag.UserFullName = user.FullName;
                         if (user.Ban != null)
                         {
                             if (user.Ban.ToDate < DateTime.Now)

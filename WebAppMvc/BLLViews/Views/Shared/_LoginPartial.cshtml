@@ -1,15 +1,19 @@
-﻿
-<aside class="sidebar pos-absolute z-2  bg-black" data-role="sidebar" data-toggle="#sidebar-toggle-2"  id="sb2" data-shift=".shifted-content">
+﻿@{
+
+
+    ViewBag.Title = "Requests";
+}
+<aside class="sidebar pos-absolute z-2  bg-black" data-role="sidebar" data-toggle="#sidebar-toggle-2" id="sb2" data-shift=".shifted-content">
     <br />
     <br />
     <br />
 
-    <div class="sidebar-header  bg-black" data-image="">
+    <div class="sidebar-header  bg-black" data-image="@ViewBag.UserAva">
         <div class="avatar bg-darkRed">
 
         </div>
-        <span class="title fg-white">Metro 4 Components Library</span>
-        <span class="subtitle fg-white"> 2018 © Sergey Pimenov</span>
+        <span class="title fg-white">@ViewBag.UserFullName. </span>
+        @*<span class="subtitle fg-white"> 2018 © Sergey Pimenov</span>*@
     </div>
 
     <ul class="sidebar-menu">
@@ -66,5 +70,5 @@
     </ul>
 </aside>
 <script>
-  
+
 </script>
