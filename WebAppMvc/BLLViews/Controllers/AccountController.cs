@@ -54,9 +54,12 @@ namespace BLLViews.Controllers
         }
 
 
-        [Authorize(Roles ="Banned")]
         public ActionResult Banned()
         {
+            if(User.IsInRole("Banned")==false)
+            {
+                return Redirect("/");
+            }
             BannedModel model = new BannedModel();
             model.User = UserManager.FindById(User.Identity.GetUserId());
             model.Ban = UserManager.FindById(User.Identity.GetUserId()).Ban;
