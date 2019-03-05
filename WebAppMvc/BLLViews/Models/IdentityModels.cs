@@ -108,7 +108,7 @@ namespace BLLViews.Models
             }
    
         }
-    class MyContextInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
+    class MyContextInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
     {
         protected override void Seed(ApplicationDbContext db)
         {

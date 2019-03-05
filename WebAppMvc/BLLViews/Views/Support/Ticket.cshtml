@@ -49,7 +49,7 @@
 <div class="container">
     @if (Model.ticket.Status != "Closed")
     {
-        using (Html.BeginForm("Ticket", "Support", FormMethod.Post))
+        using (Ajax.BeginForm("Ticket", "Support", new AjaxOptions { HttpMethod = "POST" }))
         {
             @Html.TextBoxFor(model => Model.ticket.ID, new { @type = "hidden" })
             <br />
