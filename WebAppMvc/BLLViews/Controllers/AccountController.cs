@@ -86,7 +86,10 @@ namespace BLLViews.Controllers
             string userID = user.Id;
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
+                model.user = db.Users.FirstOrDefault(x => x.Id == user.Id);
+                model.user.City = db.Users.FirstOrDefault(x => x.Id == user.Id).City;
                 model.jobs = db.Jobs.Where(x => x.UserOwner.Id == userID).ToList();
+                model.AvaPath = user.AvaPath;
             }
             return View(model);
         }

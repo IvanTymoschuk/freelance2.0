@@ -1,18 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+using BLLViews.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using CompareAttribute = System.ComponentModel.DataAnnotations.CompareAttribute;
 
 namespace BLLViews.Models
 {
     public class IndexViewModel
     {
+        public IndexViewModel()
+        {
+            ListCities = new List<SelectListItem>();
+        }
         public bool HasPassword { get; set; }
         public IList<UserLoginInfo> Logins { get; set; }
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
         public ApplicationUser user { get; set; }
+        public int CityID { get; set; }
+        public ICollection<SelectListItem> ListCities { get; set; }
     }
 
     public class ManageLoginsViewModel

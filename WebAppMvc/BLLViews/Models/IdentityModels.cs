@@ -19,7 +19,7 @@ namespace BLLViews.Models
 
         }
         public string FullName { get; set; }
-        public City City { get; set; }
+        virtual public City City { get; set; }
         public string AvaPath { get; set; }
         public double Raiting { get; set; }
         virtual public List<Job> Bets { get; set; }

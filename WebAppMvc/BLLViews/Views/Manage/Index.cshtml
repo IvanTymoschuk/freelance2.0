@@ -13,6 +13,10 @@
         @Html.TextBoxFor(model => Model.user.FullName, new { @class = "cell-12", data_role = "input", data_prepend = "User name: " })
         <br />
         @Html.TextBoxFor(model => Model.user.AvaPath, new { @class = "cell-12", data_role = "input", data_prepend = "Ava path: " })
+      //  @Html.TextBoxFor(model => Model.user.AvaPath, new { data_cls_caption = "bg-darkred fg-white", data_cls_button = "bg-darkorange fg-white", type = "file", @class = "cell-12", data_role = "file", data_prepend = "Ava path: " })
+        <br />
+        @Html.Label("SELECT CITY: ")
+        @Html.DropDownListFor(Model => Model.CityID, Model.ListCities, new { @class = "cell-12" })
         <br />
         <button class="button alert outline cell-12">SAVE</button>
 
@@ -20,11 +24,11 @@
     <br />
     @if (Model.HasPassword)
     {
-        @Html.ActionLink("Change your password", "ChangePassword","Manage",new { @class="button alert outline cell-12"})
+        @Html.ActionLink("Change your password", "ChangePassword", "Manage", new { @class = "button alert outline cell-12" })
     }
     else
     {
-        @Html.ActionLink("Create", "SetPassword","Manage",new { @class="button alert outline cell-12"})
+        @Html.ActionLink("Create", "SetPassword", "Manage", new { @class = "button alert outline cell-12" })
     }
 </div>
 
