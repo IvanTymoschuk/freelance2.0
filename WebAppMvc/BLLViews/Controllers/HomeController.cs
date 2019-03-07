@@ -44,31 +44,6 @@ namespace BLLViews.Controllers
 
             return View();
         }
-        //public ActionResult Login()
-        //{
-        //    ViewBag.Message = "Your application description page.";
-
-        //    return View();
-        //}
-        //public ActionResult Cabinet()
-        //{
-        //    ViewBag.Message = "Your application description page.";
-
-        //    return View();
-        //}
-        //public ActionResult Register()
-        //{
-        //    ViewBag.Message = "Your application description page.";
-
-        //    return View();
-        //}
-        //public ActionResult Support()
-        //{
-        //    ViewBag.Message = "Your application description page.";
-
-        //    return View();
-        //}
-
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
