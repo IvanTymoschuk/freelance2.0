@@ -1,11 +1,31 @@
-﻿<div id="demoDialog1" class="dialog" data-role="dialog">
-    <div class="dialog-title">Use Windows location service?</div>
+﻿@model BLLViews.Models.PartialBanModel
+
+<div id="demoDialog1" class="dialog" data-role="dialog">
+    <div class="dialog-title">Ban 
+    </div>
     <div class="dialog-content">
-        Bassus abactors ducunt ad triticum.
-        A fraternal form of manifestation is the bliss.
+        @using (Ajax.BeginForm("BanUser", new AjaxOptions { UpdateTargetId = "TableUsers",OnSuccess= "BanShow" }))
+        {
+
+            @Html.TextBoxFor(model => model.UserId, new { id="UidInBP",type="hidden"})
+            @Html.ValidationMessageFor(model => model.Ban.Reason, "", new { @class = "fg-darkred" })
+            @Html.EditorFor(model => model.Ban.Reason, new { htmlAttributes = new { data_role = "materialinput", placeholder = "Enter Reason", @required = "true" } })
+            <br />
+
+            @Html.CheckBoxFor(Model => Model.Ban.IsPermanent, new { @class = "isPermanent", type = "checkbox", data_role = "checkbox" })
+            @Html.Label("IsPermanent")
+            <br />
+            @Html.ValidationMessageFor(model => model.CountHour, "", new { @class = "fg-darkred" })
+            <p>Count hour ban</p>
+            @Html.TextBoxFor(model => model.CountHour, htmlAttributes: new { @class = "fg-white", type = "numbers", data_role = "spinner", data_min_value = "1" })
+
+            <div class="dialog-actions">
+                <button class="button js-dialog-close cell-12">BAN</button>
+            </div>
+        }
     </div>
-    <div class="dialog-actions">
-        <button class="button js-dialog-close">Disagree</button>
-        <button class="button primary js-dialog-close">Agree</button>
-    </div>
+
+    <button class="button js-dialog-close">Close</button>
+
+
 </div>

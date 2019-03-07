@@ -23,6 +23,41 @@ namespace BLLViews.Controllers
                 _userManager = value;
             }
         }
+        [HttpPost]
+        public ActionResult BanUser(PartialBanModel model)
+        {
+            var user = UserManager.FindById(model.UserId);
+
+            if (model.Ban.IsPermanent)
+            {
+                UserManager.FindById(user.Id).Ban = new BansList() { IsPermanent = true, Reason = model.Ban.Reason, DateBan = DateTime.Now, ToDate = DateTime.Now.AddYears(120) };
+                UserManager.RemoveFromRole(user.Id, "User");
+                UserManager.AddToRole(user.Id, "Banned");
+                UserManager.SendEmail(user.Id, "Your account has been banned. Time:  " + DateTime.Now, $"Hello {user.UserName} Your account has been banned!!!");
+
+            }
+            else
+            {
+                UserManager.FindById(user.Id).Ban = new BansList() { IsPermanent = false, ToDate = DateTime.Now.AddHours(model.CountHour), Reason = model.Ban.Reason, DateBan = DateTime.Now };
+                UserManager.RemoveFromRole(user.Id, "User");
+                UserManager.AddToRole(user.Id, "Banned");
+                UserManager.SendEmail(user.Id, "Your account has been banned. Time:  " + DateTime.Now, $"Hello {user.UserName} Your account has been banned!!!");
+            }
+
+            return new EmptyResult();
+        }
+        
+        public ActionResult GetUID(string id)
+        {
+
+            Repos<ApplicationUser> repos = new Repos<ApplicationUser>();
+            PartialBanModel model = new PartialBanModel();
+
+      
+            model.UserId = id;
+
+            return PartialView("_BanPanel",model);
+        }
         // GET: Admin
         [Authorize]
         public ActionResult Index()

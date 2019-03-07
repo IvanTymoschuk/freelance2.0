@@ -7,7 +7,7 @@
 
     <div class="container">
 
-        <table class="table table-border cell-border">
+        <table class="table table-border cell-border" id="TableUsers">
             <thead>
                 <tr>
                     <th>FullName</th>
@@ -37,26 +37,35 @@
                         <tr class="bd-darkRed">
                             <td>@el.FullName</td>
                             <td>@el.UserName</td>
-                            <td data-popover-trigger="click" data-popover-position="right" data-role="popover" data-popover-text='User no banned!<br><button onClick="ShowPartailBan()" class="button alert cell-12">BAN</button '>
+                            <td data-popover-trigger="click" data-popover-position="right" data-role="popover" data-popover-text='User no banned!<br><button id = "OpenBan" onclick="ShowPartailBan()" data-value="@el.Id">BAN</button>'>
                                 NULL
                             </td>
                             <td>NULL</td>
                         </tr>
-                    }
+                                                                                                                                                }
                 }
             </tbody>
         </table>
+   
+               
         <div id="Test">
-         @Html.Partial("_BanPanel")
+         @Html.Partial("_BanPanel",Model.partialBanModel)
         </div>
         <script>
             function ShowPartailBan() {
-             Metro.dialog.open('#demoDialog1');
-
+                let info = $("#OpenBan").data("value");
+                Metro.dialog.open('#demoDialog1');
+                $("#UidInBP").val(info);
             }
             function UnBanShow() {
                 var notify = Metro.notify;
                 notify.create("User Unbanned!", null, {
+
+                });
+            };
+            function BanShow() {
+                var notify = Metro.notify;
+                notify.create("User Banned!", null, {
 
                 });
             };

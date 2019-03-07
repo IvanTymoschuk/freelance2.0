@@ -18,5 +18,6 @@ namespace BLLViews.Models
     {
         public BansList Ban { get; set; }
         public string UserId { get; set; }
+        public int CountHour { get; set; }
     }
 }
