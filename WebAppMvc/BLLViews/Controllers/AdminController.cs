@@ -44,21 +44,32 @@ namespace BLLViews.Controllers
                 UserManager.SendEmail(user.Id, "Your account has been banned. Time:  " + DateTime.Now, $"Hello {user.UserName} Your account has been banned!!!");
             }
 
+          
+            Repos<ApplicationUser> repos = new Repos<ApplicationUser>();
+            IndexModel model1 = new IndexModel();
+            model1.users = repos.ReadAll();
+            model1.partialBanModel = new PartialBanModel();
+            model1.partialRolesModel = new PartialRolesModel();
+            return View("Index", model1);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateRoles(PartialRolesModel model)
+        {
+            if (model.IsAdmin)
+                UserManager.AddToRole(model.UserID, "Admin");
+            else
+                UserManager.RemoveFromRole(model.UserID, "Admin");
+
+            if (model.IsSupport)
+                UserManager.AddToRole(model.UserID, "Support");
+            else
+                UserManager.RemoveFromRole(model.UserID, "Support");
+
+
             return new EmptyResult();
         }
-        
-        public ActionResult GetUID(string id)
-        {
 
-            Repos<ApplicationUser> repos = new Repos<ApplicationUser>();
-            PartialBanModel model = new PartialBanModel();
-
-      
-            model.UserId = id;
-
-            return PartialView("_BanPanel",model);
-        }
-        // GET: Admin
         [Authorize]
         public ActionResult Index()
         {
@@ -68,6 +79,8 @@ namespace BLLViews.Controllers
             IndexModel model = new IndexModel();
             model.users = repos.ReadAll();
             model.partialBanModel = new PartialBanModel();
+            model.partialRolesModel = new PartialRolesModel();
+       
                 return View(model);
         }
      
@@ -85,7 +98,9 @@ namespace BLLViews.Controllers
             UserManager.RemoveFromRole(user.Id, "Banned");
             UserManager.AddToRole(user.Id, "User");
             UserManager.FindById(user.Id).Ban=null;
-
+            //Repos<ApplicationUser> rUser = new Repos<ApplicationUser>();
+            //user.Ban = null;
+            //rUser.Update(user);
             return new EmptyResult();
         }
     }

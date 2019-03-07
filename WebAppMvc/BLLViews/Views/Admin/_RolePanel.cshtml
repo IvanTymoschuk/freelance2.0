@@ -1,0 +1,24 @@
+﻿@model BLLViews.Models.PartialRolesModel
+
+    <div id="demoDialog2" class="dialog" data-role="dialog">
+        <div class="dialog-title">
+            Roles
+        </div>
+        <div class="dialog-content">
+            @using (Ajax.BeginForm("UpdateRoles", new AjaxOptions { OnSuccess = "RolesUpdated", LoadingElementDuration = 4000, LoadingElementId = "preloader" }))
+            {
+                @Html.TextBoxFor(model => model.UserID, new { id = "UidInRP", type = "hidden" })
+                @Html.CheckBoxFor(x => x.IsAdmin, new { type = "checkbox", data_role = "checkbox", data_caption = "IsAdmin" })
+                <br />
+                @Html.CheckBoxFor(x => x.IsSupport, new { type = "checkbox", data_role = "checkbox", data_caption = "IsSupport" })
+
+                <div class="dialog-actions">
+                    <button class="button js-dialog-close cell-12">UPDATE</button>
+                </div>
+            }
+        </div>
+
+        <button class="button js-dialog-close">Close</button>
+
+        </div>
+

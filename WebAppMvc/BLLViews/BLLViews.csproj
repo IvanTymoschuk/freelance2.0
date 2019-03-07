@@ -300,6 +300,8 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Home\NotFound.cshtml" />
     <Content Include="Views\Admin\_BanPanel.cshtml" />
+    <Content Include="Views\Admin\_RolePanel.cshtml" />
+    <Content Include="Views\Shared\Loading.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
