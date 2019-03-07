@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 using System.Web.Mvc;
 using BLLViews.Models;
 using Microsoft.AspNet.Identity;
@@ -21,6 +22,8 @@ namespace BLLViews.Models
         public bool BrowserRemembered { get; set; }
         public ApplicationUser user { get; set; }
         public int CityID { get; set; }
+        public HttpPostedFileBase Upload { get; set; }
+
         public ICollection<SelectListItem> ListCities { get; set; }
     }
 

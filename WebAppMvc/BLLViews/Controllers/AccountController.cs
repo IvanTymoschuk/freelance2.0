@@ -78,7 +78,7 @@ namespace BLLViews.Controllers
         [AllowAnonymous]
         public ActionResult UserInfo(string id)
         {
-            UserInfoModel model = new UserInfoModel();
+            UserInfoModel model = new UserInfoModel(); 
             var user = UserManager.FindById(id);
             if (user == null)
                 return HttpNotFound("User with id " + id + " not found!");

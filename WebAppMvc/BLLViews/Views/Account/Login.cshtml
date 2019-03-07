@@ -11,27 +11,34 @@
 </style>
 <div class="container">
     <h2 class="text-center">@ViewBag.Title</h2>
+
     @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal stLoginInput", role = "form" }))
     {
+        <h4 class="text-center">Open existing account</h4>
+        <hr />
         @Html.AntiForgeryToken()
 
-        @Html.ValidationSummary(true, "", new { @class = "fg-white" })
+        // @Html.ValidationSummary(true, "", new { @class = "fg-white" })
 
+
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "fg-white" })
         @Html.LabelFor(m => m.Email)
         @Html.TextBoxFor(m => m.Email, new { @class = "cell-12" })
-        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "fg-white" })
+
         <br />
 
-        @Html.LabelFor(m => m.Password)
 
-        @Html.PasswordFor(m => m.Password, new { @class = "cell-12" })
         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "fg-white" })
+        @Html.LabelFor(m => m.Password)
+        @Html.PasswordFor(m => m.Password, new { @class = "cell-12" })
 
-        @Html.CheckBoxFor(m => m.RememberMe, new { type = "checkbox", data_role = "checkbox" })
-        @Html.LabelFor(m => m.RememberMe)
+
+
+        @Html.ActionLink("Forgot Password","ForgotPassword","Account")
+       
 
         <br />
-        <button class="button alert outline cell-5">SIGN IN</button>
+        <button class="button alert outline cell-5">Login</button>
         @Html.ActionLink("Register", "Register", routeValues: null, htmlAttributes: new { @class = "button alert outline cell-6 float-right" })
         @* Enable this once you have account confirmation enabled for password reset functionality
             <p>
