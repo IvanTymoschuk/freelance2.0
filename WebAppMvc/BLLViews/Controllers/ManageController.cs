@@ -92,10 +92,15 @@ namespace BLLViews.Controllers
         [HttpPost]
         public ActionResult Index( IndexViewModel model)
         {
+            
             var userId = User.Identity.GetUserId();
+            string fileName = System.IO.Path.GetFileName(model.Upload.FileName);
+            string serverFileName = string.Format(Server.MapPath("~/Content/AvaFiles/" + fileName));
+
+            model.Upload.SaveAs(serverFileName);
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                db.Users.FirstOrDefault(x => x.Id == userId).AvaPath = model.user.AvaPath;
+                db.Users.FirstOrDefault(x => x.Id == userId).AvaPath = serverFileName;
                 db.Users.FirstOrDefault(x => x.Id == userId).FullName = model.user.FullName;
                 db.Users.FirstOrDefault(x => x.Id == userId).City = db.Cities.FirstOrDefault(x => x.Id == model.CityID);
                 db.SaveChanges();
