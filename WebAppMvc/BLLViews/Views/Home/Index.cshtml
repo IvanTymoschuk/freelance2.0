@@ -1,48 +1,100 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+
+
 <style>
-    .div1 {
-        background-image: url(http://www.pixelstalk.net/wp-content/uploads/2016/11/Backgrounds-Earth-From-Space.jpg);
-        height:500px;
-        width:100%;
+    .p-4 {
+        padding: 0px !important;
+    }
+
+    body {
+        padding-top: 0px !important;
+    }
+
+    .parallax-container {
+        height: 850px;
+        width: 100%;
+        background-size: cover;
+    }
+    .left-button, .right-button{
+        font-size: 2rem;
+        margin: 2rem;
+        width: 250px;
+        height: 70px;
+        padding: 1rem;
+    }
+    .main-h{
+        position: absolute;
+        top:3%;
+        right: 1%;
+        font-size: 4.5rem;
+        font-weight: bold;
+    }
     
-    }
-    .brd {
-        border: 4px double red; /* Параметры границы */
+</style>
+<script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@4.1.1/dist/simpleParallax.min.js"></script>
 
-        padding: 10px; /* Поля вокруг текста */
-    }
-    .div2{
-      margin-left:16%;  
-      
-    }
-    .stbutt {
-        text-align: center;
-        width: 150px;
-    }
-
-    </style>
-<div>
-    <div class="div1 brd">
-        <div class="div2">
-            <p><h1>Hire freelancers.</h1></p>
-            <p> <h1> Make things</h1></p>
-            <p> <h1> happen.</h1></p>
-            <p><h3>Grow your business through the top freelancing</h3></p>
-            <p><h3> website. Hire talent nearby or worldwide.</h3></p>
-            <button class="button alert stbutt">Get Started</button>
+<img class="parallax-container" src="~/Content/SiteImages/mainback.jpg" />
+<h1 class="main-h">Make the world yourself</h1>
+<br />
+<br />
+<div class="container ">
+    <div class="grid">
+        <div class="row flex-justify-center main-navigate">
+            <div clas="cell-3 "><a class="button alert outline left-button">Create Job</a></div>
+            <div clas="cell-3 "><a class="button alert outline right-button">Find Job</a></div>
         </div>
     </div>
-    
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 
-</div>  
-   
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<h1>hello</h1>
+<h1>hello</h1>
+<h1>hello</h1>
+<h1>hello</h1>
+<h1>hello</h1>
+<script>
+    $(document).ready(function() {
+
+        //effects take place in 3000ms
+        $('main-h').fadeOut(3000);
+        $('main-h').fadeIn(3000);
+
+    })
+    var image = document.getElementsByClassName('parallax-container');
+    new simpleParallax(image, {
+
+        transition: 'cubic-bezier(0,0,0,1)'
+    });
+    var image = document.getElementsByClassName('main-navigate');
+    new simpleParallax(image, {
+
+        transition: 'cubic-bezier(0,0,0,1)'
+    });
+</script>
 
 
 
-   
 
 
 
-  
+
+
