@@ -65,7 +65,7 @@ namespace BLLViews.Controllers
                 TicketModel model = new TicketModel();
                 var userId = User.Identity.GetUserId();
                 if (ctx.Tickets.FirstOrDefault(x => x.OwnerID == userId && x.ID == id) == null)
-                    return HttpNotFound("Ticket not found");
+                    return RedirectToAction("NotFound", "Home");
                 model.ticket = ctx.Tickets.FirstOrDefault(x => x.ID == id);
                 model.ticketMSGs = ctx.TicketMSGs.Where(x => x.ticket == ctx.Tickets.FirstOrDefault(y => y.ID == id && y.OwnerID == userId)).ToList();
                 model.mSG = new TicketMSG();

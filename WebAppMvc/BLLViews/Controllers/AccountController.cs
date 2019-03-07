@@ -111,11 +111,11 @@ namespace BLLViews.Controllers
                         ViewBag.UserFullName = user.FullName;
                         if (user.Ban != null)
                         {
-                            if (user.Ban.ToDate < DateTime.Now)
+                            if (user.Ban.ToDate < DateTime.Now&& user.Ban.IsPermanent!=true)
                             {
                                 UserManager.RemoveFromRole(user.Id, "Banned");
                                 UserManager.AddToRole(user.Id, "User");
-
+                                UserManager.FindById(user.Id).Ban = null;
                                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                                 return RedirectToLocal(returnUrl);
                             }

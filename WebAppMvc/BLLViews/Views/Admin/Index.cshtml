@@ -1,0 +1,64 @@
+﻿@model BLLViews.Models.IndexModel
+@{
+    /**/
+
+    ViewBag.Title = "Adminka";
+}
+
+    <div class="container">
+
+        <table class="table table-border cell-border">
+            <thead>
+                <tr>
+                    <th>FullName</th>
+                    <th>Username</th>
+                    <th>isBanned</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody class="fg-white">
+                @foreach (var el in Model.users)
+                {
+                    if (el.Ban != null)
+                    {
+                        <tr class="bd-darkRed">
+                            <td>@el.FullName</td>
+                            <td>@el.UserName</td>
+                            <td data-popover-trigger="click" class="bg-darkRed" data-popover-position="right" data-role="popover" data-popover-text='User banned!<br>Reason: @el.Ban.Reason<br>To Date: @el.Ban.ToDate<br>IsPermanent: @el.Ban.IsPermanent<br>Ban Date: @el.Ban.DateBan<br>  @Ajax.ActionLink("UNBAN", "UnBan", new {Id=el.Id},new AjaxOptions{ OnSuccess="UnBanShow"}, new { @class="button alert"})'>
+                                <div>
+                                    BANNED
+                                </div>
+                            </td>
+                            <td>NULL</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr class="bd-darkRed">
+                            <td>@el.FullName</td>
+                            <td>@el.UserName</td>
+                            <td data-popover-trigger="click" data-popover-position="right" data-role="popover" data-popover-text='User no banned!<br><button onClick="ShowPartailBan()" class="button alert cell-12">BAN</button '>
+                                NULL
+                            </td>
+                            <td>NULL</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <div id="Test">
+         @Html.Partial("_BanPanel")
+        </div>
+        <script>
+            function ShowPartailBan() {
+             Metro.dialog.open('#demoDialog1');
+
+            }
+            function UnBanShow() {
+                var notify = Metro.notify;
+                notify.create("User Unbanned!", null, {
+
+                });
+            };
+        </script>
+    </div>

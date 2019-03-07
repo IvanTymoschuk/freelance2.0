@@ -160,5 +160,43 @@ namespace BLLViews.Models
             base.Seed(db);
         }
     }
+    public class Repos<T>
+         where T : class
+    {
+        ApplicationDbContext db = new ApplicationDbContext();
+        DbSet<T> Set;
+
+        public Repos()
+        {
+            Set = db.Set<T>();
+        }
+
+        public void Create(T Entity)
+        {
+            Set.Add(Entity);
+            db.SaveChanges();
+        }
+
+        public List<T> ReadAll()
+        {
+            return Set.ToList();
+        }
+
+
+        public void Update(T Entity)
+        {
+            db.Entry(Entity).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+
+        public void Delete(T Entity)
+        {
+            db.Entry(Entity).State = EntityState.Deleted;
+            Set.Remove(Entity);
+            db.SaveChanges();
+        }
+
+
+    }
 
 }

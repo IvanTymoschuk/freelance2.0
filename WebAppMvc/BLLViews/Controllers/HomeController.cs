@@ -75,6 +75,10 @@ namespace BLLViews.Controllers
 
             return View();
         }
+        public ActionResult NotFound()
+        {
+            return View();
+        }
         public ActionResult CreateJobs()
         {
             if(User.IsInRole("Banned"))

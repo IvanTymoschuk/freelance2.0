@@ -104,6 +104,11 @@ namespace BLLViews
             }
             return manager;
         }
+
+        internal Task FindByIdAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     // Configure the application sign-in manager which is used in this application.
