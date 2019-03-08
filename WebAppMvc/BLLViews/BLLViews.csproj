@@ -190,6 +190,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\loading_spinner.gif" />
     <Content Include="Content\metro-all.css" />
     <Content Include="Content\metro-all.min.css" />
     <Content Include="Content\metro-colors.css" />
@@ -303,6 +304,7 @@
     <Content Include="Views\Admin\_BanPanel.cshtml" />
     <Content Include="Views\Admin\_RolePanel.cshtml" />
     <Content Include="Views\Shared\Loading.cshtml" />
+    <Content Include="Views\Home\_Items.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

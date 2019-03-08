@@ -1,0 +1,48 @@
+﻿@model  BLLViews.Models.JobsListModel
+
+@foreach (var el in Model.jobs)
+{
+    <div class="container row style_item">
+
+        <div class="cell-9">
+            <div class="row">
+                <div class="cell-4">
+                    <p>@el.Date</p>
+                </div>
+                <div class="cell-4">
+                    <p>@el.UserOwner.FullName</p>
+                </div>
+                <div class="cell-4">
+                    <p>@el.UserOwner.Raiting</p>
+                </div>
+
+                <div class="row container">
+                    <p style="font-size: 1.5rem">@el.Name</p>
+                </div>
+                <div class="row container">
+                    <p>@el.Description</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cell-3">
+
+            <div class="row container">
+                <p style="color: greenyellow">@el.Category.Name</p>
+
+            </div>
+            <div class="row container">
+                <p style="font-size: 1.5rem">@el.Salary</p>
+            </div>
+            <div class="row container">
+                <p>@el.City.Name</p>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+}

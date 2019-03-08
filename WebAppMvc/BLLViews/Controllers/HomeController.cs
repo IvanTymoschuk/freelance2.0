@@ -73,25 +73,65 @@ namespace BLLViews.Controllers
                 return View(model);
             }
         }
-        public ActionResult JobsList()
+
+
+
+        const int pageSize = 9;
+
+        public ActionResult JobsList(int? page)
         {
             if (User.IsInRole("Banned"))
             {
                 return Redirect("~/Account/banned");
             }
-            using (ApplicationDbContext ctx = new ApplicationDbContext())
-            {
 
-                var model = new JobsListModel()
+            var model = new JobsListModel();
+            ApplicationDbContext ctx = new ApplicationDbContext();
+            
+
+                if (!page.HasValue)
                 {
+                    model.jobs = ctx.Jobs.Include("UserOwner")
+                        .Include("Category")
+                        .Include("City")
+                        .OrderByDescending(x => x.Date)
+                        .Take(pageSize).ToList();
+                    model.Categories = ctx.Categories.ToList();
+                    model.Cities = ctx.Cities.ToList();
+                    model.Users = ctx.Users.ToList();
 
-                    jobs = ctx.Jobs.Include("UserOwner").Include("Category").Include("City").ToList(),
-                    Categories = ctx.Categories.ToList(),
-                    Cities = ctx.Cities.ToList(),
-                    Users = ctx.Users.ToList()
-                };
-                return View(model);
-            }    
+                }
+                else
+                {
+                    int pageIndex = pageSize * page.Value;
+                    model.jobs = ctx.Jobs.Include("UserOwner")
+                        .Include("Category")
+                        .Include("City")
+                        .OrderByDescending(x => x.Date)
+                        .Skip(pageIndex)
+                        .Take(pageSize).ToList();
+                    model.Categories = ctx.Categories.ToList();
+                    model.Cities = ctx.Cities.ToList();
+                    model.Users = ctx.Users.ToList();
+            }
+
+            
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_Items", model);
+            }
+
+           
+            return View(model);
+
+            //var model = new JobsListModel()
+            //{
+
+            //    jobs = ctx.Jobs.Include("UserOwner").Include("Category").Include("City").ToList(),
+            //    Categories = ctx.Categories.ToList(),
+            //    Cities = ctx.Cities.ToList(),
+            //    Users = ctx.Users.ToList()
+            //};
         }
     }
 }

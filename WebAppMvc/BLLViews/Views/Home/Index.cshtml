@@ -42,8 +42,8 @@
 <div class="container ">
     <div class="grid">
         <div class="row flex-justify-center main-navigate">
-            <div clas="cell-3 "><a class="button alert outline left-button">Create Job</a></div>
-            <div clas="cell-3 "><a class="button alert outline right-button">Find Job</a></div>
+            <div clas="cell-3 ">@Html.ActionLink("Get Job","JobsList","Home",new { @class="button alert outline left-button" }) </div>
+            <div clas="cell-3 ">@Html.ActionLink("Create Job", "CreateJobs", "Home", new { @class = "button alert outline right-button" })</div>
         </div>
     </div>
 </div>
