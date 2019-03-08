@@ -26,7 +26,7 @@
                     @if (el.Ban != null)
                     {
                         <td>
-                            <button data-popover-trigger="click" class="button alert outline cell-12" data-popover-position="right" data-role="popover" data-popover-text='User banned!<br>Reason: @el.Ban.Reason<br>To Date: @el.Ban.ToDate<br>IsPermanent: @el.Ban.IsPermanent<br>Ban Date: @el.Ban.DateBan<br>  @Ajax.ActionLink("UNBAN", "UnBan", new { Id = el.Id }, new AjaxOptions { OnSuccess = "UnBanShow",OnBegin="LoaderJS", OnComplete="HideLoaderJS" }, new { @class = "button alert outline" })'>Banned</button>
+                            <button data-popover-trigger="click" class="button alert outline cell-12" data-popover-position="right" data-role="popover" data-popover-text='User banned!<br>Reason: @el.Ban.Reason<br>To Date: @el.Ban.ToDate<br>IsPermanent: @el.Ban.IsPermanent<br>Ban Date: @el.Ban.DateBan<br>  @Ajax.ActionLink("UNBAN", "UnBan", new { Id = el.Id }, new AjaxOptions { OnSuccess = "UnBanShow",OnBegin="LoaderJS", OnComplete="HideLoaderJS", OnFailure="ErrorJS" }, new { @class = "button alert outline" })'>Banned</button>
                         </td>
                     }
                     else
@@ -75,6 +75,8 @@
                 notify.create("Roles has been updated!!!", null, {
                 });
             };
-            
+            function ErrorJS() {
+                Metro.infobox.create('<h3>SERVER ERROR<h3/><br><p>1. No Internet<br>2. Server error<p/>', 'alert');
+            }
         </script>
     </div>
