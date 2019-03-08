@@ -27,9 +27,11 @@ namespace BLLViews
                         "~/Content/metro-colors.css",
                           "~/Content/metro-icons.css",
                             "~/Content/metro-rtl.css",
-                      "~/Content/less/schemes/red-dark.css",
+                              "~/Content/less/schemes/red-dark.css",
                                 "~/Content/site.css",
-                                 "~/Content/Loader.css"));
+                                 "~/Content/Loader.css",
+                                  "~/Content/footer.css"
+                                     ));
         }
     }
 }

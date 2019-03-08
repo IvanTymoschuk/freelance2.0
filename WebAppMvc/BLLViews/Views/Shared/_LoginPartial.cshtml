@@ -23,15 +23,16 @@
         @if (Request.IsAuthenticated)
         {
             <li class="group-title fg-white">Main</li>
+            
             <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">
-                <a href="~/support/MyTickets"> Support</a>
+                @Html.ActionLink("My jobs", $"UserInfo/{User.Identity.GetUserId()}", "Account", routeValues: null, htmlAttributes: null)
             </li>
             <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">
-                @Html.ActionLink("Cabinet", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                @Html.ActionLink("Profile", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
 
             </li>
             <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">
-                @Html.ActionLink("PROFILE", $"UserInfo/{User.Identity.GetUserId()}", "Account", routeValues: null, htmlAttributes: null)
+                <a href="~/support/MyTickets"> Support</a>
             </li>
             <li class="divider"></li>
             if (User.IsInRole("Admin") || User.IsInRole("Support") || User.IsInRole("Banned"))
@@ -40,7 +41,7 @@
                 if (User.IsInRole("Support"))
                 {
 
-                    <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';"> @Html.ActionLink("Support", "Tickets", "Support", routeValues: null, htmlAttributes: new { title = "support" })</li>
+                    <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';"> @Html.ActionLink("Support", "Tickets", "Support", routeValues: null, htmlAttributes: new { title = "Support" })</li>
                 }
                 if (User.IsInRole("Admin"))
                 {
@@ -65,7 +66,7 @@
 
         <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">
             @Html.AntiForgeryToken()
-            @Html.ActionLink("LOG OFF", "LogOff", "Account", routeValues: null, htmlAttributes: null)
+            @Html.ActionLink("Log out", "LogOff", "Account", routeValues: null, htmlAttributes: null)
         </li>
     </ul>
 </aside>
