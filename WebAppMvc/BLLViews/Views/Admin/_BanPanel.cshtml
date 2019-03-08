@@ -4,7 +4,7 @@
     <div class="dialog-title">Ban 
     </div>
     <div class="dialog-content">
-        @using (Ajax.BeginForm("BanUser", new AjaxOptions { UpdateTargetId = "TableUsers",OnSuccess= "BanShow",LoadingElementDuration = 4000, LoadingElementId = "preloader"  }))
+        @using (Ajax.BeginForm("BanUser", new AjaxOptions { UpdateTargetId = "TableUsers",OnSuccess= "BanShow",OnBegin="LoaderJS", OnComplete="HideLoaderJS" }))
         {
 
             @Html.TextBoxFor(model => model.UserId, new { id="UidInBP",type="hidden"})
