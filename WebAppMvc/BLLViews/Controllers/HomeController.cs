@@ -54,6 +54,7 @@ namespace BLLViews.Controllers
         {
             return View();
         }
+        [Authorize]
         public ActionResult CreateJobs()
         {
             if(User.IsInRole("Banned"))
