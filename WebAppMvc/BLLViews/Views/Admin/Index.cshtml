@@ -25,7 +25,7 @@
                     <td>@el.UserName</td>
                     @if (el.Ban != null)
                     {
-                        <td data-popover-trigger="click" class="bg-darkRed" data-popover-position="right" data-role="popover" data-popover-text='User banned!<br>Reason: @el.Ban.Reason<br>To Date: @el.Ban.ToDate<br>IsPermanent: @el.Ban.IsPermanent<br>Ban Date: @el.Ban.DateBan<br>  @Ajax.ActionLink("UNBAN", "UnBan", new { Id = el.Id }, new AjaxOptions { OnSuccess = "UnBanShow" }, new { @class = "button alert" })'>
+                        <td data-popover-trigger="click" class="bg-darkRed" data-popover-position="right" data-role="popover" data-popover-text='User banned!<br>Reason: @el.Ban.Reason<br>To Date: @el.Ban.ToDate<br>IsPermanent: @el.Ban.IsPermanent<br>Ban Date: @el.Ban.DateBan<br>  @Ajax.ActionLink("UNBAN", "UnBan", new { Id = el.Id }, new AjaxOptions { OnSuccess = "UnBanShow",OnBegin="LoaderJS", OnComplete="HideLoaderJS" }, new { @class = "button alert" })'>
                             <div>
                                 BANNED
                             </div>

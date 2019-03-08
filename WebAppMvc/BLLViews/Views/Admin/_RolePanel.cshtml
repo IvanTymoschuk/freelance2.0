@@ -5,7 +5,7 @@
             Roles
         </div>
         <div class="dialog-content">
-            @using (Ajax.BeginForm("UpdateRoles", new AjaxOptions { OnSuccess = "RolesUpdated", LoadingElementDuration = 4000, LoadingElementId = "preloader" }))
+            @using (Ajax.BeginForm("UpdateRoles", new AjaxOptions { OnSuccess = "RolesUpdated", OnBegin="LoaderJS", OnComplete="HideLoaderJS"}))
             {
                 @Html.TextBoxFor(model => model.UserID, new { id = "UidInRP", type = "hidden" })
                 @Html.CheckBoxFor(x => x.IsAdmin, new { type = "checkbox", data_role = "checkbox", data_caption = "IsAdmin" })
