@@ -48,7 +48,7 @@ namespace BLLViews.Controllers
         {
             using (ApplicationDbContext ctx = new ApplicationDbContext())
             {
-                ctx.Tickets.FirstOrDefault(x => x.ID == model.ticket.ID).ticketMSGs.Add(new TicketMSG() { Text = $"Hello {ctx.Users.FirstOrDefault(x => x.Id == ctx.Tickets.FirstOrDefault(y => y.ID == model.ticket.ID).OwnerID).Email} \n<br> {model.mSG.Text} \n<br> Your hero with unlimied possibilities \n<br> {User.Identity.GetUserName()}.", UserID = model.uid, Date = DateTime.Now });
+                ctx.Tickets.FirstOrDefault(x => x.ID == model.ticket.ID).ticketMSGs.Add(new TicketMSG() { Text = $"Hello {ctx.Users.FirstOrDefault(x => x.Id == ctx.Tickets.FirstOrDefault(y => y.ID == model.ticket.ID).OwnerID).Email} \n<br/> {model.mSG.Text} \n<br/> Your hero with unlimied possibilities \n<br/> {User.Identity.GetUserName()}.", UserID = model.uid, Date = DateTime.Now });
                 ctx.Tickets.FirstOrDefault(x => x.ID == model.ticket.ID).LastUpdate = DateTime.Now;
                 ctx.Tickets.FirstOrDefault(x => x.ID == model.ticket.ID).Status = model.newStatus;
                 UserManager.SendEmail(ctx.Tickets.FirstOrDefault(x => x.ID == model.ticket.ID).OwnerID, "Support" + DateTime.Now, "Your request has been answered!");
