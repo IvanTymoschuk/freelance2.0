@@ -17,91 +17,398 @@
         width: 100%;
         background-size: cover;
     }
-    .left-button, .right-button{
+
+    .left-button, .right-button {
         font-size: 2rem;
         margin: 2rem;
         width: 250px;
         height: 70px;
         padding: 1rem;
     }
-    .main-h{
+
+    .main-h {
         position: absolute;
-        top:3%;
+        top: 3%;
         right: 1%;
         font-size: 4.5rem;
         font-weight: bold;
     }
-    
+
+    .stdivborder {
+        border-left: 4px double black;
+        border-left-color: red;
+        padding: 10px;
+        height: 100px;
+    }
+
+    .img {
+        height: 315px;
+        width: 200px;
+    }
+
+    .stbordercards {
+        border: 4px thin black;
+        border-color: red;
+        padding: 10px;
+    }
+
+    .stbutt {
+        width: auto;
+    }
+
+    .stbuttCard2 {
+        margin: 10px;
+    }
+
+    .stcard2 {
+        height: 250px;
+    }
+
+    .stLink {
+    }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@4.1.1/dist/simpleParallax.min.js"></script>
 
 <img class="parallax-container" src="~/Content/SiteImages/mainback.jpg" />
-<h1 class="main-h">Make the world yourself</h1>
+<p>
+    <h1 class="main-h text-center">
+        Hire freelancers.<br />
+        Make things happen.
+    </h1>
+    <div class="main-h" style="margin-top:13%;margin-right:15%;">
+        <ul class="unstyled-list icon-list">
+            <li><span class="mif-arrow-down ani-pulse fg-red"></span></li>
+        </ul>
+    </div>
+</p>
 <br />
 <br />
 <div class="container ">
     <div class="grid">
         <div class="row flex-justify-center main-navigate">
-            <div clas="cell-3 ">@Html.ActionLink("Get Job","JobsList","Home",new { @class="button alert outline left-button" }) </div>
+            <div clas="cell-3 ">@Html.ActionLink("Get Job", "JobsList", "Home", new { @class = "button alert outline left-button" }) </div>
             <div clas="cell-3 ">@Html.ActionLink("Create Job", "CreateJobs", "Home", new { @class = "button alert outline right-button" })</div>
         </div>
     </div>
 </div>
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
+<hr />
+<div class=" text-center">
+    <div class="float-left" style="width:20%;">
+        <p>
+            <h3>
+                Hire for any scope
+                of work:
+            </h3>
+        </p>
+    </div>
+    <div class="stdivborder float-left" style="width:20%;">
+        <h4>
+            Short-term tasks
+        </h4>
+        <p>
+            Build a pool of diverse experts for one-off tasks
+        </p>
+    </div>
+    <div class="stdivborder float-left" style="width:20%;">
+        <h4>
+            Recurring projects
+        </h4>
+        <p>
+            Have a go-to team with specialized skills
+        </p>
+    </div>
+    <div class="stdivborder float-left" style="width:20%;">
+        <h4>
+            Full-time contract work
+        </h4>
+        <p>
+            Expand your staff with a dedicated team
+        </p>
+    </div>
+    <div class="stdivborder float-left" style="width:20%;">
+        <h4>
+            Contract with freelancers.
+        </h4>
+        <p>
+            Expand the staff.Update their knowledge and get it for your own benefit.
+        </p>
 
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<h1>hello</h1>
-<h1>hello</h1>
-<h1>hello</h1>
-<h1>hello</h1>
-<h1>hello</h1>
+    </div>
+
+
+    <hr />
+
+
+</div>
+
+<div class="container text-center">
+    <div>
+        @*<p><h1>How it works</h1></p>*@
+        <button class="button alert outline left-button"> How it works</button>  @*disabled*@
+    </div>
+    <hr />
+    <div class="float-left" style="width:25%;">
+        <div class="card image-header img stbordercards">
+            <div class="card-header fg-white"
+                 style="background-image: url(https://www.upwork.com/ab/assets/Adquiro/9eefcd5/wp/images/item1.b82e85601f00.svg)">
+
+            </div>
+            <div class="card-content p-2">
+                <p>Post a job(it’s free)</p>
+
+            </div>
+            <div class="card-footer">
+                Tell us about your project. Upwork connects you with top talent around the world, or near you.
+            </div>
+        </div>
+    </div>
+    <div class="float-left" style="width:25%;">
+        <div class="card image-header img stbordercards">
+            <div class="card-header fg-white"
+                 style="background-image: url(https://www.upwork.com/ab/assets/Adquiro/9eefcd5/wp/images/item2.6d8f26d2ef92.svg)">
+
+            </div>
+            <div class="card-content p-2">
+                <p>Freelancers come to you</p>
+
+            </div>
+            <div class="card-footer">
+                Get qualified proposals within 24 hours. Compare bids, reviews, and prior work.
+            </div>
+        </div>
+    </div>
+    <div class="float-left" style="width:25%;">
+        <div class="card image-header img stbordercards ">
+            <div class="card-header fg-white"
+                 style="background-image: url(https://www.upwork.com/ab/assets/Adquiro/9eefcd5/wp/images/item3.325b8bf8553d.svg)">
+
+            </div>
+            <div class="card-content p-2">
+                <p>Collaborate easily</p>
+
+            </div>
+            <div class="card-footer">
+                Use Upwork to chat or video call, share files, and track project milestones from your desktop or mobile.
+            </div>
+        </div>
+    </div>
+    <div class="float-left" style="width:25%;">
+        <div class="card image-header img stbordercards">
+            <div class="card-header fg-white"
+                 style="background-image: url(https://www.upwork.com/ab/assets/Adquiro/9eefcd5/wp/images/item4.f6b3affd28b3.svg)">
+
+            </div>
+            <div class="card-content p-2">
+                <p>Payment simplified</p>
+
+            </div>
+            <div class="card-footer">
+                Pay hourly or fixed-price and receive invoices through Upwork. Only pay for work you authorize.
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+<hr />
+<div class="container text-center">
+    <div>
+        <button class="button alert outline left-button stbutt">Choose the offering that works best for you</button>
+    </div>
+    <hr />
+    <div class="float-left" style="width:25%">
+        <div class="card stbordercards">
+            <div class="card-header stcard2">
+                <div style="height:73px;">
+                    <h4>Basic</h4>
+                    <p>
+                        The essentials to start hiring, today.
+                    </p>
+                </div>
+                <button style="margin-top:15%" class="button alert outline stbuttCard2">Select Basic</button>
+
+                <h6 class="text-center">Free</h6>
+            </div>
+            <div class="card-content p-2 stcard2">
+                <p><span class="mif-checkmark fg-green"></span> <a> Verified freelancer work history and reviews</a></p>
+                <p><span class="mif-checkmark fg-green"></span> <a> Unlimited proposals from freelancers </a></p>
+                <p><span class="mif-checkmark fg-green"></span> <a> Built-in collaboration tools and easy payments</a></p>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="float-left" style="width:25%">
+        <div class="card stbordercards">
+            <div class="card-header stcard2">
+                <div style="height:73px;">
+                    <h4>Plus</h4>
+                    <p>
+                        For teams looking to stand out to quality talent and scale hiring fast.
+                    </p>
+                </div>
+                <button style="margin-top:15%" class="button alert outline stbuttCard2">Select Basic</button>
+
+                <h6 class="text-center">$49.99/month*</h6>
+            </div>
+            <div class="card-content p-2 stcard2">
+                <p class="fg-gray">Everything in Basic, and:</p>
+                <p><span class="mif-checkmark fg-green"></span> <a> Dedicated account managers to help you find and hire quality talent fast</a></p>
+                <p><span class="mif-checkmark fg-green"></span> <a> Project tracking and collaboration tools for teams </a></p>
+                <p><span class="mif-checkmark fg-green"></span> <a> Tailored search results featuring Top Rated and Rising Talent</a></p>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="float-left" style="width:25%">
+        <div class="card stbordercards">
+            <div class="card-header stcard2">
+                <div style="height:73px;">
+                    <h4>Business</h4>
+                    <p>
+                        For businesses looking for a flexible talent solution that scales with them.
+                    </p>
+                </div>
+                <button style="margin-top:15%" class="button alert outline stbuttCard2">Select Basic</button>
+
+                <h6 class="text-center">$499/month**</h6>
+            </div>
+            <div class="card-content p-2 stcard2">
+                <p class="fg-gray">Everything in Plus, and:</p>
+                <p><span class="mif-checkmark fg-green"></span> <a> Consolidated billing and invoicing with net 30 pay</a></p>
+                <p><span class="mif-checkmark fg-green"></span> <a> Dedicated team of advisors to get you hiring faster and more successfully </a></p>
+                <p><span class="mif-checkmark fg-green"></span> <a> Detailed reporting with company insights and trends</a></p>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="float-left" style="width:25%">
+        <div class="card stbordercards">
+            <div class="card-header stcard2">
+                <div style="height:73px;">
+                    <h4>Enterprise</h4>
+                    <p>
+                        For companies looking for a solution that fits into their workforce program.
+                    </p>
+                </div>
+                <button style="margin-top:15%" class="button alert outline stbuttCard2">Select Basic</button>
+
+                <h6 class="text-center">Price varies - contact us for a demo</h6>
+            </div>
+            <div class="card-content p-2 stcard2">
+                <p class="fg-gray">Everything in Business, and:</p>
+                <p><span class="mif-checkmark fg-green"></span> <a> Custom configurable contracting and onboarding process</a></p>
+                <p><span class="mif-checkmark fg-green"></span> <a> Worker classification compliance services </a></p>
+                <p><span class="mif-checkmark fg-green"></span> <a> Project-based or managed solutions, and dedicated account executive</a></p>
+
+            </div>
+
+        </div>
+    </div>
 
 
 
 
 
+</div>
+<hr />
 
+<div class="container">
+    <h5>Top skills:</h5>
+    <div class="row">
+        <div class="cell">
+            @*<a class="fg-white fg-red-hover" href="#">Android Developer</a>*@
+            @Html.ActionLink("Android Developer", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })
+            <p>@Html.ActionLink("Customer Service", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Front-End Developer", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("iOS Developer", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })</p>
 
+        </div>
+        <div class="cell">
+            @Html.ActionLink("Bookkeeper", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })
+            <p>@Html.ActionLink("Database Administration", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Game Developer", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Java Developer", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })</p>
+        </div>
+        <div class="cell">
+            @Html.ActionLink("PHP Developer", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })
+            <p>@Html.ActionLink("Content Writer", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Data Scientist", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Graphic Designer", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })</p>
+        </div>
+    </div>
+</div>
 
+<hr />
 
 <footer class="footer-distributed">
 
-    <div class="footer-left">
-
-        <h3>Freelance<span>logo</span></h3>
-
-        <p class="footer-links">
-            <a href="#">Home</a>
-            ·
-            <a href="#">Jobs List</a>
-            ·
-            <a href="#">About</a>
-            ·
-            <a href="#">Team</a>
-            ·
-            <a href="#">Contact</a>
-        </p>
-
+    <div class="container">
+        <div class="text-center">
+            <h3>Freelance<span>logo</span></h3>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="cell-4">
+                <h4>COMPANY</h4>
+                <p>@Html.ActionLink("About Us", "About", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                <p>@Html.ActionLink("Investor Relations", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                <p>@Html.ActionLink("Carrers", "AboutCarrers", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                <p>@Html.ActionLink("Press", "AboutPress", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                <p>@Html.ActionLink("Trust & Safety", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                <p>@Html.ActionLink("Terms of Service", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                <p>@Html.ActionLink("Privacy Policy", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            </div>
+            <div class="cell-4">
+                <h4>RESOURCES</h4>
+                <p>@Html.ActionLink("Customer Support", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>@*qqq*@
+                <p>@Html.ActionLink("Hiring Headquarters", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                <p>@Html.ActionLink("Hiring Resources", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                <p>@Html.ActionLink("Freelance Blog", "About", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                <p>@Html.ActionLink("Customer Stories", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                <p>@Html.ActionLink("Business Resources", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                <p>@Html.ActionLink("Payroll Services", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            </div>
+            <div class="cell-4">
+                <h4>BROWSE</h4>
+                <p>@Html.ActionLink("Hiring Headquarters", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                <p>@Html.ActionLink("Find Jobs", "JobsList", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                <p>@Html.ActionLink("Jobs in USA", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                <p>@Html.ActionLink("Freelancers in Australia", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                <p>@Html.ActionLink("Freelancers in Canada", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                <p>@Html.ActionLink("Freelancers in UK", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                <p>@Html.ActionLink("Freelancers in USA", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            </div>
+        </div>
+        <div class="footer-icons">
+            <div class="float-left">
+                <div class="text-left">
+            <h5>Follow us</h5>
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-github"></i></a>
+            </div>
+            </div>
+            <div class="float-right">
+                <div class="text-right">
+                    <h5>Mobile app</h5>
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        </div>
+   
+    <hr />
+    <div class="text-center">
         <p class="footer-company-name">Psycho Team &copy; @DateTime.Now.Year</p>
     </div>
 
-    <div class="footer-center">
+    @*<div class="footer-center">
 
         <div>
             <i class="fa fa-map-marker"></i>
@@ -116,32 +423,32 @@
         <div>
             <i class="fa fa-envelope"></i>
             <p>@Html.ActionLink("Support", "Tickets", "Support", routeValues: null, htmlAttributes: new { title = "Support Team" })</p>
-        </div>
+        </div>*@
 
-    </div>
+    @*</div>*@
 
-    <div class="footer-right">
+    @*<div class="footer-right">
 
-        <p class="footer-company-about">
-            <span>About the company</span>
-            Psycho team is young team which develop web-sites with newest and stylish design.
-        </p>
+            <p class="footer-company-about">
+                <span>About the company</span>
+                Psycho team is young team which develop web-sites with newest and stylish design.
+            </p>
 
-        <div class="footer-icons">
+            <div class="footer-icons">
 
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-github"></i></a>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-github"></i></a>
 
-        </div>
+            </div>
 
-    </div>
+        </div>*@
 
 </footer>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
 
         //effects take place in 3000ms
         $('main-h').fadeOut(3000);
