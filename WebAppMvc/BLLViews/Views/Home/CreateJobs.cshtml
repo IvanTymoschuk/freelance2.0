@@ -72,8 +72,8 @@
             <p> <h5> In this field, you must enter Name your project or task.</h5></p>
         </div>
         <div class="card-content p-2">
-
-            @*@Html.TextBoxFor(model => Model.jobs.ID, new { @type = "hidden" })*@ <input class="stCardInput " maxlength="3000" id="Name" Name="Name" type="text" data-role="input" data-prepend="Name project or task: ">
+           @*@Html.TextBoxFor(x =>x.jobs, new { @class = "stCardInput", data_role = "input", data_prepend = "Name project or task: " })*@
+            @*@Html.TextBoxFor(model => Model.jobs.ID, new { @type = "hidden" })*@ @*<input class="stCardInput " maxlength="3000" id="Name" Name="Name" type="text" data-role="input" data-prepend="Name project or task: ">*@
             @*@Html.TextBoxFor(model => Model.jobs.Name, new { @class = "cell-12", data_role = "input", data_prepend = "Name project or task: " })*@
         </div>
         <div class="card-footer stTextCardFooter">
