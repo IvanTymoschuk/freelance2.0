@@ -1,6 +1,6 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding-top: 20px;
+  
 
 }
 
@@ -21,5 +21,5 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+   
 }

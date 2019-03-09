@@ -2,43 +2,43 @@
 @{
     ViewBag.Title = "Requests";
 }
-    <div class="container">
-        <br />
-        <h2 style="text-align:center">@ViewBag.Title</h2>
+<div class="container">
+    <br />
+    <h2 style="text-align:center">@ViewBag.Title</h2>
 
 
-        <table class="table">
-            <thead>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>STATUS</th>
+                <th>THEME</th>
+                <th>LAST UPDATE</th>
+                <th>LINK</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var el in Model.tickets)
+            {
                 <tr>
-                    <th>ID</th>
-                    <th>STATUS</th>
-                    <th>THEME</th>
-                    <th>LAST UPDATE</th>
-                    <th>LINK</th>
+                    <td>@el.ID</td>
+                    <td>@el.Status</td>
+                    <td>@el.Theme</td>
+                    <td>@el.LastUpdate</td>
+                    <td><a href="/support/ticket/@el.ID" class="cell-12 button alert outline" style="font-size:14px">INFO</a></td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var el in Model.tickets)
-                {
-                    <tr>
-                        <td>@el.ID</td>
-                        <td>@el.Status</td>
-                        <td>@el.Theme</td>
-                        <td>@el.LastUpdate</td>
-                        <td><a href="/support/ticket/@el.ID" class="cell-12 button alert outline" style="font-size:14px">INFO</a></td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-        <br />
-        <hr />
-        <br />
-        <div class="row">
-            <h3 class="cell-6">Help is needed?</h3>
-            <a href="/support/newticket" class="cell-6 button alert outline" style="font-size:24px">GET SUPPORT</a>
-            <h5 class="cell-4">
-                Describe the situation - and our team will be happy to help you.
-            </h5>
-        </div>
-        <br />
+            }
+        </tbody>
+    </table>
+    <br />
+    <hr />
+    <br />
+    <div class="row">
+        <h3 class="cell-6">Help is needed?</h3>
+        <a href="/support/newticket" class="cell-6 button alert outline" style="font-size:24px">GET SUPPORT</a>
+        <h5 class="cell-4">
+            Describe the situation - and our team will be happy to help you.
+        </h5>
     </div>
+    <br />
+</div>

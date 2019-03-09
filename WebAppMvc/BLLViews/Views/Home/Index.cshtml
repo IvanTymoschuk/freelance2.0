@@ -1,40 +1,169 @@
-﻿
-
-@{
+﻿@{
     ViewBag.Title = "Home Page";
 }
 
 
-<div data-role="cube" data-rules="myDemoRules2"></div>
-<h2 class="text-center">This page is in development!!!</h2>
+<style>
+    .p-4 {
+        padding: 0px !important;
+    }
 
+    body {
+        padding-top: 0px !important;
+    }
 
-<div class="float-left" style="width: 30%">
+    .parallax-container {
+        height: 850px;
+        width: 100%;
+        background-size: cover;
+    }
+    .left-button, .right-button{
+        font-size: 2rem;
+        margin: 2rem;
+        width: 250px;
+        height: 70px;
+        padding: 1rem;
+    }
+    .main-h{
+        position: absolute;
+        top:3%;
+        right: 1%;
+        font-size: 4.5rem;
+        font-weight: bold;
+    }
+    
+</style>
+<script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@4.1.1/dist/simpleParallax.min.js"></script>
 
-    <p><h1> Hire freelancers.</h1></p>
-    <p><h1>  Make things</h1></p>
-    <p><h1>   happen.</h1></p>
-   
-
-    <h3>Grow your business through the top freelancing website. Hire talent nearby or worldwide.</h3>
-
-</div>
-
-
-    <div class="float-left" style="width:60%">
-       
-        <div class="stCanvas">
-            <script>
-                var myDemoRules2 = [
-                    { on: { 'top': [1, 2, 5], 'left': [9, 13, 14], 'right': [15, 12, 16] } },
-                    { on: { 'top': [9, 6, 3], 'left': [5, 10, 15], 'right': [14, 11, 8] } },
-                    { on: { 'top': [13, 4], 'left': [1, 16], 'right': [13, 4] } },
-                    { on: { 'top': [10, 7], 'left': [6, 11], 'right': [10, 7] } },
-                    { on: { 'top': [8, 14], 'left': [2, 12], 'right': [9, 3] } },
-                    { on: { 'top': [11], 'left': [7], 'right': [6] } },
-                    { on: { 'top': [12, 15], 'left': [3, 8], 'right': [2, 5] } },
-                    { on: { 'top': [16], 'left': [4], 'right': [1] } }
-                ];
-            </script>
+<img class="parallax-container" src="~/Content/SiteImages/mainback.jpg" />
+<h1 class="main-h">Make the world yourself</h1>
+<br />
+<br />
+<div class="container ">
+    <div class="grid">
+        <div class="row flex-justify-center main-navigate">
+            <div clas="cell-3 ">@Html.ActionLink("Get Job","JobsList","Home",new { @class="button alert outline left-button" }) </div>
+            <div clas="cell-3 ">@Html.ActionLink("Create Job", "CreateJobs", "Home", new { @class = "button alert outline right-button" })</div>
         </div>
     </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<h1>hello</h1>
+<h1>hello</h1>
+<h1>hello</h1>
+<h1>hello</h1>
+<h1>hello</h1>
+
+
+
+
+
+
+
+
+
+<footer class="footer-distributed">
+
+    <div class="footer-left">
+
+        <h3>Freelance<span>logo</span></h3>
+
+        <p class="footer-links">
+            <a href="#">Home</a>
+            ·
+            <a href="#">Jobs List</a>
+            ·
+            <a href="#">About</a>
+            ·
+            <a href="#">Team</a>
+            ·
+            <a href="#">Contact</a>
+        </p>
+
+        <p class="footer-company-name">Psycho Team &copy; @DateTime.Now.Year</p>
+    </div>
+
+    <div class="footer-center">
+
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p><span>ITStep Academy Office</span> Rivne, Ukraine</p>
+        </div>
+
+        <div>
+            <i class="fa fa-phone"></i>
+            <p>+1 555 123456</p>
+        </div>
+
+        <div>
+            <i class="fa fa-envelope"></i>
+            <p>@Html.ActionLink("Support", "Tickets", "Support", routeValues: null, htmlAttributes: new { title = "Support Team" })</p>
+        </div>
+
+    </div>
+
+    <div class="footer-right">
+
+        <p class="footer-company-about">
+            <span>About the company</span>
+            Psycho team is young team which develop web-sites with newest and stylish design.
+        </p>
+
+        <div class="footer-icons">
+
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-github"></i></a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+<script>
+    $(document).ready(function() {
+
+        //effects take place in 3000ms
+        $('main-h').fadeOut(3000);
+        $('main-h').fadeIn(3000);
+
+    })
+    var image = document.getElementsByClassName('parallax-container');
+    new simpleParallax(image, {
+
+        transition: 'cubic-bezier(0,0,0,1)'
+    });
+    var image = document.getElementsByClassName('main-navigate');
+    new simpleParallax(image, {
+
+        transition: 'cubic-bezier(0,0,0,1)'
+    });
+</script>
+
+
+
+
+
+
+
+

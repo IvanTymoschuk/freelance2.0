@@ -78,7 +78,7 @@ namespace BLLViews.Controllers
         [AllowAnonymous]
         public ActionResult UserInfo(string id)
         {
-            UserInfoModel model = new UserInfoModel();
+            UserInfoModel model = new UserInfoModel(); 
             var user = UserManager.FindById(id);
             if (user == null)
                 return HttpNotFound("User with id " + id + " not found!");
@@ -86,7 +86,10 @@ namespace BLLViews.Controllers
             string userID = user.Id;
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
+                model.user = db.Users.FirstOrDefault(x => x.Id == user.Id);
+                model.user.City = db.Users.FirstOrDefault(x => x.Id == user.Id).City;
                 model.jobs = db.Jobs.Where(x => x.UserOwner.Id == userID).ToList();
+                model.AvaPath = user.AvaPath;
             }
             return View(model);
         }
@@ -108,11 +111,11 @@ namespace BLLViews.Controllers
                         ViewBag.UserFullName = user.FullName;
                         if (user.Ban != null)
                         {
-                            if (user.Ban.ToDate < DateTime.Now)
+                            if (user.Ban.ToDate < DateTime.Now&& user.Ban.IsPermanent!=true)
                             {
                                 UserManager.RemoveFromRole(user.Id, "Banned");
                                 UserManager.AddToRole(user.Id, "User");
-
+                                UserManager.FindById(user.Id).Ban = null;
                                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                                 return RedirectToLocal(returnUrl);
                             }

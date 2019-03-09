@@ -4,7 +4,9 @@
 }
 
 <style>
-
+    .body{
+        padding-top: 1px !important;
+    }
   
     .style_list {
         top: 1rem;
@@ -12,36 +14,45 @@
     }
 
     .style_item {
-        margin: 2px;
+        margin: 15px;
         padding: 5px;
         border-style: solid;
-        border-width: 1px;
+        border-width: 2px;
         border-color: darkred;
-        transition: padding 0.4s linear, background 0.2s linear;
+        transition:  background 0.2s linear,border-radius 0.25s ease-out;
+      
     }
-    .style_item:hover {
-        padding: 8px;
-        background: darkslategray;
-    }
+        .style_item:hover {
+            cursor: pointer;
+            border-radius: 20px;
+            background: #042949;
+        }
 
-
-
-
-
+        .btn-create{
+            width: 80%;
+        }
+        .box{
+            justify-content: center;
+        }
+        .text{
+            font-size: 2rem !important;
+            height: 4rem !important;
+        }
 </style>
 
 
 <br />
-<div class="grid container">
+<div class="container">
+   
     <div class="row">
-        <div class="cell-4">
+        <div class="cell-3 d-flex flex-justify-center">
             <h2> JobsList</h2>
         </div>
-        <div class="cell-4">
-            @Html.TextBox("searchtextbox", "", new { placeholder = "Search", data_role = "input", data_search_button = "true" })
+        <div class="cell-6" style="margin-bottom: 20px">
+            @Html.TextBox("searchtextbox", "", new { type = "text",@class = " text", id="search", placeholder = "Search"})
         </div>
-        <div class="cell-2 offset-2">
-            <button class="button">Create Job</button>
+        <div class="cell-3 d-flex  flex-justify-center">
+            <button class="button btn-create">Create Job</button>
         </div>
     </div>
     <div class="row">
@@ -62,60 +73,51 @@
             </select>
         </div>
     </div>
-    <div class="row style_list">
 
 
-        @foreach (var el in Model.jobs)
-        {
-            <div class="container row style_item">
-                
+    <div class="container style_list">
+        <div id="scrolList">
+            @Html.Partial("_Items", Model)
+        </div>
 
 
-
-                <div class="cell-9" >
-                    <div class="row">
-                        <div class="cell-4">
-                            <p>@el.Date</p>
-                        </div>
-                        <div class="cell-4">
-                            <p>@el.UserOwner.FullName</p>
-                        </div>
-                        <div class="cell-4">
-                            <p>@el.UserOwner.Raiting</p>
-                        </div>
-                      
-                        <div class="row container">
-                            <p style="font-size: 1.5rem">@el.Name</p>
-                        </div>
-                        <div class="row container">
-                            <p>@el.Description</p>
-                        </div>
-                    </div>
-                </div>
-               
-                <div class="cell-3">
-                        
-                    <div class="row container">
-                        <p style="color: greenyellow">@el.Category.Name</p>
-
-                    </div>
-                    <div class="row container">
-                        <p style="font-size: 1.5rem">@el.Salary</p>
-                    </div>
-                    <div class="row container">
-                        <p>@el.City.Name</p>
-
-                    </div>
-                        
-
-                </div>
-               
-
-            </div>
-
-        }
 
     </div>
+
 </div>
+
+@section scripts{
+    <script type="text/javascript">
+        let pageNo=1;
+        function loadData(text) {
+            console.log(text); 
+            $.ajax({
+                url: '/Home/JobsList/',
+                data: { search: text, page: pageNo },
+                success: function(data) {
+
+                    $("#scrolList").append(data);
+                    pageNo++;
+                }
+            });
+        }
+        var searchData = "";
+
+        $(window).scroll(function () {
+            if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+
+                loadData(searchData);
+
+            }
+        });
+        $("#search").on("input", function () {
+            pageNo = 0;
+            $("#scrolList").empty();
+            searchData = $("#search").val();
+            loadData(searchData);
+        })  
+    </script>
+}
+
 
 

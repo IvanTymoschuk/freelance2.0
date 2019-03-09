@@ -1,0 +1,82 @@
+﻿@model BLLViews.Models.IndexModel
+@{
+    /**/
+
+    ViewBag.Title = "Adminka";
+}
+
+    <div class="container">
+
+        <table class="table  striped  table-border cell-border" data-role="table" data-show-activity="false" data-rownum="true">
+            <thead>
+                <tr>
+                    <th>FullName</th>
+                    <th>Username</th>
+                    <th>isBanned</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody class="fg-white">
+                @foreach (var el in Model.users)
+                {
+                 
+                <tr class="bd-darkRed">
+                    <td>@el.FullName</td>
+                    <td>@el.UserName</td>
+                    @if (el.Ban != null)
+                    {
+                        <td>
+                            <button data-popover-trigger="click" class="button alert outline cell-12" data-popover-position="right" data-role="popover" data-popover-text='User banned!<br>Reason: @el.Ban.Reason<br>To Date: @el.Ban.ToDate<br>IsPermanent: @el.Ban.IsPermanent<br>Ban Date: @el.Ban.DateBan<br>  @Ajax.ActionLink("UNBAN", "UnBan", new { Id = el.Id }, new AjaxOptions { OnSuccess = "UnBanShow",OnBegin="LoaderJS", OnComplete="HideLoaderJS", OnFailure="ErrorJS" }, new { @class = "button alert outline" })'>Banned</button>
+                        </td>
+                    }
+                    else
+                    {
+                <td >
+                    <button data-popover-trigger="click" class="button alert outline cell-12" data-popover-position="right" data-role="popover" data-popover-text='User no banned!<br><button id = "OpenBan" onclick="ShowPartailBan()" class="button alert outline" data-value="@el.Id">BAN</button>'>Null</button>
+                </td>
+                    }
+                    <td><button  id = "OpenRoles" onclick="ShowPartailRoles()" data-value="@el.Id" class="cell-12 button alert outline">Roles</button></td>
+                </tr>
+                 }
+                  
+                
+            </tbody>
+        </table>
+   
+               
+        <div id="Test">
+         @Html.Partial("_BanPanel",Model.partialBanModel)
+         @Html.Partial("_RolePanel", Model.partialRolesModel)
+        </div>
+        <script>
+            function ShowPartailBan() {
+                let info = $("#OpenBan").data("value");
+                Metro.dialog.open('#demoDialog1');
+                $("#UidInBP").val(info);
+            }
+              function ShowPartailRoles() {
+                let info = $("#OpenRoles").data("value");
+                Metro.dialog.open('#demoDialog2');
+                $("#UidInRP").val(info);
+            }
+            function UnBanShow() {
+                var notify = Metro.notify;
+                notify.create("User Unbanned!", null, {
+
+                });
+            };
+            function BanShow() {
+                var notify = Metro.notify;
+                notify.create("User Banned!", null, {
+                });
+            };
+            function RolesUpdated() {
+                var notify = Metro.notify;
+                notify.create("Roles has been updated!!!", null, {
+                });
+            };
+            function ErrorJS() {
+                Metro.infobox.create('<h3>SERVER ERROR<h3/><br><p>1. No Internet<br>2. Server error<p/>', 'alert');
+            }
+        </script>
+    </div>

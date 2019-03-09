@@ -9,36 +9,37 @@
         margin-right: 30%;
     }
 </style>
-    <div class="container">
-        <h2 class="text-center">@ViewBag.Title</h2>
+<div class="container">
+    <h2 class="text-center">@ViewBag.Title</h2>
 
-        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal stLoginInput", role = "form" }))
-        {
-            @Html.AntiForgeryToken()
-            <h4 class="text-center">Create a new account</h4>
-            <hr />
-            @Html.ValidationSummary("", new { @class = "fg-white" })
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal stLoginInput", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4 class="text-center">Create a new account</h4>
+        <hr />
+        // @Html.ValidationSummary("", new { @class = "fg-white" })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "fg-white" })
+        @Html.LabelFor(m => m.Email)
 
-            @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email, new { @class = "cell-12" })
+        <br />
 
-            @Html.TextBoxFor(m => m.Email, new { @class = "cell-12" })
-            <br />
+        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "fg-white" })
+        @Html.LabelFor(m => m.Password)
 
+        @Html.PasswordFor(m => m.Password, new { @class = "cell-12" })
 
-            @Html.LabelFor(m => m.Password)
+        <br />
+        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "fg-white" })
+        @Html.LabelFor(m => m.ConfirmPassword)
 
-            @Html.PasswordFor(m => m.Password, new { @class = "cell-12" })
+        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "cell-12" })
 
-            <br />
-            @Html.LabelFor(m => m.ConfirmPassword)
+        <br />
+        <button class="button alert outline cell-12" onclick="SendOnEMail();">Register</button>
 
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "cell-12" })
-
-            <br />
-            <button class="button alert outline cell-12" onclick="SendOnEMail();">REGISTER</button>
-
-        }
-    </div>
+    }
+</div>
 <script>
     function SendOnEMail() {
         alert("A confirmation email has been sent to your email!");

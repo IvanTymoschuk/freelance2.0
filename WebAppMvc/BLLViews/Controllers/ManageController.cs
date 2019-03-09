@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BLLViews.Models;
+using System.Collections.Generic;
 
 namespace BLLViews.Controllers
 {
@@ -65,6 +66,12 @@ namespace BLLViews.Controllers
 
             var userId = User.Identity.GetUserId();
 
+             List<SelectListItem> items = new List<SelectListItem>();
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                foreach (var el in db.Cities)
+                    items.Add(new SelectListItem() { Text = el.Name, Value = el.Id.ToString() });
+            }
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
@@ -72,21 +79,30 @@ namespace BLLViews.Controllers
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
-                user = UserManager.FindById(userId)
+                user = UserManager.FindById(userId),
+                ListCities = items
                 
-
             };
+          
+
+            
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Index( IndexViewModel model)
         {
+            
             var userId = User.Identity.GetUserId();
+            string fileName = System.IO.Path.GetFileName(model.Upload.FileName);
+            string serverFileName = string.Format(Server.MapPath("~/Content/AvaFiles/" + fileName));
+
+            model.Upload.SaveAs(serverFileName);
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                db.Users.FirstOrDefault(x => x.Id == userId).AvaPath = model.user.AvaPath;
+                db.Users.FirstOrDefault(x => x.Id == userId).AvaPath = serverFileName;
                 db.Users.FirstOrDefault(x => x.Id == userId).FullName = model.user.FullName;
+                db.Users.FirstOrDefault(x => x.Id == userId).City = db.Cities.FirstOrDefault(x => x.Id == model.CityID);
                 db.SaveChanges();
             }
             return Redirect("/account/UserInfo/" + userId);

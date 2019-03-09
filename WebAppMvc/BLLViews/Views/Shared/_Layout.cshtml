@@ -5,32 +5,33 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+
     @Styles.Render("~/Content/css")
+   
+
     @Scripts.Render("~/bundles/modernizr")
 
     @Scripts.Render("~/bundles/jquery")
 
     <style>
-       
+
         .sidebar-menu {
             color: white;
         }
-            
 
-            .app-bar {
-                border-bottom: red solid 3px;
-            }
 
-    
+        .app-bar {
+            border-bottom: red solid 3px;
+        }
+
+
         .app-bar-menu li {
             list-style: none !important;
         }
-    
-    
-    
     </style>
 </head>
-<body>
+<body id="TableUsers">
+    @Html.Partial("Loading")
 
     <div data-role="appbar" data-expand-point="md" class="bg-black fg-white app-bar fixed-top pos-absolute">
 
@@ -44,10 +45,10 @@
         </a>
 
         <ul class="app-bar-menu">
-            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+            <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">@Html.ActionLink("Home", "Index", "Home")</li>
 
             <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">@Html.ActionLink("CreateJobs", "CreateJobs", "Home")</li>
-            <li> @Html.ActionLink("About", "About", "Home")</li>
+            <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';"> @Html.ActionLink("About", "About", "Home")</li>
         </ul>
         @if (User.Identity.IsAuthenticated)
         {
@@ -59,8 +60,8 @@
         else
         {
             <ul class="pos-absolute pos-right-center bg-black app-bar-menu">
-                <li> @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" }) </li>
-                <li> @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) </li>
+                <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';"> @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" }) </li>
+                <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';"> @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) </li>
             </ul>
         }
 
@@ -73,13 +74,15 @@
     }
 
     <div class="shifted-content-2 h-100 p-ab">
-    
+
 
         <div class="h-100 p-4">
             @RenderBody()
-            </div>
         </div>
-            @Scripts.Render("~/bundles/MetroUI")
-            @RenderSection("scripts", required: false)
+    </div>
+    @Scripts.Render("~/bundles/MetroUI")
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+
+    @RenderSection("scripts", required: false)
 </body>
 </html>

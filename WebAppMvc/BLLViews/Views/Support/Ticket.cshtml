@@ -5,6 +5,7 @@
     ViewBag.Title = "Requests";
 }
     <div class="container">
+        @Html.ActionLink("BACK","MyTickets","Support",null,new {@class="button alert outline cell-4"})
         <br />
         <h2 style="text-align:center">ID @Model.ticket.ID : @Model.ticket.Theme</h2>
         <h4>Status: @Model.ticket.Status</h4>

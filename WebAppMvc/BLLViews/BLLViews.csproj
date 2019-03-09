@@ -181,6 +181,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AdminModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\JobsListView.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -189,6 +190,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\footer.css" />
+    <Content Include="Content\loading_spinner.gif" />
     <Content Include="Content\metro-all.css" />
     <Content Include="Content\metro-all.min.css" />
     <Content Include="Content\metro-colors.css" />
@@ -199,6 +202,7 @@
     <Content Include="Content\metro-rtl.min.css" />
     <Content Include="Content\metro.css" />
     <Content Include="Content\metro.min.css" />
+    <Content Include="Content\SiteImages\mainback.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -221,6 +225,8 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -294,10 +300,16 @@
     <Content Include="Views\Home\AboutOurTeam.cshtml" />
     <Content Include="Views\Home\AboutPress.cshtml" />
     <Content Include="Views\Home\AboutContactUs.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Home\NotFound.cshtml" />
+    <Content Include="Views\Admin\_BanPanel.cshtml" />
+    <Content Include="Views\Admin\_RolePanel.cshtml" />
+    <Content Include="Views\Shared\Loading.cshtml" />
+    <Content Include="Views\Home\_Items.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Admin\" />
+    <Folder Include="Content\AvaFiles\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

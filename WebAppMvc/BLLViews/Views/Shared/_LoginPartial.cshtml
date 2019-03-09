@@ -23,15 +23,16 @@
         @if (Request.IsAuthenticated)
         {
             <li class="group-title fg-white">Main</li>
-            <li>
-                <a href="~/support/MyTickets"> Support</a>
+            
+            <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">
+                @Html.ActionLink("My jobs", $"UserInfo/{User.Identity.GetUserId()}", "Account", routeValues: null, htmlAttributes: null)
             </li>
-            <li>
-                @Html.ActionLink("Cabinet", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">
+                @Html.ActionLink("Profile", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
 
             </li>
-            <li>
-                @Html.ActionLink("PROFILE", $"UserInfo/{User.Identity.GetUserId()}", "Account", routeValues: null, htmlAttributes: null)
+            <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">
+                <a href="~/support/MyTickets"> Support</a>
             </li>
             <li class="divider"></li>
             if (User.IsInRole("Admin") || User.IsInRole("Support") || User.IsInRole("Banned"))
@@ -40,15 +41,15 @@
                 if (User.IsInRole("Support"))
                 {
 
-                    <li> @Html.ActionLink("Support", "Tickets", "Support", routeValues: null, htmlAttributes: new { title = "support" })</li>
+                    <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';"> @Html.ActionLink("Support", "Tickets", "Support", routeValues: null, htmlAttributes: new { title = "Support" })</li>
                 }
                 if (User.IsInRole("Admin"))
                 {
-                    <li> @Html.ActionLink("Admin", "Index", "Admin", routeValues: null, htmlAttributes: new { title = "Admin" })</li>
+                    <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';"> @Html.ActionLink("Admin", "Index", "Admin", routeValues: null, htmlAttributes: new { title = "Admin" })</li>
                 }
                 if (User.IsInRole("Banned"))
                 {
-                    <li> @Html.ActionLink("Banned", "Banned", "Account", routeValues: null, htmlAttributes: new { title = "Admin" })</li>
+                    <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';"> @Html.ActionLink("Banned", "Banned", "Account", routeValues: null, htmlAttributes: new { title = "Admin" })</li>
                 }
             }
 
@@ -63,9 +64,9 @@
 
         <li class="divider"></li>
 
-        <li>
+        <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">
             @Html.AntiForgeryToken()
-            @Html.ActionLink("LOG OFF", "LogOff", "Account", routeValues: null, htmlAttributes: null)
+            @Html.ActionLink("Log out", "LogOff", "Account", routeValues: null, htmlAttributes: null)
         </li>
     </ul>
 </aside>

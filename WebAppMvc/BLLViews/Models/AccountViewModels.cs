@@ -121,6 +121,7 @@ namespace BLLViews.Models
         {
             jobs = new List<Job>();
         }
+        public string AvaPath { get; set; }
         public ApplicationUser user { get; set; }
         public ICollection<Job> jobs { get; set; }
     }

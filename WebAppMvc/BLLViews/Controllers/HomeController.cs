@@ -44,37 +44,17 @@ namespace BLLViews.Controllers
 
             return View();
         }
-        //public ActionResult Login()
-        //{
-        //    ViewBag.Message = "Your application description page.";
-
-        //    return View();
-        //}
-        //public ActionResult Cabinet()
-        //{
-        //    ViewBag.Message = "Your application description page.";
-
-        //    return View();
-        //}
-        //public ActionResult Register()
-        //{
-        //    ViewBag.Message = "Your application description page.";
-
-        //    return View();
-        //}
-        //public ActionResult Support()
-        //{
-        //    ViewBag.Message = "Your application description page.";
-
-        //    return View();
-        //}
-
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
             return View();
         }
+        public ActionResult NotFound()
+        {
+            return View();
+        }
+        [Authorize]
         public ActionResult CreateJobs()
         {
             if(User.IsInRole("Banned"))
@@ -94,25 +74,39 @@ namespace BLLViews.Controllers
                 return View(model);
             }
         }
-        public ActionResult JobsList()
+
+
+
+        const int pageSize = 9;
+
+        public ActionResult JobsList(string search,int? page=0)
         {
             if (User.IsInRole("Banned"))
             {
                 return Redirect("~/Account/banned");
             }
-            using (ApplicationDbContext ctx = new ApplicationDbContext())
+
+            var model = new JobsListModel();
+            ApplicationDbContext ctx = new ApplicationDbContext();
+
+            int pageIndex = pageSize * page.Value;
+            model.jobs = ctx.Jobs.Include("UserOwner")
+                .Include("Category")
+                .Include("City")
+                .Where(x=>string.IsNullOrEmpty(search) ? true : x.Name.Contains(search))
+                .OrderByDescending(x => x.Date)
+                .Skip(pageIndex)
+                .Take(pageSize).ToList();
+            model.Categories = ctx.Categories.ToList();
+            model.Cities = ctx.Cities.ToList();
+            model.Users = ctx.Users.ToList();
+             
+            if (Request.IsAjaxRequest())
             {
-
-                var model = new JobsListModel()
-                {
-
-                    jobs = ctx.Jobs.Include("UserOwner").Include("Category").Include("City").ToList(),
-                    Categories = ctx.Categories.ToList(),
-                    Cities = ctx.Cities.ToList(),
-                    Users = ctx.Users.ToList()
-                };
-                return View(model);
-            }    
+                return PartialView("_Items", model);
+            }
+          
+            return View(model);
         }
     }
 }
