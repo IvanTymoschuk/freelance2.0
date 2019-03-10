@@ -3,32 +3,3 @@
             <div id="loader"></div>
         </div>
 
-
-<script>
-    $(function() {
-        $("body").remove("#overlay");
-        $("#preloader").css({'display':'none'});
-    });
-    function LoaderJS() {
-        var docHeight = $(document).height();
-        $("body").append("<div id='overlay'></div>");
-        $("#preloader").css({'display':'block'});
-        $("#overlay").height(docHeight)
-            .css({
-                "display": "block",
-                'opacity': 0.4,
-                'position': 'absolute',
-                'top': 0,
-                'left': 0,
-                'background-color': 'black',
-                'width': '100%',
-                'z-index': 5000
-            });
-  
-    };
-    function HideLoaderJS() {
-        $("body").remove("#overlay");
-        $("#overlay").css({ "display": "none" });
-        $("#preloader").css({'display':'none'});
-    }
-</script>

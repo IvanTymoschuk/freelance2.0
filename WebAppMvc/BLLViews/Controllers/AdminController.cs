@@ -23,9 +23,38 @@ namespace BLLViews.Controllers
                 _userManager = value;
             }
         }
+        [Authorize]
+        public ActionResult GetRoles(string id)
+        {
+            if (!User.IsInRole("Admin"))
+                return RedirectToAction("NotFound", "Home");
+
+            // NO WORKING
+            //PartialRolesModel model = new PartialRolesModel();
+            //model.roles= UserManager.GetRoles(id);
+            //model.UserID = id;
+            //return PartialView("_RolePanel", model);
+
+            IndexModel model = new IndexModel();
+            model.partialBanModel = new PartialBanModel();
+            Repos<ApplicationUser> repos = new Repos<ApplicationUser>();
+            model.users = repos.ReadAll();
+            model.partialRolesModel = new PartialRolesModel();
+            model.partialRolesModel.roles= UserManager.GetRoles(id);
+            model.partialRolesModel.UserID = id;
+            if (UserManager.GetRoles(id).Contains("Admin"))
+                model.partialRolesModel.IsAdmin = true;
+            if (UserManager.GetRoles(id).Contains("Support"))
+                model.partialRolesModel.IsSupport = true;
+            return View("Index", model);
+        }
+
         [HttpPost]
+        [Authorize]
         public ActionResult BanUser(PartialBanModel model)
         {
+            if (!User.IsInRole("Admin") || !User.IsInRole("Support"))
+                return RedirectToAction("NotFound", "Home");
             var user = UserManager.FindById(model.UserId);
 
             if (model.Ban.IsPermanent)
@@ -54,17 +83,28 @@ namespace BLLViews.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult UpdateRoles(PartialRolesModel model)
         {
-            if (model.IsAdmin)
-                UserManager.AddToRole(model.UserID, "Admin");
-            else
-                UserManager.RemoveFromRole(model.UserID, "Admin");
+            if (!User.IsInRole("Admin"))
+                return RedirectToAction("NotFound", "Home");
+            var user = UserManager.FindById(model.UserID);
+            if (user != null)
+            {
+                if(model.IsSupport==false&&UserManager.IsInRole(user.Id,"Support"))
+                     UserManager.RemoveFromRole(user.Id, "Support");
+                if(model.IsSupport == true && UserManager.IsInRole(user.Id, "Support")==false)
+                    UserManager.AddToRole(user.Id, "Support");
 
-            if (model.IsSupport)
-                UserManager.AddToRole(model.UserID, "Support");
+                if (model.IsAdmin == false && UserManager.IsInRole(user.Id, "Admin"))
+                    UserManager.RemoveFromRole(user.Id, "Admin");
+                if (model.IsAdmin == true && UserManager.IsInRole(user.Id, "Admin") == false)
+                    UserManager.AddToRole(user.Id, "Admin");
+            }
             else
-                UserManager.RemoveFromRole(model.UserID, "Support");
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
 
 
             return new EmptyResult();
@@ -83,10 +123,10 @@ namespace BLLViews.Controllers
        
                 return View(model);
         }
-     
+        [Authorize]
         public async System.Threading.Tasks.Task<ActionResult> UnBan(string id)
         {
-            if (!User.IsInRole("Admin"))
+            if (!User.IsInRole("Admin") || !User.IsInRole("Support"))
                 return RedirectToAction("NotFound", "Home");
 
             

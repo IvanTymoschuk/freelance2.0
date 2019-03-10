@@ -12,7 +12,7 @@
         <div class="avatar bg-darkRed">
 
         </div>
-        <span class="title fg-white">@ViewBag.UserFullName. </span>
+        <span class="title fg-white">@User.Identity.Name. </span>
         @*<span class="subtitle fg-white"> 2018 © Sergey Pimenov</span>*@
     </div>
 
@@ -47,10 +47,7 @@
                 {
                     <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';"> @Html.ActionLink("Admin", "Index", "Admin", routeValues: null, htmlAttributes: new { title = "Admin" })</li>
                 }
-                if (User.IsInRole("Banned"))
-                {
-                    <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';"> @Html.ActionLink("Banned", "Banned", "Account", routeValues: null, htmlAttributes: new { title = "Admin" })</li>
-                }
+              
             }
 
         }

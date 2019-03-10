@@ -23,8 +23,13 @@ namespace BLLViews.Models
     }
     public class PartialRolesModel
     {
+        public PartialRolesModel()
+        {
+            roles = new List<String>();
+        }
         public bool IsAdmin { get; set; }
         public bool IsSupport { get; set; }
         public string UserID { get; set; }
+        public ICollection<string> roles { get; set; }
     }
 }

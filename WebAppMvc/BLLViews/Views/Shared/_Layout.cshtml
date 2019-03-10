@@ -7,7 +7,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
 
     @Styles.Render("~/Content/css")
-   
+
 
     @Scripts.Render("~/bundles/modernizr")
 
@@ -49,9 +49,16 @@
 
             <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">@Html.ActionLink("CreateJobs", "CreateJobs", "Home")</li>
             <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';"> @Html.ActionLink("About", "About", "Home")</li>
+            <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">
+                @if (User.IsInRole("Banned"))
+                {
+                    @Html.ActionLink("Banned", "Banned", "Account", routeValues: null, htmlAttributes: new { title = "Admin" })
+                }
+            </li>
         </ul>
         @if (User.Identity.IsAuthenticated)
         {
+
             <button class="button pos-absolute pos-right-center bg-black"
                     id="sidebar-toggle-2">
                 <span class="mif-menu"></span>
@@ -59,6 +66,7 @@
         }
         else
         {
+
             <ul class="pos-absolute pos-right-center bg-black app-bar-menu">
                 <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';"> @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" }) </li>
                 <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';"> @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) </li>
@@ -82,7 +90,8 @@
     </div>
     @Scripts.Render("~/bundles/MetroUI")
     @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
-
+    @Scripts.Render("~/scripts/scripts.js")
     @RenderSection("scripts", required: false)
 </body>
+
 </html>

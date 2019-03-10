@@ -1,13 +1,16 @@
 ﻿@model BLLViews.Models.PartialBanModel
-
+@{
+    Layout = null;
+}
 <div id="demoDialog1" class="dialog" data-role="dialog">
-    <div class="dialog-title">Ban 
+    <div class="dialog-title">
+        Ban
     </div>
     <div class="dialog-content">
-        @using (Ajax.BeginForm("BanUser", new AjaxOptions { UpdateTargetId = "TableUsers",OnSuccess= "BanShow",OnBegin="LoaderJS", OnComplete="HideLoaderJS", OnFailure="ErrorJS" }))
+        @using (Ajax.BeginForm("BanUser", new AjaxOptions { UpdateTargetId = "TableUsers", OnSuccess = "BanShow", OnBegin = "LoaderJS", OnComplete = "HideLoaderJS", OnFailure = "ErrorJS" }))
         {
 
-            @Html.TextBoxFor(model => model.UserId, new { id="UidInBP",type="hidden"})
+            @Html.TextBoxFor(model => model.UserId, new { id = "UidInBP", type = "hidden" })
             @Html.ValidationMessageFor(model => model.Ban.Reason, "", new { @class = "fg-darkred" })
             @Html.EditorFor(model => model.Ban.Reason, new { htmlAttributes = new { data_role = "materialinput", placeholder = "Enter Reason", @required = "true" } })
             <br />
@@ -22,7 +25,7 @@
             <div class="dialog-actions">
                 <button class="button js-dialog-close cell-12">BAN</button>
             </div>
-        }  
+        }
     </div>
 
     <button class="button js-dialog-close">Close</button>

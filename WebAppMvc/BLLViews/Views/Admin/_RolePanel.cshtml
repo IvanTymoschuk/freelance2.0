@@ -1,24 +1,29 @@
 ﻿@model BLLViews.Models.PartialRolesModel
+@{
+    Layout = null;
+}
+<div id="demoDialog2" class="dialog" data-role="dialog">
+    <div class="dialog-title">
+        Roles
+    </div>
+    <div class="dialog-content">
+        @Model.UserID;
+        @using (Ajax.BeginForm("UpdateRoles", new AjaxOptions { OnSuccess = "RolesUpdated", OnBegin = "LoaderJS", OnComplete = "HideLoaderJS", OnFailure = "ErrorJS" }))
+        {
+            @Html.TextBoxFor(model => model.UserID, new { id = "UidInRP", type = "hidden" })
+            @Html.CheckBoxFor(x => x.IsAdmin, new { type = "checkbox", data_role = "checkbox", data_caption = "IsAdmin" })
+            <br />
 
-    <div id="demoDialog2" class="dialog" data-role="dialog">
-        <div class="dialog-title">
-            Roles
-        </div>
-        <div class="dialog-content">
-            @using (Ajax.BeginForm("UpdateRoles", new AjaxOptions { OnSuccess = "RolesUpdated", OnBegin="LoaderJS", OnComplete="HideLoaderJS", OnFailure="ErrorJS"}))
-            {
-                @Html.TextBoxFor(model => model.UserID, new { id = "UidInRP", type = "hidden" })
-                @Html.CheckBoxFor(x => x.IsAdmin, new { type = "checkbox", data_role = "checkbox", data_caption = "IsAdmin" })
-                <br />
-                @Html.CheckBoxFor(x => x.IsSupport, new { type = "checkbox", data_role = "checkbox", data_caption = "IsSupport" })
+            @Html.CheckBoxFor(x => x.IsSupport, new { type = "checkbox", data_role = "checkbox", data_caption = "IsSupport" })
 
-                <div class="dialog-actions">
-                    <button class="button js-dialog-close cell-12">UPDATE</button>
-                </div>
-            }
-        </div>
 
-        <button class="button js-dialog-close">Close</button>
+            <div class="dialog-actions">
+                <button class="button js-dialog-close cell-12">UPDATE</button>
+            </div>
+        }
+    </div>
 
-        </div>
+    <button class="button js-dialog-close">Close</button>
+
+</div>
 
