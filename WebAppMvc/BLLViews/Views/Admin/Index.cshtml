@@ -36,7 +36,7 @@
                         </td>
                     }
 
-                    <td>@Ajax.ActionLink("Roles", "GetRoles", new { id = el.Id }, new AjaxOptions { OnBegin = "LoaderJS", OnComplete = "HideLoaderJS", OnFailure = "ErrorJS", OnSuccess = "ShowPartailRoles", UpdateTargetId = "TableUsers", InsertionMode=InsertionMode.Replace})</td>
+                    <td>@Ajax.ActionLink("Roles", "GetRoles", new { id = el.Id }, new AjaxOptions { OnBegin = "LoaderJS", OnComplete = "HideLoaderJS", OnFailure = "ErrorJS", OnSuccess = "ShowPartailRoles", UpdateTargetId = "TableUsers", InsertionMode=InsertionMode.Replace},new { @class="button alert outline cell-12"})</td>
 
                 </tr>
             }

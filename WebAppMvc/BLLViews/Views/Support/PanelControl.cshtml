@@ -41,7 +41,7 @@
 
             @Html.ValidationMessageFor(model => model.Ban.Reason, "", new { @class = "fg-darkred" })
             @Html.EditorFor(model => model.Ban.Reason, new { htmlAttributes = new { data_role = "input", data_prepend = "Reason: " } })
-            <br />
+            <br /v
 
             @Html.CheckBoxFor(Model => Model.Ban.IsPermanent, new { @class = "isPermanent", type = "checkbox", data_role = "checkbox" })
             @Html.Label("IsPermanent")
