@@ -306,6 +306,7 @@
     <Content Include="Views\Admin\_RolePanel.cshtml" />
     <Content Include="Views\Shared\Loading.cshtml" />
     <Content Include="Views\Home\_Items.cshtml" />
+    <Content Include="Views\Home\TopSkill.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
