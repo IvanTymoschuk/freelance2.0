@@ -44,7 +44,19 @@
     </tbody>
 </table>
 <script>
-    function GetRoles() {
-        
-    }
+ 
+   $(document).ready(function () {
+      $.ajax({
+         type: "GET",
+         url: '@Html.Action("GetRoles", "Admin",new {id= "181e1cb5-726d-476f-998c-281e4071adaa" })',
+         dataType: "html",
+         data: { id: "181e1cb5-726d-476f-998c-281e4071adaa" },
+
+         success: function (content) {
+             $("#RolesPartial").html(content);
+         },
+         error: function (e) { }
+      })
+   });
+
 </script>
