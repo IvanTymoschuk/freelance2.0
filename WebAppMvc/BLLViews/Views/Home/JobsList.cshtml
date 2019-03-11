@@ -88,9 +88,14 @@
 
 @section scripts{
     <script type="text/javascript">
-        let pageNo=1;
+        let pageNo = 1;
+
+        
+      
+
+
         function loadData(text) {
-            console.log(text); 
+            
             $.ajax({
                 url: '/Home/JobsList/',
                 data: { search: text, page: pageNo },
@@ -103,13 +108,16 @@
         }
         var searchData = "";
 
-        $(window).scroll(function () {
+        $(document).on("scroll",function () {
             if ($(window).scrollTop() == $(document).height() - $(window).height()) {
 
                 loadData(searchData);
 
             }
         });
+
+        
+
         $("#search").on("input", function () {
             pageNo = 0;
             $("#scrolList").empty();

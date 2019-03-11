@@ -82,6 +82,30 @@ namespace BLLViews.Controllers
         }
 
 
+        [Authorize]
+        public ActionResult JobView()
+        {
+            if (User.IsInRole("Banned"))
+            {
+                return Redirect("~/Account/banned");
+            }
+
+
+            using (ApplicationDbContext ctx = new ApplicationDbContext())
+            {
+
+                var model = new JobsListModel()
+                {
+
+                    jobs = ctx.Jobs.Include("Category").Include("City").ToList(),
+                    Categories = ctx.Categories.ToList(),
+                    Cities = ctx.Cities.ToList()
+                };
+                return View(model);
+            }
+        }
+
+
 
         const int pageSize = 9;
 
