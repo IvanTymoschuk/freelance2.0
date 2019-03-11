@@ -50,6 +50,12 @@ namespace BLLViews.Controllers
 
             return View();
         }
+        public ActionResult AllLinks()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
         public ActionResult NotFound()
         {
             return View();
