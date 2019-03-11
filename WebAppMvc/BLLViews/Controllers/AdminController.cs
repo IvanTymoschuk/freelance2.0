@@ -46,7 +46,7 @@ namespace BLLViews.Controllers
                 model.partialRolesModel.IsAdmin = true;
             if (UserManager.GetRoles(id).Contains("Support"))
                 model.partialRolesModel.IsSupport = true;
-            return View("Index", model);
+            return PartialView("Index", model);
         }
 
         [HttpPost]
@@ -79,7 +79,7 @@ namespace BLLViews.Controllers
             model1.users = repos.ReadAll();
             model1.partialBanModel = new PartialBanModel();
             model1.partialRolesModel = new PartialRolesModel();
-            return View("Index", model1);
+            return PartialView("Index", model1);
         }
 
         [HttpPost]
@@ -124,24 +124,31 @@ namespace BLLViews.Controllers
                 return View(model);
         }
         [Authorize]
-        public async System.Threading.Tasks.Task<ActionResult> UnBan(string id)
+        public ActionResult UnBan(string id)
         {
             if (!User.IsInRole("Admin") || !User.IsInRole("Support"))
                 return RedirectToAction("NotFound", "Home");
 
             
-            Repos<BansList> repos = new Repos<BansList>();
-            var user = await UserManager.FindByIdAsync(id);
+
+            var user = UserManager.FindById(id);
             if(user==null)
                 return RedirectToAction("NotFound", "Home");
       
             UserManager.RemoveFromRole(user.Id, "Banned");
             UserManager.AddToRole(user.Id, "User");
-            UserManager.FindById(user.Id).Ban=null;
-            //Repos<ApplicationUser> rUser = new Repos<ApplicationUser>();
-            //user.Ban = null;
-            //rUser.Update(user);
-            return new EmptyResult();
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                db.Users.FirstOrDefault(x => x.Id == user.Id).Ban.ToDate = DateTime.Now;
+                db.Users.FirstOrDefault(x => x.Id == user.Id).Ban.IsPermanent= false;
+                db.SaveChanges();
+            }
+            Repos<ApplicationUser> repos = new Repos<ApplicationUser>();
+            IndexModel model1 = new IndexModel();
+            model1.users = repos.ReadAll();
+            model1.partialBanModel = new PartialBanModel();
+            model1.partialRolesModel = new PartialRolesModel();
+            return PartialView("Index", model1);
         }
     }
 }
