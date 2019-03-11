@@ -15,6 +15,12 @@ namespace BLLViews.Models
         public PartialBanModel partialBanModel { get; set; }
         public PartialRolesModel partialRolesModel { get; set; }
     }
+    public class GetAllUsers
+    {
+        public ApplicationUser user { get; set; }
+        public BansList ban { get; set; }
+        public bool isBanned { get; set; }
+    }
     public class PartialBanModel
     {
         public BansList Ban { get; set; }

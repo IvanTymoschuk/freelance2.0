@@ -75,11 +75,11 @@
         }
 
     </div>
-   @using BLLViews.Models
+    @using BLLViews.Models
 
     @if (User.Identity.IsAuthenticated)
     {
-        @Html.Action("_LoginPartial","Account")
+        @Html.Action("_LoginPartial", "Account")
     }
 
     <div class="shifted-content-2 h-100 p-ab">
@@ -92,6 +92,7 @@
     @Scripts.Render("~/bundles/MetroUI")
     @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
     @Scripts.Render("~/scripts/scripts.js")
+
     @RenderSection("scripts", required: false)
 </body>
 

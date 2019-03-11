@@ -7,32 +7,11 @@
 
 <div class="container">
  
-    @Html.Partial("_Users")
+ <div id="AllUsers">
+     @Html.Action("GetUsers")
+ </div>
 
-                <tr class="bd-darkRed">
-                    <td>@el.FullName</td>
-                    <td>@el.UserName</td>
-                    @if (el.Ban != null)
-                    {
-                        <td>
-                            <button data-popover-trigger="click" class="button alert outline cell-12" data-popover-position="right" data-role="popover" data-popover-text='User banned!<br>Reason: @el.Ban.Reason<br>To Date: @el.Ban.ToDate<br>IsPermanent: @el.Ban.IsPermanent<br>Ban Date: @el.Ban.DateBan<br>  @Ajax.ActionLink("UNBAN", "UnBan", new { Id = el.Id }, new AjaxOptions { OnSuccess = "UnBanShow",OnBegin="LoaderJS", OnComplete="HideLoaderJS", OnFailure="ErrorJS" }, new { @class = "button alert outline" })'>Banned</button>
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
-                            <button data-popover-trigger="click" class="button alert outline cell-12" data-popover-position="right" data-role="popover" data-popover-text='User no banned!<br><button id = "OpenBan" onclick="ShowPartailBan()" class="button alert outline" data-value="@el.Id">BAN</button>'>Null</button>
-                        </td>
-                    }
-
-                    <td>@Ajax.ActionLink("Roles", "GetRoles", new { id = el.Id }, new AjaxOptions { OnBegin = "LoaderJS", OnComplete = "HideLoaderJS", OnFailure = "ErrorJS", OnSuccess = "ShowPartailRoles", UpdateTargetId = "TableUsers", InsertionMode=InsertionMode.Replace})</td>
-
-                </tr>
-            }
-
-
-        </tbody>
-    </table>
+              
 
 
     <div id="Test">
@@ -42,5 +21,26 @@
     <div id="RolesPartial">
      
     </div>
-
+  
 </div>
+<script>
+
+    function UpdateUsers() {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("GetUsers", "Admin")',
+            dataType: "html",
+            success: function (content) {
+                $("#AllUsers").html(content);
+
+            },
+            error: function (e) { },
+            complete: function () {
+                HideLoaderJS();
+            },
+            beforeSend: function () {
+                LoaderJS();
+            }
+        });
+    };
+</script>

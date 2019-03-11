@@ -21,6 +21,7 @@
         var notify = Metro.notify;
         notify.create("User Banned!", null, {
         });
+		UserUpdate();
     };
     function RolesUpdated() {
         var notify = Metro.notify;

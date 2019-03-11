@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<BLLViews.Models.GetAllUsers>
 @{
     ViewBag.Title = "_Users";
 
@@ -12,51 +12,60 @@
             <th>Actions</th>
         </tr>
     </thead>
-    <tbody class="fg-white">
-        @foreach (var el in Model.users)
+    <tbody class="fg-white" id="Users">
+        @foreach (var el in Model)
         {
 
             <tr class="bd-darkRed">
-                <td>@el.FullName</td>
-                <td>@el.UserName</td>
-                @if (el.Ban!=null)
+                <td>@el.user.FullName</td>
+                <td>@el.user.UserName</td>
+                @if (el.isBanned)
                 {
                     <td>
-                        <button data-popover-trigger="click" class="button alert outline cell-12" data-popover-position="right" data-role="popover" data-popover-text='User banned!<br>Reason: @el.Ban.Reason<br>To Date: @el.Ban.ToDate<br>IsPermanent: @el.Ban.IsPermanent<br>Ban Date: @el.Ban.DateBan<br>  @Ajax.ActionLink("UNBAN", "UnBan", new { Id = el.Id }, new AjaxOptions { OnSuccess = "UnBanShow",OnBegin="LoaderJS", OnComplete="HideLoaderJS", OnFailure="ErrorJS" }, new { @class = "button alert outline" })'>Banned</button>
+                        <button data-popover-trigger="click" class="button alert outline cell-12" data-popover-position="right" data-role="popover" data-popover-text='User banned!<br>Reason: @el.ban.Reason<br>To Date: @el.ban.ToDate<br>IsPermanent: @el.ban.IsPermanent<br>Ban Date: @el.ban.DateBan<br>  @Ajax.ActionLink("UNBAN", "UnBan", new { Id = el.user.Id }, new AjaxOptions { OnSuccess = "UnBanShow",OnBegin="LoaderJS", OnComplete="HideLoaderJS", OnFailure="ErrorJS" }, new { @class = "button alert outline" })'>Banned</button>
                     </td>
                 }
                 else
                 {
                     <td>
-                        <button data-popover-trigger="click" class="button alert outline cell-12" data-popover-position="right" data-role="popover" data-popover-text='User no banned!<br><button id = "OpenBan" onclick="ShowPartailBan()" class="button alert outline" data-value="@el.Id">BAN</button>'>Null</button>
+                        <button data-popover-trigger="click" class="button alert outline cell-12" data-popover-position="right" data-role="popover" data-popover-text='User no banned!<br><button id = "OpenBan" onclick="ShowPartailBan()" class="button alert outline" data-value="@el.user.Id">BAN</button>'>Null</button>
                     </td>
                 }
 
                 <td>
-                @*<button onclick="loadProject('@el.Id')"></button>*@
-                @Ajax.ActionLink("Roles", "GetRoles", new { id = el.Id }, new AjaxOptions { OnBegin = "LoaderJS", OnComplete = "HideLoaderJS", OnFailure = "ErrorJS", OnSuccess = "ShowPartailRoles", UpdateTargetId = "TableUsers", InsertionMode = InsertionMode.Replace })
+                    <button class="button alert outline cell-12" type="button" onclick='getRoles("@el.user.Id")'>Roles</button>
+                    @* @Ajax.ActionLink("Roles", "GetRoles", new { id = el.Id }, new AjaxOptions { OnBegin = "LoaderJS", OnComplete = "HideLoaderJS", OnFailure = "ErrorJS", OnSuccess = "ShowPartailRoles", UpdateTargetId = "TableUsers", InsertionMode = InsertionMode.Replace })*@
                 </td>
-
+           
             </tr>
         }
 
 
     </tbody>
 </table>
+
+
 <script>
- 
-   $(document).ready(function () {
-      $.ajax({
-         type: "GET",
-         url: '@Html.Action("GetRoles", "Admin",new {id= "181e1cb5-726d-476f-998c-281e4071adaa" })',
-         dataType: "html",
-         data: { id: "181e1cb5-726d-476f-998c-281e4071adaa" },
-
-         success: function (content) {
-             $("#RolesPartial").html(content);
-         },
-         error: function (e) { }
-      })
-   });
-
-</script>
+    function getRoles(uid) {
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("GetRoles")/'+uid,
+        dataType: 'html',
+        data: 'source=' + uid,
+        success: function (result) {
+            $('#RolesPartial').html(result);
+             setTimeout(function () {
+            //let info = $("#OpenRoles").data("value");
+            Metro.dialog.open('#demoDialog2');
+            // $("#UidInRP").val(info);
+        }, 10);
+        },
+        complete: function () {
+            HideLoaderJS();
+        },
+        beforeSend: function () {
+            LoaderJS();
+        }
+    });
+};
+ </script>

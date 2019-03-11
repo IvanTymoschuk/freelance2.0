@@ -82,13 +82,9 @@ namespace BLLViews.Controllers
                 UserManager.SendEmail(user.Id, "Your account has been banned. Time:  " + DateTime.Now, $"Hello {user.UserName} Your account has been banned!!!");
             }
 
-          
-            Repos<ApplicationUser> repos = new Repos<ApplicationUser>();
-            IndexModel model1 = new IndexModel();
-            model1.users = repos.ReadAll();
-            model1.partialBanModel = new PartialBanModel();
-            model1.partialRolesModel = new PartialRolesModel();
-            return PartialView("Index", model1);
+
+            GetUsers();
+            return new EmptyResult();
         }
 
         [HttpPost]
@@ -152,13 +148,32 @@ namespace BLLViews.Controllers
                 db.Users.FirstOrDefault(x => x.Id == user.Id).Ban.IsPermanent= false;
                 db.SaveChanges();
             }
-            Repos<ApplicationUser> repos = new Repos<ApplicationUser>();
-            IndexModel model1 = new IndexModel();
-            model1.users = repos.ReadAll();
-            model1.partialBanModel = new PartialBanModel();
-            model1.partialRolesModel = new PartialRolesModel();
 
-            return PartialView("Index", model1);
+            GetUsers();
+            return new EmptyResult();
+        }
+        [Authorize]
+        public ActionResult GetUsers()
+        {
+            if (!User.IsInRole("Admin"))
+                return RedirectToAction("NotFound", "Home");
+            ICollection<GetAllUsers> model = new List<GetAllUsers>();
+            Repos<ApplicationUser> repos = new Repos<ApplicationUser>();
+            var list = repos.ReadAll();
+            foreach (var el in list)
+            {
+                GetAllUsers u = new GetAllUsers();
+                u.user = el;
+                if (el.Ban != null)
+                {
+                    u.ban = el.Ban;
+
+                    if (el.Ban.IsPermanent || el.Ban.ToDate > DateTime.Now)
+                        u.isBanned = true;
+                }
+                model.Add(u);
+            }
+            return PartialView("_Users", model);
         }
     }
 }
