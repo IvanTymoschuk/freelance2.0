@@ -2,7 +2,10 @@
 @{
     ViewBag.Title = "Manage";
 }
+<style>
+    
 
+</style>
 
 <p class="text-center">@ViewBag.StatusMessage</p>
 <div class="container">
@@ -18,7 +21,7 @@
         @Html.Label("SELECT CITY: ")
         @Html.DropDownListFor(Model => Model.CityID, Model.ListCities, new { @class = "cell-12" })
         <br />
-        <input class="button alert outline cell-12" type="submit" value="Save" />
+        <input style="width:100%;" class="button alert outline cell-12" type="submit" value="Save" />
    
 
     }
