@@ -12,7 +12,7 @@
             <th>Actions</th>
         </tr>
     </thead>
-    <tbody class="fg-white" id="Users">
+    <tbody class="fg-white" id="BTable">
         @foreach (var el in Model)
         {
 
@@ -22,7 +22,7 @@
                 @if (el.isBanned)
                 {
                     <td>
-                        <button data-popover-trigger="click" class="button alert outline cell-12" data-popover-position="right" data-role="popover" data-popover-text='User banned!<br>Reason: @el.ban.Reason<br>To Date: @el.ban.ToDate<br>IsPermanent: @el.ban.IsPermanent<br>Ban Date: @el.ban.DateBan<br>  @Ajax.ActionLink("UNBAN", "UnBan", new { Id = el.user.Id }, new AjaxOptions { OnSuccess = "UnBanShow",OnBegin="LoaderJS", OnComplete="HideLoaderJS", OnFailure="ErrorJS" }, new { @class = "button alert outline" })'>Banned</button>
+                        <button data-popover-trigger="click" class="button alert outline cell-12" data-popover-position="right" data-role="popover" data-popover-text='User banned!<br>Reason: @el.ban.Reason<br>To Date: @el.ban.ToDate<br>IsPermanent: @el.ban.IsPermanent<br>Ban Date: @el.ban.DateBan<br>  @Ajax.ActionLink("UNBAN", "UnBan", new { Id = el.user.Id }, new AjaxOptions {UpdateTargetId="AllUsers", OnSuccess = "UnBanShow",OnBegin="LoaderJS", OnComplete="HideLoaderJS", OnFailure="ErrorJS" }, new { @class = "button alert outline" })'>Banned</button>
                     </td>
                 }
                 else
@@ -33,8 +33,8 @@
                 }
 
                 <td>
-                    <button class="button alert outline cell-12" type="button" onclick='getRoles("@el.user.Id")'>Roles</button>
-                    @* @Ajax.ActionLink("Roles", "GetRoles", new { id = el.Id }, new AjaxOptions { OnBegin = "LoaderJS", OnComplete = "HideLoaderJS", OnFailure = "ErrorJS", OnSuccess = "ShowPartailRoles", UpdateTargetId = "TableUsers", InsertionMode = InsertionMode.Replace })*@
+                    @*<button  id="@el.user.Id" class=" elemClass button alert outline cell-12" type="button" >Roles</button>*@
+                     @Ajax.ActionLink("Roles", "GetRoles", new { id = el.user.Id }, new AjaxOptions { OnBegin = "LoaderJS", OnComplete = "HideLoaderJS", OnFailure = "ErrorJS", OnSuccess = "test", UpdateTargetId="Test" })
                 </td>
            
             </tr>
@@ -46,26 +46,12 @@
 
 
 <script>
-    function getRoles(uid) {
-    $.ajax({
-        type: 'GET',
-        url: '@Url.Action("GetRoles")/'+uid,
-        dataType: 'html',
-        data: 'source=' + uid,
-        success: function (result) {
-            $('#RolesPartial').html(result);
-             setTimeout(function () {
+    function test() {
+           setTimeout(function () {
             //let info = $("#OpenRoles").data("value");
             Metro.dialog.open('#demoDialog2');
             // $("#UidInRP").val(info);
         }, 10);
-        },
-        complete: function () {
-            HideLoaderJS();
-        },
-        beforeSend: function () {
-            LoaderJS();
-        }
-    });
-};
+    }
+
  </script>

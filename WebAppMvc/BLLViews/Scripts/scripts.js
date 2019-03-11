@@ -17,12 +17,7 @@
 
         });
     };
-    function BanShow() {
-        var notify = Metro.notify;
-        notify.create("User Banned!", null, {
-        });
-		UserUpdate();
-    };
+   
     function RolesUpdated() {
         var notify = Metro.notify;
         notify.create("Roles has been updated!!!", null, {

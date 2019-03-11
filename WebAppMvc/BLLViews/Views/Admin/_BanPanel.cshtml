@@ -7,7 +7,7 @@
         Ban
     </div>
     <div class="dialog-content">
-        @using (Ajax.BeginForm("BanUser", new AjaxOptions { OnSuccess = "UpdateUsers", OnBegin = "LoaderJS", OnComplete = "HideLoaderJS", OnFailure = "ErrorJS", InsertionMode = InsertionMode.Replace }))
+        @using (Ajax.BeginForm("BanUser", new AjaxOptions {UpdateTargetId="AllUsers", OnSuccess="BanShow",  OnBegin = "LoaderJS", OnComplete = "HideLoaderJS", OnFailure = "ErrorJS", InsertionMode = InsertionMode.Replace }))
         {
 
             @Html.TextBoxFor(model => model.UserId, new { id = "UidInBP", type = "hidden" })
@@ -32,3 +32,10 @@
 
 
 </div>
+<script>
+     function BanShow() {
+        var notify = Metro.notify;
+        notify.create("User Banned!", null, {
+        });
+    };
+</script>

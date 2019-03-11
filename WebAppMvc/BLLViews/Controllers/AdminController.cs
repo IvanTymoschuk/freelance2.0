@@ -82,9 +82,23 @@ namespace BLLViews.Controllers
                 UserManager.SendEmail(user.Id, "Your account has been banned. Time:  " + DateTime.Now, $"Hello {user.UserName} Your account has been banned!!!");
             }
 
+            ICollection<GetAllUsers> model1 = new List<GetAllUsers>();
+            Repos<ApplicationUser> repos = new Repos<ApplicationUser>();
+            var list = repos.ReadAll();
+            foreach (var el in list)
+            {
+                GetAllUsers u = new GetAllUsers();
+                u.user = el;
+                if (el.Ban != null)
+                {
+                    u.ban = el.Ban;
 
-            GetUsers();
-            return new EmptyResult();
+                    if (el.Ban.IsPermanent || el.Ban.ToDate > DateTime.Now)
+                        u.isBanned = true;
+                }
+                model1.Add(u);
+            }
+            return PartialView("_Users", model1);
         }
 
         [HttpPost]
@@ -149,8 +163,23 @@ namespace BLLViews.Controllers
                 db.SaveChanges();
             }
 
-            GetUsers();
-            return new EmptyResult();
+            ICollection<GetAllUsers> model = new List<GetAllUsers>();
+            Repos<ApplicationUser> repos = new Repos<ApplicationUser>();
+            var list = repos.ReadAll();
+            foreach (var el in list)
+            {
+                GetAllUsers u = new GetAllUsers();
+                u.user = el;
+                if (el.Ban != null)
+                {
+                    u.ban = el.Ban;
+
+                    if (el.Ban.IsPermanent || el.Ban.ToDate > DateTime.Now)
+                        u.isBanned = true;
+                }
+                model.Add(u);
+            }
+            return PartialView("_Users", model);
         }
         [Authorize]
         public ActionResult GetUsers()
