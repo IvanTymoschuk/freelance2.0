@@ -35,18 +35,27 @@ namespace BLLViews.Controllers
             //model.UserID = id;
             //return PartialView("_RolePanel", model);
 
-            IndexModel model = new IndexModel();
-            model.partialBanModel = new PartialBanModel();
-            Repos<ApplicationUser> repos = new Repos<ApplicationUser>();
-            model.users = repos.ReadAll();
-            model.partialRolesModel = new PartialRolesModel();
-            model.partialRolesModel.roles= UserManager.GetRoles(id);
-            model.partialRolesModel.UserID = id;
+            //IndexModel model = new IndexModel();
+            //model.partialBanModel = new PartialBanModel();
+            //Repos<ApplicationUser> repos = new Repos<ApplicationUser>();
+            //model.users = repos.ReadAll();
+            //model.partialRolesModel = new PartialRolesModel();
+            //model.partialRolesModel.roles= UserManager.GetRoles(id);
+            //model.partialRolesModel.UserID = id;
+            //if (UserManager.GetRoles(id).Contains("Admin"))
+            //    model.partialRolesModel.IsAdmin = true;
+            //if (UserManager.GetRoles(id).Contains("Support"))
+            //    model.partialRolesModel.IsSupport = true;
+
+            PartialRolesModel model = new PartialRolesModel();
+         
+            model.roles = UserManager.GetRoles(id);
+            model.UserID = id;
             if (UserManager.GetRoles(id).Contains("Admin"))
-                model.partialRolesModel.IsAdmin = true;
+                model.IsAdmin = true;
             if (UserManager.GetRoles(id).Contains("Support"))
-                model.partialRolesModel.IsSupport = true;
-            return PartialView("Index", model);
+                model.IsSupport = true;
+            return PartialView("_RolePanel", model);
         }
 
         [HttpPost]
@@ -148,6 +157,7 @@ namespace BLLViews.Controllers
             model1.users = repos.ReadAll();
             model1.partialBanModel = new PartialBanModel();
             model1.partialRolesModel = new PartialRolesModel();
+
             return PartialView("Index", model1);
         }
     }

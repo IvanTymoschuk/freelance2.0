@@ -74,11 +74,11 @@
         }
 
     </div>
-
+   @using BLLViews.Models
 
     @if (User.Identity.IsAuthenticated)
     {
-        @Html.Partial("_LoginPartial")
+        @Html.Action("_LoginPartial","Account")
     }
 
     <div class="shifted-content-2 h-100 p-ab">

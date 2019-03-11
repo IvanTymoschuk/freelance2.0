@@ -32,7 +32,10 @@
                     </td>
                 }
 
-                <td>@Ajax.ActionLink("Roles", "GetRoles", new { id = el.Id }, new AjaxOptions { OnBegin = "LoaderJS", OnComplete = "HideLoaderJS", OnFailure = "ErrorJS", OnSuccess = "ShowPartailRoles", UpdateTargetId = "TableUsers", InsertionMode = InsertionMode.Replace })</td>
+                <td>
+                @*<button onclick="loadProject('@el.Id')"></button>*@
+                @Ajax.ActionLink("Roles", "GetRoles", new { id = el.Id }, new AjaxOptions { OnBegin = "LoaderJS", OnComplete = "HideLoaderJS", OnFailure = "ErrorJS", OnSuccess = "ShowPartailRoles", UpdateTargetId = "TableUsers", InsertionMode = InsertionMode.Replace })
+                </td>
 
             </tr>
         }
@@ -40,3 +43,8 @@
 
     </tbody>
 </table>
+<script>
+    function GetRoles() {
+        
+    }
+</script>

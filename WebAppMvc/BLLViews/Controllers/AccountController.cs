@@ -93,8 +93,38 @@ namespace BLLViews.Controllers
             }
             return View(model);
         }
+        //public ActionResult GetInfo(string id)
+        //{
+        //    var user = UserManager.FindById(id);
+        //    var model = new GetUserInfo();
+        //    model.ava = user.AvaPath;
+        //    model.fullname = user.FullName;
+        //    return PartialView("_LoginPartial", model);
+        //}
         //
         // POST: /Account/Login
+        public ActionResult _LoginPartial()
+        {
+            var model = new GetUserInfo();
+            if (string.IsNullOrEmpty(UserManager.FindById(User.Identity.GetUserId()).FullName) == false)
+            {
+                model.fullname = UserManager.FindById(User.Identity.GetUserId()).FullName;
+            }
+            else
+            {
+                model.fullname = "";
+            }
+            if (string.IsNullOrEmpty(UserManager.FindById(User.Identity.GetUserId()).AvaPath) == false)
+            {
+                model.ava = UserManager.FindById(User.Identity.GetUserId()).AvaPath;
+            }
+            else
+            {
+                model.ava = "";
+            }
+
+            return PartialView("_LoginPartial",model);
+        }
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -107,8 +137,7 @@ namespace BLLViews.Controllers
                 {
                     if (user.EmailConfirmed == true)
                     {
-                        ViewBag.UserAva = user.AvaPath;
-                        ViewBag.UserFullName = user.FullName;
+
                         if (user.Ban != null)
                         {
                             if (user.Ban.ToDate < DateTime.Now&& user.Ban.IsPermanent!=true)
