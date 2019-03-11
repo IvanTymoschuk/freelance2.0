@@ -307,6 +307,9 @@
     <Content Include="Views\Shared\Loading.cshtml" />
     <Content Include="Views\Home\_Items.cshtml" />
     <Content Include="Views\Home\TopSkill.cshtml" />
+    <Content Include="Views\Home\AllLinks.cshtml" />
+    <Content Include="Views\Admin\_Users.cshtml" />
+    <Content Include="Views\Home\JobView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

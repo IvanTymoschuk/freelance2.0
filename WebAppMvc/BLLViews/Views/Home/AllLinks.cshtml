@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "AllLinks";
+}
+<style>
+    .stbordercards {
+       
+    }
+    .stdivborder {
+        border-left: 4px double black;
+        border-left-color: red;
+        border-right: 4px double black;
+        border-right-color: red;
+        padding: 10px;
+    }
+
+</style>
+<div class="text-center">
+    <h1>AllLinks</h1>
+    <h4>In this page you can see all links our site</h4>
+</div>
+<div class="container  ">
+
+    <div class="row ">
+        <div class="cell-4 stdivborder">
+            <h4>COMPANY</h4>
+            <hr />
+            <p>@Html.ActionLink("About Us", "About", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Investor Relations", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Carrers", "AboutCarrers", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Press", "AboutPress", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Trust & Safety", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Terms of Service", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Privacy Policy", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <hr />
+        </div>
+        <div class="cell-4 stdivborder">
+            <h4>RESOURCES</h4>
+            <hr />
+            <p>@Html.ActionLink("Customer Support", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>@*qqq*@
+            <p>@Html.ActionLink("Hiring Headquarters", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Hiring Resources", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Freelance Blog", "About", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Customer Stories", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Business Resources", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Payroll Services", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <hr />
+        </div>
+        <div class="cell-4 stdivborder">
+            <h4>BROWSE</h4>
+            <hr />
+            <p>@Html.ActionLink("Hiring Headquarters", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Find Jobs", "JobsList", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Jobs in USA", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Freelancers in Australia", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Freelancers in Canada", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Freelancers in UK", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Freelancers in USA", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <hr />
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h5>Top skills:</h5>
+    <div class="row">
+        <div class="cell stdivborder">
+            @*<a class="fg-white fg-red-hover" href="#">Android Developer</a>*@
+            <hr />
+            @Html.ActionLink("Android Developer", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })
+            <p>@Html.ActionLink("Customer Service", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Front-End Developer", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("iOS Developer", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })</p>
+
+        </div>
+        <div class="cell stdivborder">
+            <hr />
+            @Html.ActionLink("Bookkeeper", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })
+            <p>@Html.ActionLink("Database Administration", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Game Developer", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Java Developer", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })</p>
+        </div>
+        <div class="cell stdivborder">
+            <hr />
+            @Html.ActionLink("PHP Developer", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })
+            <p>@Html.ActionLink("Content Writer", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Data Scientist", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })</p>
+            <p>@Html.ActionLink("Graphic Designer", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })</p>
+        </div>
+    </div>
+    <h1>This page in developing</h1>
+
+</div>

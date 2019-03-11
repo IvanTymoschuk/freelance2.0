@@ -64,8 +64,7 @@
         height: 250px;
     }
 
-    .stLink {
-    }
+    
 </style>
 <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@4.1.1/dist/simpleParallax.min.js"></script>
 
@@ -81,8 +80,7 @@
         </ul>
     </div>
 </p>
-<br />
-<br />
+
 <div class="container ">
     <div class="grid">
         <div class="row flex-justify-center main-navigate">
@@ -248,7 +246,7 @@
                         For teams looking to stand out to quality talent and scale hiring fast.
                     </p>
                 </div>
-                <button style="margin-top:15%" class="button alert outline stbuttCard2">Select Basic</button>
+                <button style="margin-top:15%" class="button alert outline stbuttCard2">Select Plus</button>
 
                 <h6 class="text-center">$49.99/month*</h6>
             </div>
@@ -271,7 +269,7 @@
                         For businesses looking for a flexible talent solution that scales with them.
                     </p>
                 </div>
-                <button style="margin-top:15%" class="button alert outline stbuttCard2">Select Basic</button>
+                <button style="margin-top:15%" class="button alert outline stbuttCard2">Select Business</button>
 
                 <h6 class="text-center">$499/month**</h6>
             </div>
@@ -294,9 +292,9 @@
                         For companies looking for a solution that fits into their workforce program.
                     </p>
                 </div>
-                <button style="margin-top:15%" class="button alert outline stbuttCard2">Select Basic</button>
+                <button style="margin-top:15%" class="button alert outline stbuttCard2">Select Enterprise</button>
 
-                <h6 class="text-center">Price varies - contact us for a demo</h6>
+                <h6 class="text-center">@Html.ActionLink("Price varies - contact us for a demo","AboutContactUs","Home",new { @class = "fg-white fg-red-hover"}) </h6>
             </div>
             <div class="card-content p-2 stcard2">
                 <p class="fg-gray">Everything in Business, and:</p>
@@ -346,88 +344,68 @@
 
 <footer class="footer-distributed">
 
-    <div class="container">
+    
         <div class="text-center">
-            <h3>Freelance<span>logo</span></h3>
+            <h3>Pen.Guin<span>.com</span></h3>
+            <hr />
         </div>
-        <hr />
-        <div class="row">
-            <div class="cell-4">
-                <h4>COMPANY</h4>
-                <p>@Html.ActionLink("About Us", "About", "Home", new { @class = "fg-white fg-red-hover" })</p>
-                <p>@Html.ActionLink("Investor Relations", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
-                <p>@Html.ActionLink("Carrers", "AboutCarrers", "Home", new { @class = "fg-white fg-red-hover" })</p>
-                <p>@Html.ActionLink("Press", "AboutPress", "Home", new { @class = "fg-white fg-red-hover" })</p>
-                <p>@Html.ActionLink("Trust & Safety", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
-                <p>@Html.ActionLink("Terms of Service", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
-                <p>@Html.ActionLink("Privacy Policy", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
-            </div>
-            <div class="cell-4">
-                <h4>RESOURCES</h4>
-                <p>@Html.ActionLink("Customer Support", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>@*qqq*@
-                <p>@Html.ActionLink("Hiring Headquarters", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
-                <p>@Html.ActionLink("Hiring Resources", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
-                <p>@Html.ActionLink("Freelance Blog", "About", "Home", new { @class = "fg-white fg-red-hover" })</p>
-                <p>@Html.ActionLink("Customer Stories", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
-                <p>@Html.ActionLink("Business Resources", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
-                <p>@Html.ActionLink("Payroll Services", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
-            </div>
-            <div class="cell-4">
-                <h4>BROWSE</h4>
-                <p>@Html.ActionLink("Hiring Headquarters", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
-                <p>@Html.ActionLink("Find Jobs", "JobsList", "Home", new { @class = "fg-white fg-red-hover" })</p>
-                <p>@Html.ActionLink("Jobs in USA", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
-                <p>@Html.ActionLink("Freelancers in Australia", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
-                <p>@Html.ActionLink("Freelancers in Canada", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
-                <p>@Html.ActionLink("Freelancers in UK", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
-                <p>@Html.ActionLink("Freelancers in USA", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
-            </div>
-        </div>
-        <div class="footer-icons">
-            <div class="float-left">
-                <div class="text-left">
-            <h5>Follow us</h5>
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-github"></i></a>
-            </div>
-            </div>
-            <div class="float-right">
-                <div class="text-right">
-                    <h5>Mobile app</h5>
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
+        <div class="container">
+            <div class="row">
+                <div class="cell-4">
+                    <h4>COMPANY</h4>
+                    <p>@Html.ActionLink("About Us", "About", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                    <p>@Html.ActionLink("Investor Relations", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                    <p>@Html.ActionLink("Carrers", "AboutCarrers", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                    <p>@Html.ActionLink("Press", "AboutPress", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                    <p>@Html.ActionLink("Trust & Safety", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                    <p>@Html.ActionLink("Terms of Service", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                    <p>@Html.ActionLink("Privacy Policy", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                </div>
+                <div class="cell-4">
+                    <h4>RESOURCES</h4>
+                    <p>@Html.ActionLink("Customer Support", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                    <p>@Html.ActionLink("Hiring Headquarters", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                    <p>@Html.ActionLink("Hiring Resources", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                    <p>@Html.ActionLink("Freelance Blog", "About", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                    <p>@Html.ActionLink("Customer Stories", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                    <p>@Html.ActionLink("Business Resources", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                    <p>@Html.ActionLink("Payroll Services", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                </div>
+                <div class="cell-4">
+                    <h4>BROWSE</h4>
+                    <p>@Html.ActionLink("Hiring Headquarters", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                    <p>@Html.ActionLink("Find Jobs", "JobsList", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                    <p>@Html.ActionLink("Jobs in USA", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                    <p>@Html.ActionLink("Freelancers in Australia", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                    <p>@Html.ActionLink("Freelancers in Canada", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                    <p>@Html.ActionLink("Freelancers in UK", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
+                    <p>@Html.ActionLink("Freelancers in USA", "Index", "Home", new { @class = "fg-white fg-red-hover" })</p>
                 </div>
             </div>
+
         </div>
-        </div>
-   
     <hr />
-    <div class="text-center">
-        <p class="footer-company-name">Psycho Team &copy; @DateTime.Now.Year</p>
-    </div>
+    <div class="container">
+        <div style="margin-left:10%" class="footer-center">
 
-    @*<div class="footer-center">
+            <div>
+                <i class="fa fa-map-marker"></i>
+                <p><span>ITStep Academy Office</span> Rivne, Ukraine</p>
+            </div>
 
-        <div>
-            <i class="fa fa-map-marker"></i>
-            <p><span>ITStep Academy Office</span> Rivne, Ukraine</p>
+            <div>
+                <i class="fa fa-phone"></i>
+                <p>+1 555 123456</p>
+            </div>
+
+            <div>
+                <i class="fa fa-envelope"></i>
+                <p>@Html.ActionLink("Support", "Tickets", "Support", routeValues: null, htmlAttributes: new { title = "Support Team" })</p>
+            </div>
+
         </div>
 
-        <div>
-            <i class="fa fa-phone"></i>
-            <p>+1 555 123456</p>
-        </div>
-
-        <div>
-            <i class="fa fa-envelope"></i>
-            <p>@Html.ActionLink("Support", "Tickets", "Support", routeValues: null, htmlAttributes: new { title = "Support Team" })</p>
-        </div>*@
-
-    @*</div>*@
-
-    @*<div class="footer-right">
+        <div  style="margin-left:5%" class="footer-right">
 
             <p class="footer-company-about">
                 <span>About the company</span>
@@ -435,15 +413,31 @@
             </p>
 
             <div class="footer-icons">
+                <div class="float-left">
+                    <div class="text-left">
+                        <h5>Follow us</h5>
+                        <a href="#"><span class="mif-facebook "></span></a>
+                        <a href="#"><span class="mif-twitter icon"></span></a>
+                        <a href="#"><span class="mif-github icon"></span></a>
+                        <a href="#"><span class="mif-instagram icon"></span></a>
 
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-linkedin"></i></a>
-                <a href="#"><i class="fa fa-github"></i></a>
-
+                    </div>
+                </div>
+                <div class="float-right">
+                    <div class="text-right">
+                        <h5>Mobile app</h5>
+                        <a href="#"><span class="mif-android icon"></span></a>
+                        <a href="#"><span class="mif-apple icon"></span></a>
+                    </div>
+                </div>
             </div>
 
-        </div>*@
+        </div>
+    </div>
+    <div class="text-center">
+        <hr />
+        <p class="footer-company-name">Psycho Team &copy; @DateTime.Now.Year</p>
+    </div>
 
 </footer>
 

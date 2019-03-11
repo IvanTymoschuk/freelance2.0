@@ -6,19 +6,8 @@
 }
 
 <div class="container">
-
-    <table class="table  striped  table-border cell-border" data-role="table" data-show-activity="false" data-rownum="true">
-        <thead>
-            <tr>
-                <th>FullName</th>
-                <th>Username</th>
-                <th>isBanned</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody class="fg-white">
-            @foreach (var el in Model.users)
-            {
+ 
+    @Html.Partial("_Users")
 
                 <tr class="bd-darkRed">
                     <td>@el.FullName</td>
@@ -36,7 +25,7 @@
                         </td>
                     }
 
-                    <td>@Ajax.ActionLink("Roles", "GetRoles", new { id = el.Id }, new AjaxOptions { OnBegin = "LoaderJS", OnComplete = "HideLoaderJS", OnFailure = "ErrorJS", OnSuccess = "ShowPartailRoles", UpdateTargetId = "TableUsers", InsertionMode=InsertionMode.Replace},new { @class="button alert outline cell-12"})</td>
+                    <td>@Ajax.ActionLink("Roles", "GetRoles", new { id = el.Id }, new AjaxOptions { OnBegin = "LoaderJS", OnComplete = "HideLoaderJS", OnFailure = "ErrorJS", OnSuccess = "ShowPartailRoles", UpdateTargetId = "TableUsers", InsertionMode=InsertionMode.Replace})</td>
 
                 </tr>
             }
@@ -51,7 +40,7 @@
 
     </div>
     <div id="RolesPartial">
-        @Html.Partial("_RolePanel", Model.partialRolesModel)
+     
     </div>
 
 </div>

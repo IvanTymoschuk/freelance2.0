@@ -14,7 +14,11 @@ namespace BLLViews.Models
     {
         public string ReturnUrl { get; set; }
     }
-
+    public class GetUserInfo
+    {
+        public string fullname { get; set; }
+        public string ava { get; set; }
+    }
     public class SendCodeViewModel
     {
         public string SelectedProvider { get; set; }
