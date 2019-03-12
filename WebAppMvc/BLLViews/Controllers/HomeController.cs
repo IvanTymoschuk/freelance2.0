@@ -83,7 +83,7 @@ namespace BLLViews.Controllers
 
 
         [Authorize]
-        public ActionResult JobView()
+        public ActionResult JobView(int id)
         {
             if (User.IsInRole("Banned"))
             {
@@ -93,13 +93,14 @@ namespace BLLViews.Controllers
 
             using (ApplicationDbContext ctx = new ApplicationDbContext())
             {
-
-                var model = new JobsListModel()
+                
+                var model = new JobView()
                 {
 
-                    jobs = ctx.Jobs.Include("Category").Include("City").ToList(),
+                    job = ctx.Jobs.Include("UserOwner").Include("Category").Include("City").SingleOrDefault(x => x.ID == id),
                     Categories = ctx.Categories.ToList(),
-                    Cities = ctx.Cities.ToList()
+                    Cities = ctx.Cities.ToList(),
+                    Users=ctx.Users.ToList()
                 };
                 return View(model);
             }
