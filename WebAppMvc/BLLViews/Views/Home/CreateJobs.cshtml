@@ -1,4 +1,5 @@
-﻿@model BLLViews.Models.JobsListModel
+﻿@model BLLViews.Models.CreateJobModel
+
 @{
     ViewBag.Title = "CreateJobs";
 }
@@ -85,7 +86,8 @@
             <p> <h5> In this field, you must enter short Description about theme of the project or the task.</h5></p>
         </div>
         <div class="card-content p-2">
-            <input class="stCardInput" maxlength="3000" id="Description" Name="Description" type="text" data-role="input" data-prepend="Description of project or task: ">
+          @* @Html.TextBoxFor()*@
+           @* <input class="stCardInput" maxlength="3000" id="Description" Name="Description" type="text" data-role="input" data-prepend="Description of project or task: ">*@
         </div>
         <div class="card-footer stTextCardFooter">
             <p>The text should be less than 3000 symbols.</p> @*Valitation message*@
