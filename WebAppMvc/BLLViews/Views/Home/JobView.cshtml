@@ -1,7 +1,96 @@
-﻿
+﻿@model BLLViews.Models.JobView
 @{
-    ViewBag.Title = "JobView";
+    ViewBag.Title = Model.job.Name;
 }
 
-<h2>JobView</h2>
+
+<style>
+    .main-container {
+        border: 2px solid darkred;
+    }
+
+    .avatar {
+        border-radius: 10px;
+    }
+
+    .user-info {
+        margin: 5px;
+        border-radius: 10px;
+        background-color: dimgray;
+    }
+
+    #mapid {
+        height: 180px;
+    }
+</style>
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiaXZhbnR5bW8iLCJhIjoiY2p0NXhiZXlsMGI5ajQ0cXprNHl1YmI5ciJ9.RbgpQDG-e3cQlkXMPVA_3Q';
+    var map = new mapboxgl.Map({
+        container: 'map', // container id
+        style: 'mapbox://styles/mapbox/streets-v9', // stylesheet location
+        center: [-74.50, 40], // starting position [lng, lat]
+        zoom: 9 // starting zoom
+    });
+</script>
+
+<div class="container main-container">
+
+    <h1 class="text-center">@Model.job.Name</h1>
+    <hr />
+    <div class="grid">
+        <div class="row">
+            <div class="cell-8"><h2>@Model.job.Salary</h2></div>
+            <div class="cell-4">@Html.ActionLink("Subscribe", "", new { @class = "button alert" })</div>
+        </div>
+        <br />
+        <br />
+        <label>Description:</label>
+        <div class="container row">
+            @Model.job.Description
+        </div>
+
+
+
+        <br />
+        <br />
+        <br />
+        <br />
+
+        <div class="row">
+            <div class="cell-8">
+                <div class="row user-info">
+                    <div class="cell-3">
+                        <img width="30" class="avatar" height="30" src="@Model.job.UserOwner.AvaPath">
+                        @Model.job.UserOwner.FullName
+                    </div>
+                    <div class="cell-3">
+                        <input data-role="rating" data-value="@Model.job.UserOwner.Raiting" readonly disabled data-star-color="violet" data-stared-color="red" data-round-func="floor">
+                    </div>
+                    <div class="cell-3">
+                        @Model.job.UserOwner.PhoneNumber
+                    </div>
+                    <div class="cell-3">
+                        @Model.job.UserOwner.Email
+                    </div>
+                </div>
+            </div>
+            <div class="cell-2">
+                <h6>@Model.job.Date</h6>
+            </div>
+            <div class="cell-2">
+                <h4>@Model.job.City.Name</h4>
+            </div>
+        </div>
+        <hr />
+        <div id="mapid" style="height:400px"></div>
+
+    </div>
+</div>
+
+
+
+
+
 
