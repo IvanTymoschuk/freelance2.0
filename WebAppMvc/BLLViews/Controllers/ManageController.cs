@@ -105,7 +105,7 @@ namespace BLLViews.Controllers
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 if(!string.IsNullOrEmpty(serverFileName))
-                    db.Users.FirstOrDefault(x => x.Id == userId).AvaPath = serverFileName;
+                    db.Users.FirstOrDefault(x => x.Id == userId).AvaPath = "/Content/AvaFiles/" + fileName;
                 if(!string.IsNullOrEmpty(model.user.FullName))
                     db.Users.FirstOrDefault(x => x.Id == userId).FullName = model.user.FullName;
 
