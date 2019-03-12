@@ -16,7 +16,7 @@ namespace BLLViews.Models
         public ApplicationUser()
         {
             Bets = new List<Job>();
-
+            Statuses = new List<AccountStatus>();
         }
         public string FullName { get; set; }
         virtual public City City { get; set; }
@@ -24,6 +24,7 @@ namespace BLLViews.Models
         public double Raiting { get; set; }
         virtual public List<Job> Bets { get; set; }
         virtual public BansList Ban { get; set; }
+        virtual public ICollection<AccountStatus> Statuses { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             
@@ -35,6 +36,13 @@ namespace BLLViews.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+    }
+    public class AccountStatus
+    {
+        public int ID{ get; set; }
+        virtual public ApplicationUser user { get; set; }
+        public string Status { get; set; }
+        public DateTime toDate { get; set; }
     }
     public class Category
     {
@@ -48,13 +56,17 @@ namespace BLLViews.Models
     }
     public class Job
     {
+        public Job()
+        {
+            subscribers = new List<ApplicationUser>();
+        }
         public int ID { get; set; }
         public string Name { get; set; }
         public decimal Salary { get; set; }
         public DateTime Date { get; set; }
         public string Description { get; set; }
         public City City { get; set; }
-
+        virtual public ICollection<ApplicationUser> subscribers { get; set; }
         public Category Category { get; set; }
         public ApplicationUser UserOwner { get; set; }
     }
@@ -101,6 +113,7 @@ namespace BLLViews.Models
             public virtual DbSet<City> Cities { get; set; }
             public virtual DbSet<BansList> Bans { get; set; }
             public virtual DbSet<Ticket> Tickets { get; set; }
+            public virtual DbSet<AccountStatus> Statuses { get; set; }
             public virtual DbSet<TicketMSG> TicketMSGs { get; set; }
             public static ApplicationDbContext Create()
             {
@@ -120,6 +133,9 @@ namespace BLLViews.Models
             var role2 = new IdentityRole { Name = "User" };
             var role3 = new IdentityRole { Name = "Support" };
             var role4 = new IdentityRole { Name = "Banned" };
+            var role5 = new IdentityRole { Name = "Plus" };
+            var role6 = new IdentityRole { Name = "Business" };
+            var role7 = new IdentityRole { Name = "Enterprise" };
             var support = new ApplicationUser { Email = "Support@freelance.localhost", UserName = "Support@freelance.localhost"};
             string password = "Test228";
             support.EmailConfirmed = true;
@@ -128,6 +144,9 @@ namespace BLLViews.Models
             roleManager.Create(role2);
             roleManager.Create(role3);
             roleManager.Create(role4);
+            roleManager.Create(role5);
+            roleManager.Create(role6);
+            roleManager.Create(role7);
             if (result.Succeeded)
             {
                 userManager.AddToRole(support.Id, role3.Name);
@@ -157,7 +176,7 @@ namespace BLLViews.Models
 
 
 
-            base.Seed(db);
+           // base.Seed(db);
         }
     }
     public class Repos<T>

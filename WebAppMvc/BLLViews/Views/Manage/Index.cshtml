@@ -16,7 +16,7 @@
         @Html.TextBoxFor(model => Model.user.FullName, new { @class = "cell-12", data_role = "input", data_prepend = "User name: " })
         <br />
         // @Html.TextBoxFor(model => Model.user.AvaPath, new { @class = "cell-12", data_role = "input", data_prepend = "Ava path: " })
-        @Html.TextBoxFor(model => Model.Upload, new { data_cls_caption = "bg-darkred fg-white", data_cls_button = "bg-darkorange fg-white", type = "file", @class = "cell-12", data_role = "file", data_prepend = "Ava path: " })
+        @Html.TextBoxFor(model => Model.Upload, new { data_cls_caption = "bg-darkred fg-white", data_cls_button = "bg-darkorange fg-white", type = "file", @class = "cell-12", data_role = "file", data_prepend = "Ava path: ",accept=".png,.jpg" })
         <br />
         @Html.Label("SELECT CITY: ")
         @Html.DropDownListFor(Model => Model.CityID, Model.ListCities, new { @class = "cell-12" })

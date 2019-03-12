@@ -124,9 +124,11 @@ namespace BLLViews.Models
         public UserInfoModel()
         {
             jobs = new List<Job>();
+            Subs = new List<Job>();
         }
         public string AvaPath { get; set; }
         public ApplicationUser user { get; set; }
         public ICollection<Job> jobs { get; set; }
+        public ICollection<Job> Subs { get; set; }
     }
 }

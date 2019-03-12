@@ -34,7 +34,7 @@
 
                 <td>
                     @*<button  id="@el.user.Id" class=" elemClass button alert outline cell-12" type="button" >Roles</button>*@
-                     @Ajax.ActionLink("Roles", "GetRoles", new { id = el.user.Id }, new AjaxOptions { OnBegin = "LoaderJS", OnComplete = "HideLoaderJS", OnFailure = "ErrorJS", OnSuccess = "test", UpdateTargetId="Test" })
+                     @Ajax.ActionLink("Roles", "GetRoles", new { id = el.user.Id }, new AjaxOptions { OnBegin = "LoaderJS", OnComplete = "HideLoaderJS", OnFailure = "ErrorJS", OnSuccess = "test", UpdateTargetId="RolesPartial" })
                 </td>
            
             </tr>

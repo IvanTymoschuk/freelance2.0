@@ -224,7 +224,7 @@
                         The essentials to start hiring, today.
                     </p>
                 </div>
-                <button style="margin-top:15%" class="button alert outline stbuttCard2">Select Basic</button>
+                <button style="margin-top:15%" disabled class="button alert outline stbuttCard2">Selected</button>
 
                 <h6 class="text-center">Free</h6>
             </div>
@@ -246,7 +246,14 @@
                         For teams looking to stand out to quality talent and scale hiring fast.
                     </p>
                 </div>
-                <button style="margin-top:15%" class="button alert outline stbuttCard2">Select Plus</button>
+                @if (!User.IsInRole("Plus"))
+                {
+                    @Ajax.ActionLink("Select Plus", "BuyStatus", "Account", new { id = 1 }, new AjaxOptions { OnFailure = "ErrorJS", OnSuccess = "RolesUpdated", OnBegin = "LoaderJS", OnComplete = "HideLoaderJS" }, new { style = "margin-top:15%", @class = "button alert outline stbuttCard2" })
+                }
+                else
+                {
+                    <button style="margin-top:15%" disabled class="button alert outline stbuttCard2">  Selected </button>
+                }
 
                 <h6 class="text-center">$49.99/month*</h6>
             </div>
@@ -269,7 +276,15 @@
                         For businesses looking for a flexible talent solution that scales with them.
                     </p>
                 </div>
-                <button style="margin-top:15%" class="button alert outline stbuttCard2">Select Business</button>
+                @if (!User.IsInRole("Business"))
+                {
+                    @Ajax.ActionLink("Select Business", "BuyStatus", "Account", new { id = 2 }, new AjaxOptions {OnFailure = "ErrorJS", OnSuccess = "RolesUpdated", OnBegin = "LoaderJS", OnComplete = "HideLoaderJS" }, new { style = "margin-top:15%", @class = "button alert outline stbuttCard2" })
+                }
+                else
+                {
+            <button style="margin-top:15%" disabled class="button alert outline stbuttCard2"> Selected </button>
+                }
+
 
                 <h6 class="text-center">$499/month**</h6>
             </div>
@@ -292,9 +307,9 @@
                         For companies looking for a solution that fits into their workforce program.
                     </p>
                 </div>
-                <button style="margin-top:15%" class="button alert outline stbuttCard2">Select Enterprise</button>
+                @Html.ActionLink("Select Enterprise", "MyTickets", "Support", null, new { style = "margin-top:15%", @class = "button alert outline stbuttCard2" })
 
-                <h6 class="text-center">@Html.ActionLink("Price varies - contact us for a demo","AboutContactUs","Home",new { @class = "fg-white fg-red-hover"}) </h6>
+                <h6 class="text-center">@Html.ActionLink("Price varies - contact us for a demo", "AboutContactUs", "Home", new { @class = "fg-white fg-red-hover" }) </h6>
             </div>
             <div class="card-content p-2 stcard2">
                 <p class="fg-gray">Everything in Business, and:</p>

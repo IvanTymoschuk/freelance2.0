@@ -53,6 +53,33 @@ namespace BLLViews.Controllers
             }
         }
 
+        public ActionResult BuyStatus(int id)
+        {
+            var u = UserManager.FindById(User.Identity.GetUserId());
+            string status = null;
+            if (id == 1)
+                status = "Plus";
+            if (id == 2)
+                status = "Business";
+            if (id == 458921)
+                status = "Enterprise";
+            if(status !=null)
+            {
+                var isStatus = u.Statuses.FirstOrDefault(x => x.Status == status);
+                if(isStatus==null)
+                {
+                    UserManager.AddToRole(User.Identity.GetUserId(), status);
+                    using (ApplicationDbContext db = new ApplicationDbContext())
+                    {
+                        db.Statuses.Add(new AccountStatus { Status = status, toDate = DateTime.Now.AddMonths(1), user = db.Users.FirstOrDefault(x=>x.Id==u.Id) });
+                        db.SaveChanges();
+                    }
+                       
+                }
+            }
+            return new EmptyResult();
+
+        }
 
         public ActionResult Banned()
         {
@@ -89,6 +116,7 @@ namespace BLLViews.Controllers
                 model.user = db.Users.FirstOrDefault(x => x.Id == user.Id);
                 model.user.City = db.Users.FirstOrDefault(x => x.Id == user.Id).City;
                 model.jobs = db.Jobs.Where(x => x.UserOwner.Id == userID).ToList();
+                model.Subs = db.Users.FirstOrDefault(x => x.Id == userID).Bets;
                 model.AvaPath = user.AvaPath;
             }
             return View(model);
