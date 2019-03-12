@@ -6,24 +6,28 @@
 }
 
 
-    <div class="container">
+    <div class="container text-center">
         <h2 class="text-center">Banned</h2>
 
         <h2 class="text-center">Hello @Model.User.UserName</h2>
         <h3 class="text-center">Your account has been banned!</h3>
-        <h5>Reason:@Model.Ban.Reason</h5>
+        <br />
+        <hr />
+    </div>
+    <div class="container text-center" style="font-size:28px">
+        <p>Reason: <i class="fg-darkRed">@Model.Ban.Reason</i></p>
         @if (Model.Ban.IsPermanent == true)
         {
-            <h5>To Time: PERMANENT</h5>
+            <p>To Time: <i class="fg-darkRed">PERMANENT</i></p>
         }
         else
         {
-            <h5>To Time: @Model.Ban.ToDate</h5>
+            <p>To Time: <i class="fg-darkRed">@Model.Ban.ToDate</i></p>
         }
-        <h5>Time ban:@Model.Ban.DateBan</h5>
-        <h4>
+        <p>Time ban: <i class="fg-darkRed">@Model.Ban.DateBan</i></p>
+        <p>
 
-            <i class="text-center">You can submit an apology in <a class="fg-darkRed" href="~/support/MyTickets/@Model.User.Id">support</a>! </i>
-        </h4>
-
+            <i class="text-center">You can submit an apology in <a class="fg-darkRed" href="~/support/MyTickets">support</a>! </i>
+        </p>
+        <hr />
     </div>
