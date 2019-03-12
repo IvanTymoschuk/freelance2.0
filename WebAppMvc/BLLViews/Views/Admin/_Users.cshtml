@@ -34,24 +34,35 @@
 
                 <td>
                     @*<button  id="@el.user.Id" class=" elemClass button alert outline cell-12" type="button" >Roles</button>*@
-                     @Ajax.ActionLink("Roles", "GetRoles", new { id = el.user.Id }, new AjaxOptions { OnBegin = "LoaderJS", OnComplete = "HideLoaderJS", OnFailure = "ErrorJS", OnSuccess = "test", UpdateTargetId="RolesPartial" })
+                    @Ajax.ActionLink("Roles", "GetRoles", new { id = el.user.Id },
+                            new AjaxOptions
+                            {
+
+                                OnBegin = "LoaderJS",
+                                OnComplete = "HideLoaderJS",
+                                OnFailure = "ErrorJS",
+                                OnSuccess = "OpenModalRoles",
+                                UpdateTargetId = "RolesPartial",
+                                InsertionMode = InsertionMode.Replace
+                            },
+                    new {@class ="button alert outline cell-12"})
                 </td>
-           
+
             </tr>
         }
 
 
     </tbody>
 </table>
-
+@Scripts.Render("~/bundles/MetroUI")
 
 <script>
-    function test() {
-           setTimeout(function () {
-            //let info = $("#OpenRoles").data("value");
+    function OpenModalRoles() {
+        setTimeout(function () {
+  
             Metro.dialog.open('#demoDialog2');
-            // $("#UidInRP").val(info);
+         
         }, 10);
     }
 
- </script>
+</script>

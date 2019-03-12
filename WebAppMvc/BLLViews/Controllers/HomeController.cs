@@ -70,13 +70,13 @@ namespace BLLViews.Controllers
             using (ApplicationDbContext ctx = new ApplicationDbContext())
             {
 
-                var model = new JobsListModel()
-                {
-                   
-                    jobs = ctx.Jobs.Include("Category").Include("City").ToList(),
-                    Categories = ctx.Categories.ToList(),
-                    Cities = ctx.Cities.ToList()
-                };
+                var model = new CreateJobModel();
+                foreach (var el in ctx.Cities)
+                    model.Cities.Add(new SelectListItem() { Text = el.Name, Value = el.Id.ToString() });
+                foreach (var el in ctx.Categories)
+                    model.Categories.Add(new SelectListItem() { Text = el.Name, Value = el.ID.ToString() });
+
+
                 return View(model);
             }
         }
