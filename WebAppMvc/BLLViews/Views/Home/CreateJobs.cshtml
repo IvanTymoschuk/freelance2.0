@@ -64,8 +64,8 @@
         </ul>*@
 </div>
 
-@*@using (Html.BeginForm("Create","Home",FormMethod.Post))
-    {*@
+@using (Html.BeginForm("CreateJobs", "Home", FormMethod.Post))
+{
 <div class="float-left" style="width: 55%; ">
     <div class="card">
         <div class="card-header stTextCardHead">
@@ -74,7 +74,7 @@
         <div class="card-content p-2">
            @*@Html.TextBoxFor(x =>x.jobs, new { @class = "stCardInput", data_role = "input", data_prepend = "Name project or task: " })*@
             @*@Html.TextBoxFor(model => Model.jobs.ID, new { @type = "hidden" })*@ @*<input class="stCardInput " maxlength="3000" id="Name" Name="Name" type="text" data-role="input" data-prepend="Name project or task: ">*@
-            @*@Html.TextBoxFor(model => Model.jobs.Name, new { @class = "cell-12", data_role = "input", data_prepend = "Name project or task: " })*@
+            @Html.TextBoxFor(model => Model.Name, new { @class = "cell-12", data_role = "input", data_prepend = "Name project or task: " })
         </div>
         <div class="card-footer stTextCardFooter">
             <p>The text should be more than 2 symbols.</p> @*Valitation message*@
@@ -86,7 +86,7 @@
             <p> <h5> In this field, you must enter short Description about theme of the project or the task.</h5></p>
         </div>
         <div class="card-content p-2">
-          @* @Html.TextBoxFor()*@
+           @Html.TextBoxFor(x => x.Description, new { @class = "stCardInput", maxlength = "3000", id = "Description", Name = "Description", type = "text", data_role = "input", data_prepend = "Description of project or task: " })
            @* <input class="stCardInput" maxlength="3000" id="Description" Name="Description" type="text" data-role="input" data-prepend="Description of project or task: ">*@
         </div>
         <div class="card-footer stTextCardFooter">
@@ -100,14 +100,7 @@
         </div>
         <div class="card-content p-2">
 
-            <select data-role="select">
-                @{
-                    foreach (var el in Model.Categories)
-                    {
-                        <option>@el.Name</option>
-                    }
-                }
-            </select>
+         @Html.DropDownListFor(x => x.CategoryID, new SelectList(Model.Categories, "Value", "Text"), new { data_role = "select" })
 
         </div>
         <div class="card-footer stTextCardFooter">
@@ -121,14 +114,7 @@
         </div>
         <div class="card-content p-2">
 
-            <select data-role="select">
-                @{
-                    foreach (var el in Model.Cities)
-                    {
-                        <option>@el.Name</option>
-                    }
-                }
-            </select>
+            @Html.DropDownListFor(x => x.CityID, new SelectList(Model.Cities, "Value", "Text"), new { data_role = "select" })
 
         </div>
         <div class="card-footer stTextCardFooter">
@@ -140,7 +126,8 @@
             <p><h5> In this field, you must enter the date for which the project will be created</h5></p>
         </div>
         <div class="card-content p-2">
-            <input class="stCardInput" maxlength="3000" id="Date" Name="Date" type="date" data-role="input" data-prepend="Enter the date for which the project will be created : ">
+            @Html.TextBoxFor(Model => Model.date, new {type="text",	data_years_before="0",  data_input_format="%d/%m/%y", data_role="calendarpicker", data_prepend = "Enter the date for which the project will be created : " })
+           @* <input class="stCardInput" maxlength="3000" id="Date" Name="Date" type="date" data-role="input" data-prepend="Enter the date for which the project will be created : ">*@
         </div>
         <div class="card-footer stTextCardFooter">
             <p>Not selected date</p> @*Valitation message*@
@@ -153,7 +140,7 @@
         </div>
         <div class="card-content p-2">
 
-            <input class="stCardInput " maxlength="3000" id="Salary" Name="Salary" type="number" data-role="input" data-prepend="Name project or task: ">
+            @Html.TextBoxFor(x => x.Salary, new { type = "text", data_role = "spinner", data_min_value = "5", data_max_value = "100000", data_prepend = "Salary of project or task: " })
 
         </div>
         <div class="card-footer stTextCardFooter">
@@ -164,6 +151,6 @@
 
     <div class="text-center">
         <button class="button alert outline cell-12 stbutt">Add new AD</button>
-        <button class="button alert outline cell-12 stbutt">Clear form</button>
     </div>
 </div>
+}

@@ -24,7 +24,7 @@ namespace BLLViews.Models
         }
         public string Name { get; set; }
         public decimal Salary { get; set; }
-        public DateTime date { get; set; }
+        public string date { get; set; }
         public string Description { get; set; }
         public int CityID { get; set; }
         public int CategoryID { get; set; }

@@ -1,4 +1,6 @@
 ﻿using BLLViews.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,19 @@ namespace BLLViews.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationUserManager _userManager;
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
         public ActionResult Index()
         {
             return View();
@@ -59,6 +74,27 @@ namespace BLLViews.Controllers
         public ActionResult NotFound()
         {
             return View();
+        }
+        [Authorize]
+        [HttpPost]
+        public ActionResult CreateJobs(CreateJobModel model)
+        {
+            using (ApplicationDbContext ctx = new ApplicationDbContext())
+            {
+                var uid = User.Identity.GetUserId();
+                ctx.Jobs.Add(new Job
+                {
+                    Description = model.Description,
+                    @Category = ctx.Categories.FirstOrDefault(x => x.ID == model.CategoryID),
+                    Name = model.Name,
+                    Salary = model.Salary,
+                    @City = ctx.Cities.FirstOrDefault(x => x.Id == model.CityID),
+                    Date = DateTime.Parse(model.date),
+                    UserOwner = ctx.Users.FirstOrDefault(x => x.Id == uid)
+                });
+                ctx.SaveChanges();
+            }
+            return Redirect("/");
         }
         [Authorize]
         public ActionResult CreateJobs()
