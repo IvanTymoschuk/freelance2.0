@@ -13,17 +13,20 @@
     <hr />
     @using (Html.BeginForm("Index", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        @Html.TextBoxFor(model => Model.user.FullName, new { @class = "cell-12", data_role = "input", data_prepend = "User name: " })
-        <br />
-        // @Html.TextBoxFor(model => Model.user.AvaPath, new { @class = "cell-12", data_role = "input", data_prepend = "Ava path: " })
-        @Html.TextBoxFor(model => Model.Upload, new { data_cls_caption = "bg-darkred fg-white", data_cls_button = "bg-darkorange fg-white", type = "file", @class = "cell-12", data_role = "file", data_prepend = "Ava path: ",accept=".png,.jpg" })
-        <br />
-        @Html.Label("SELECT CITY: ")
-        @Html.DropDownListFor(Model => Model.CityID, Model.ListCities, new { @class = "cell-12" })
-        <br />
-        <input style="width:100%;" class="button alert outline cell-12" type="submit" value="Save" />
+<div class="row"  style="margin:20px">
+    @Html.TextBoxFor(model => Model.user.FullName, new { @class = "cell-4", data_role = "input", data_prepend = "User name: " })
+    <br />
+    <div class="cell-2"></div>
+    <br />
+    @Html.TextBoxFor(model => Model.Upload, new { data_cls_caption = "bg-darkred fg-white", data_cls_button = "bg-darkorange fg-white", type = "file", @class = "cell-6", data_role = "file", data_prepend = "Ava path: ", accept = ".png,.jpg" })
+    <br />
+</div>
+<div style="margin:20px">
+    @Html.DropDownListFor(Model => Model.CityID, Model.ListCities, new { data_role="select", @class = "cell-12", data_prepend = "City: " })
+    <br />
+    <input style="width:100%;" class="button alert outline cell-12" type="submit" value="Save" />
+</div>
    
-
     }
     <br />
     @if (Model.HasPassword)

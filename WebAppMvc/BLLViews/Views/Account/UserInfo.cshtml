@@ -7,80 +7,116 @@
 
 
     <div class="container">
-        <br />
-        <br />
+        <h3 class="text-center text-bold">@Model.user.FullName</h3>
         <div class="row">
             <div class="img-container cell-2">
                 <div data-role="panel" data-width="300" data-height="300">
                     <img style="width:280px; height:280px" src="@Model.AvaPath">
                     <div class="image-overlay op-black"></div>
                 </div>
+                @if (Model.user.Id == User.Identity.GetUserId())
+                {
+                  @Html.ActionLink("EDIT", "Index", "Manage",null, htmlAttributes: new { @class = "button alert outline cell-12" })
+                }
             </div>
             <div class="cell-9">
-                <ul class="app-bar-present pos-absolute fg-white bg-darkRed" data-role="materialtabs">
-                    <li><a style="font-size:24px" href="#MyJob">Jobs</a></li>
-                    <li><a style="font-size:24px" href="#MyWork">Subscribets</a></li>
-                </ul>
-                <div style="margin-top: 112px; text-align:center; float:left">
-                    <div id="MyJob">
-                        <div class="row">
-                            @foreach (var el in Model.jobs)
-                            {
-                                <div class="card cell-4" style="margin-left:50px">
-                                    <div class="card-header">
-                                        <div class="avatar">
-                                            <img style="width:68px; height:68px" src="@Model.AvaPath">
-                                        </div>
-                                        <div class="name">@el.Name</div>
-                                        <div class="date">@el.Date</div>
-                                    </div>
-                                    <div class="card-content p-2">
-                                        <p>@el.Description</p>
-                                        <p><b>SALARY: @el.Salary</b></p>
-                                    </div>
-                                    <div class="card-footer">
-                                        @Html.ActionLink("MERO INFO", null, null, new { @class = "button alert outline cell-10" })
-                                    </div>
-                                </div>
-                            }
-                        </div>
+                <br />
+                <h3>Statistic</h3>
+                <hr />
+                <div class="row">
+                    <div class="cell-2">
+                        <p style="font-size:20px">City: @Model.user.City.Name</p>
+                        <p style="font-size:20px">Rating: @Model.user.Raiting @*<input data-role="rating" data-star-color="red" data-static="true" data-value="@Model.user.Raiting">*@</p>
+                    </div>
+                    <div class="cell-3">
+                        <p style="font-size:20px">count of projects : @Model.jobs.Count</p>
+                        <p style="font-size:20px"> projects of all : @Model.Subs.Count</p>
+                    </div>
+                    <div class="cell-7">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <p style="font-size:20px">Phone : @Model.user.PhoneNumber</p>
+                            <p style="font-size:20px">Email : @Model.user.Email</p>
+                        }
+                        else
+                        {
+                            <p style="font-size:20px">Phone : hidden</p>
+                            <p style="font-size:20px">Email : hidden</p>
+                        }
 
                     </div>
-                    <div id="MyWork">
-                        <div class="row">
-                            @foreach (var el in Model.Subs)
-                            {
-                                <div class="card cell-4" style="margin-left:50px">
-                                    <div class="card-header">
-                                        <div class="avatar">
-                                            <img style="width:68px; height:68px" src="@Model.AvaPath">
-                                        </div>
-                                        <div class="name">@el.Name</div>
-                                        <div class="date">@el.Date</div>
-                                    </div>
-                                    <div class="card-content p-2">
-                                        <p>@el.Description</p>
-                                        <p><b>SALARY: @el.Salary</b></p>
-                                    </div>
-                                    <div class="card-footer">
-                                        @Html.ActionLink("MERO INFO", null, null, new { @class = "button alert outline cell-10" })
-                                    </div>
-                                </div>
-                            }
+
+                </div>
+                <hr />
+                <br />
+                <br />
+                <h3>Activity</h3>
+                <hr />
+                <div>
+                    <ul class="bottom text-center" data-role="tabs">
+                        <li class="bg-darkRed fg-white fg-yellow-hover"><a href="#MyJobs">My Jobs</a></li>
+                        <li class="bg-darkRed fg-white fg-yellow-hover"><a href="#MySubs">Subscribet</a></li>
+                    </ul>
+                    <div class="border bd-default no-border-top p-2">
+                        <div id="MyJobs">
+                            <table class="table"
+                                   data-role="table"
+                                   data-show-search="false"
+                                   data-show-rows-steps="false"
+                                   data-rows="5"
+                                   data-show-table-info="false">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Salary</th>
+                                        <th>Date</th>
+                                        <th>More</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var el in Model.jobs)
+                                    {
+                                        <tr>
+                                            <td>@el.Name</td>
+                                            <td>@el.Salary</td>
+                                            <td>@el.Date</td>
+                                            <td>@Html.ActionLink("GO", "JobView", "Home", new { id = el.ID }, new { @class = "button alert outline cell-12" })</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="MySubs">
+                            <table class="table"
+                                   data-role="table"
+                                   data-show-search="false"
+                                   data-show-rows-steps="false"
+                                   data-rows="5"
+                                   data-show-table-info="false">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Salary</th>
+                                        <th>Date</th>
+                                        <th>More</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var el in Model.Subs)
+                                    {
+                                        <tr>
+                                            <td>@el.Name</td>
+                                            <td>@el.Salary</td>
+                                            <td>@el.Date</td>
+                                            <td>@Html.ActionLink("GO", "JobView", "Home", new { id = el.ID }, new { @class = "button alert outline cell-12" })</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
 
-        </div>
-        <br />
-        <h3>@Model.user.FullName </h3>
-
-<h5><input data-role="rating" data-value="@Model.user.Raiting" readonly disabled data-star-color="violet" data-stared-color="red" data-round-func="floor"></h5>
-
-<h5>City: @Model.user.City.Name</h5>
-        @if (Model.user.Id == User.Identity.GetUserId())
-        {
-          @Html.ActionLink("EDIT","Index","Manage",null,new { @class = "button alert outline cell-2" })
-        }
+            </div>
     </div>
