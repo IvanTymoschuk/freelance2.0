@@ -28,6 +28,16 @@ namespace BLLViews.Controllers
         {
             return View();
         }
+        public ActionResult GetMSG(int id)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var list = db.Jobs.FirstOrDefault(x => x.ID == id).JobMSGS.ToList();
+                return null;
+            }
+             
+        }
+
 
         public ActionResult About()
         {

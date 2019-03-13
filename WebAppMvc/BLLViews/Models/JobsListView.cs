@@ -14,6 +14,15 @@ namespace BLLViews.Models
         public List<ApplicationUser> Users { get; set; }
 
     }
+    public class JobMSG
+    {
+        public JobMSG()
+        {
+            msgs = new List<JobMSGS>();
+        }
+        public ICollection<JobMSGS> msgs { get; set; }
+        public JobMSGS NewMSG { get; set; }
+    }
     public class CreateJobModel
     {
         public CreateJobModel()

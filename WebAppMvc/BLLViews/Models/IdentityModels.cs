@@ -66,6 +66,7 @@ namespace BLLViews.Models
         public Job()
         {
             subscribers = new List<ApplicationUser>();
+            JobMSGS = new List<JobMSGS>();
         }
         virtual public ICollection<JobMSGS>  JobMSGS { get; set; }
         public int ID { get; set; }
@@ -117,6 +118,7 @@ namespace BLLViews.Models
             {
             }
             public virtual DbSet<Job> Jobs { get; set; }
+            public virtual DbSet<JobMSGS> JobMSGs { get; set; }
             public virtual DbSet<Category> Categories { get; set; }
             public virtual DbSet<City> Cities { get; set; }
             public virtual DbSet<BansList> Bans { get; set; }
@@ -184,7 +186,7 @@ namespace BLLViews.Models
 
 
 
-            base.Seed(db);
+         //   base.Seed(db);
         }
     }
     public class Repos<T>

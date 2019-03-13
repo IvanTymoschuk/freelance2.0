@@ -20,16 +20,16 @@ namespace BLLViews
         public Task SendAsync(IdentityMessage message)
         {
 
-            var from = "customer@lmpk.s-host.net";
-            var pass = "password*";
+            var from = "customer.psyhoteam@gmail.com";
+            var pass = "5358254AaV";
 
       
-            SmtpClient client = new SmtpClient("mail.lmpk.s-host.net", 587);
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
 
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = false;
             client.Credentials = new System.Net.NetworkCredential(from, pass);
-            client.EnableSsl = false;
+            client.EnableSsl = true;
 
             // создаем письмо: message.Destination - адрес получателя
             var mail = new MailMessage(from, message.Destination);
