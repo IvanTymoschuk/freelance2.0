@@ -115,8 +115,8 @@ namespace BLLViews.Controllers
             {
                 model.user = db.Users.FirstOrDefault(x => x.Id == user.Id);
                 model.user.City = db.Users.Select(x=>x.City).ToList()[0];
-                model.jobs = db.Users.FirstOrDefault(x => x.Id == userID).OwnerJobs;
-                model.Subs = db.Users.FirstOrDefault(x => x.Id == userID).Subscribed;
+                model.jobs = db.Jobs.Include("UserOwner").Where(x=>x.UserOwner.Id==userID).ToList();
+                model.Subs = db.Jobs.Include("UserOwner").Where(x => x.subscribers.FirstOrDefault(y=>y.Id==userID)!=null).ToList();
                 model.AvaPath = user.AvaPath;
             }
             return View(model);

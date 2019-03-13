@@ -82,7 +82,7 @@ namespace BLLViews.Models
         virtual public ICollection<ApplicationUser> subscribers { get; set; }
         public Category Category { get; set; }
         [InverseProperty("OwnerJobs")]
-        public ApplicationUser UserOwner { get; set; }
+        virtual public ApplicationUser UserOwner { get; set; }
     }
     public class Ticket
     {

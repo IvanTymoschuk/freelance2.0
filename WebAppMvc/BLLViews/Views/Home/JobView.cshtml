@@ -1,4 +1,5 @@
 ﻿@model BLLViews.Models.JobView
+@using Microsoft.AspNet.Identity;
 @{
     ViewBag.Title = Model.job.Name;
 }
@@ -21,6 +22,11 @@
     #mapid {
         height: 180px;
     }
+    .Subs
+    {
+         background-color:aliceblue;
+         color:black;
+    }
 </style>
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
@@ -36,19 +42,19 @@
     <hr />
     <div class="grid">
         <div class="row">
-            <div class="cell-8"><h2>@Model.job.Salary</h2></div>
+            <div class="cell-8"><h2>@Model.job.Salary$</h2></div>
 
+            <div id="Subsc">
+                @if (Model.job.subscribers.FirstOrDefault(x => x.UserName == User.Identity.Name) == null)
+                {
+                    <div class="cell-4"><button id="btnsub" onclick="Ts1()" class="button alert">Subscribed</button></div>
+                }
+                else
+                {
+                    <div class="cell-4"><button id="btnsub" onclick="Ts1()" class="button alert">Subscribed</button></div>
 
-            @if (Model.job.subscribers.FirstOrDefault(x => x.UserName == User.Identity.Name) == null)
-            {
-                <div class="cell-4"><button id="btnsub" onclick="Ts1()" class="button alert">Subscribe</button></div>
-            }
-            else
-            {
-                <div class="cell-4"><button id="btnsub" style="background-color:aliceblue;color:black" onclick="Ts1()" class="button alert">Subscribed</button></div>
-
-            }
-
+                }
+            </div>
 
 
         </div>
@@ -68,22 +74,24 @@
 
         <div class="row">
             <div class="cell-8">
-                <div class="row user-info">
-                    <div class="cell-3">
-                        <img width="30" class="avatar" height="30" src="@Model.job.UserOwner.AvaPath">
-                        @Model.job.UserOwner.FullName
+                <a href='@Url.Action("UserInfo","Account",new {id=Model.job.UserOwner.Id })' style="text-decoration:none; color:white">
+                    <div class="row user-info">
+                        <div class="cell-3">
+                            <img width="30" class="avatar" height="30" src="@Model.job.UserOwner.AvaPath">
+                            @Model.job.UserOwner.FullName
+                        </div>
+                        <div class="cell-3">
+                            <input data-role="rating" data-value="@Model.job.UserOwner.Raiting" readonly disabled data-star-color="violet" data-stared-color="red" data-round-func="floor">
+                        </div>
+                        <div class="cell-3">
+                            @Model.job.UserOwner.PhoneNumber
+                        </div>
+                        <div class="cell-3">
+                            @Model.job.UserOwner.Email
+                        </div>
                     </div>
-                    <div class="cell-3">
-                        <input data-role="rating" data-value="@Model.job.UserOwner.Raiting" readonly disabled data-star-color="violet" data-stared-color="red" data-round-func="floor">
-                    </div>
-                    <div class="cell-3">
-                        @Model.job.UserOwner.PhoneNumber
-                    </div>
-                    <div class="cell-3">
-                        @Model.job.UserOwner.Email
-                    </div>
-                </div>
             </div>
+            </a>
             <div class="cell-2">
                 <h6>@Model.job.Date</h6>
             </div>
@@ -93,13 +101,22 @@
         </div>
 
         <hr />
-        <div id="map" style="height:400px"></div>
-        <div id='geocoder' class='geocoder'></div>
-        <br />
+        <div>
+            <ul class="bottom text-center" data-role="tabs">
+                <li class="bg-darkRed fg-white fg-yellow-hover"><a href="#Cart">Cart</a></li>
+                <li class="bg-darkRed fg-white fg-yellow-hover"><a href="#Chat">Chat</a></li>
+            </ul>
+            <div class="border bd-default no-border-top p-2">
+                <div id="Cart">
+                    <div id="map" style="height:400px"></div>
+                    <div id='geocoder' class='geocoder'></div>
+                </div>
+                <div id="Chat">
+                    <button class="button outline alert cell-6" onclick="UpdateChat()">UPDATE CHAT</button>
+                </div>
+            </div>
+        </div>
         <hr />
-        <br />
-        <div id="Chat"></div>
-        <button class="button outline alert cell-12" onclick="UpdateChat()">UPDATE CHAT</button>
     </div>
 </div>
 <script>
@@ -125,26 +142,53 @@
             contentType: 'html',
             success: function (objOperations) {
                 $("#Chat").html(objOperations);
-            }
+            },
+              beforeSend: function () {
+
+                    LoaderJS();
+                },
+                complete: function () {
+
+                    HideLoaderJS();
+                },
+               
 
         });
     }
-    
+
     function Ts1() {
 
         $.ajax({
-            url: '@Url.Action("SubscribeManager","Home")/@User.Identity.Name/@Model.job.ID',
+            url: '@Url.Action("SubscribeManager","Home")/@Model.job.ID',
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (objOperations) {
-                        alert("gg");
-                console.log(objOperations);
+                     
+                var res = objOperations;
+                if (res == true) {
+                    $("#btnsub").text("SUBSCRIBED");
+                    $("#btnsub").addClass("Subs");
+                    $("#btnsub").removeClass("Alert");
+                }
+                if (res == false) {
+                    $("#btnsub").text("SUBSCRIBE");
+                    $("#btnsub").removeClass("Subs");
+                       $("#btnsub").addClass("Alert");
+                }
+            },
 
+              beforeSend: function () {
 
-            }
+                    LoaderJS();
+                },
+                complete: function () {
+
+                    HideLoaderJS();
+                },
+               
         });
             } ;
 </script>
 
-
+@*/@User.Identity.GetUserId()/@Model.job.ID'*@
 
