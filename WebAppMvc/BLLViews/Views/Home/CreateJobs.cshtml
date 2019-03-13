@@ -77,7 +77,7 @@
             @Html.TextBoxFor(model => Model.Name, new { @class = "cell-12", data_role = "input", data_prepend = "Name project or task: " })
         </div>
         <div class="card-footer stTextCardFooter">
-            <p>The text should be more than 2 symbols.</p> @*Valitation message*@
+            <p>You must fill thi field.</p> @*Valitation message*@
         </div>
     </div> 
 
@@ -90,7 +90,7 @@
            @* <input class="stCardInput" maxlength="3000" id="Description" Name="Description" type="text" data-role="input" data-prepend="Description of project or task: ">*@
         </div>
         <div class="card-footer stTextCardFooter">
-            <p>The text should be less than 3000 symbols.</p> @*Valitation message*@
+            <p>The text should be less than 30000 symbols.</p> @*Valitation message*@
         </div>
     </div>
 
@@ -104,7 +104,7 @@
 
         </div>
         <div class="card-footer stTextCardFooter">
-            <p>Not selected category</p> @*Valitation message*@
+            <p>You must selecte category</p> @*Valitation message*@
         </div>
     </div>
 
@@ -118,7 +118,7 @@
 
         </div>
         <div class="card-footer stTextCardFooter">
-            @*@Html.ValidationMessageFor(x => x.Cities)*@<p>Not selected city</p> @*Valitation message*@
+            @*@Html.ValidationMessageFor(x => x.Cities)*@<p>You must selecte city</p> @*Valitation message*@
         </div>
     </div>
     <div class="card">
@@ -130,7 +130,7 @@
            @* <input class="stCardInput" maxlength="3000" id="Date" Name="Date" type="date" data-role="input" data-prepend="Enter the date for which the project will be created : ">*@
         </div>
         <div class="card-footer stTextCardFooter">
-            <p>Not selected date</p> @*Valitation message*@
+            <p>You must selecte date</p> @*Valitation message*@
         </div>
     </div>
 
