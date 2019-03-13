@@ -32,11 +32,11 @@
         <br />
     }
 }
-<br />
 
 <div class="container">
-
-    @using (Html.BeginForm("Admticket", "Support", FormMethod.Post))
+    <br />
+    <br />
+    @using (Ajax.BeginForm("AddMsgToChat", "Home", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "Chat", OnSuccess = "UpdateChat", OnBegin = "LoaderJS", OnComplete = "HideLoaderJS" }))
     {
         @Html.TextBoxFor(model => Model.NewMSG.job.ID, new { @type = "hidden" })
         <br />

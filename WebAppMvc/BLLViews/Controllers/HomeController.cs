@@ -35,8 +35,10 @@ namespace BLLViews.Controllers
             {
                 JobMSG model = new JobMSG();
 
-                var list = db.Jobs.FirstOrDefault(x => x.ID == id).JobMSGS.ToList();
-                model.msgs = list;
+                var list = db.JobMSGs.Include("job").Include("Sender").Where(x => x.job.ID == id).ToList();
+                foreach (var el in list)
+                    model.msgs.Add(el);
+
                 model.NewMSG = new JobMSGS();
                 model.NewMSG.job = new Job();
                 model.NewMSG.job.ID = id;
@@ -49,8 +51,8 @@ namespace BLLViews.Controllers
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-
-                db.JobMSGs.Add(new JobMSGS { job = db.Jobs.SingleOrDefault(x => x.ID == model.NewMSG.job.ID) });
+                var uid = User.Identity.GetUserId();
+                db.Jobs.FirstOrDefault(x=>x.ID==model.NewMSG.job.ID).JobMSGS.Add(new JobMSGS { job = db.Jobs.SingleOrDefault(x => x.ID == model.NewMSG.job.ID), Sender = db.Users.FirstOrDefault(x => x.Id == uid), Text = model.NewMSG.Text });
                 db.SaveChanges();
                 return new EmptyResult();
 
@@ -210,27 +212,26 @@ namespace BLLViews.Controllers
             return View(model);
         }
 
-        public ActionResult SubscribeManager(string id,string job_id)
+        public ActionResult SubscribeManager(int id)
         {
 
             using (ApplicationDbContext ctx = new ApplicationDbContext())
             {
 
-                int JobId = Convert.ToInt32(job_id);
-                var lox = ctx.Users.Single(x => x.UserName == id);
-                if (true)
+               
+                string uid = User.Identity.GetUserId();
+                if (ctx.Jobs.Include("subscribers").FirstOrDefault(x=>x.ID== id).subscribers.FirstOrDefault(x=>x.Id== uid) ==null)
                 {
-                    ctx.Jobs.Single(x => x.ID == JobId).subscribers.Add(lox);
-
-                    return Json(new {state=true }, JsonRequestBehavior.AllowGet);
+                    ctx.Jobs.Include("subscribers").FirstOrDefault(x => x.ID == id).subscribers.Add(ctx.Users.FirstOrDefault(x => x.Id == uid));
+                    ctx.SaveChanges();
+                    return Json(true, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    ctx.Jobs.Single(x => x.ID == JobId).subscribers.Remove(lox);
-                    return Json(new { state = false }, JsonRequestBehavior.AllowGet);
+                    ctx.Jobs.Include("subscribers").FirstOrDefault(x => x.ID == id).subscribers.Remove(ctx.Users.FirstOrDefault(x => x.Id == uid));
+                    ctx.SaveChanges();
+                    return Json(false, JsonRequestBehavior.AllowGet);
                 }
-
-                
             }
         }
     }
