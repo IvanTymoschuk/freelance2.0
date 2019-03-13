@@ -71,6 +71,12 @@ namespace BLLViews.Controllers
 
             return View();
         }
+        public ActionResult TopSkill()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
         public ActionResult NotFound()
         {
             return View();
