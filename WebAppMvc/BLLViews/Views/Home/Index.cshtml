@@ -327,13 +327,13 @@
 
 
 </div>
-<hr />
+@*<hr />
 
 <div class="container">
     <h5>Top skills:</h5>
     <div class="row">
         <div class="cell">
-            @*<a class="fg-white fg-red-hover" href="#">Android Developer</a>*@
+           
             @Html.ActionLink("Android Developer", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })
             <p>@Html.ActionLink("Customer Service", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })</p>
             <p>@Html.ActionLink("Front-End Developer", "TopSkill", "Home", new { @class = "fg-white fg-red-hover" })</p>
@@ -355,14 +355,14 @@
     </div>
 </div>
 
-<hr />
+<hr />*@
 
 <footer class="footer-distributed">
 
     
         <div class="text-center">
             <h3>Pen.Guin<span>.com</span></h3>
-            <hr />
+       
         </div>
         <div class="container">
             <div class="row">
@@ -399,7 +399,7 @@
             </div>
 
         </div>
-    <hr />
+  
     <div class="container">
         <div style="margin-left:10%" class="footer-center">
 
@@ -416,6 +416,8 @@
             <div>
                 <i class="fa fa-envelope"></i>
                 <p>@Html.ActionLink("Support", "Tickets", "Support", routeValues: null, htmlAttributes: new { title = "Support Team" })</p>
+                <p>/</p>
+                <p>@Html.ActionLink("All Links", "AllLinks", "Home", routeValues: null, htmlAttributes: new { title = "All Links" })</p>
             </div>
 
         </div>
@@ -433,7 +435,7 @@
                         <h5>Follow us</h5>
                         <a href="#"><span class="mif-facebook "></span></a>
                         <a href="#"><span class="mif-twitter icon"></span></a>
-                        <a href="#"><span class="mif-github icon"></span></a>
+                        <a href="https://github.com/IvanTymoschuk"><span class="mif-github icon"></span></a>
                         <a href="#"><span class="mif-instagram icon"></span></a>
 
                     </div>

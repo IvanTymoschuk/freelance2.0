@@ -69,7 +69,7 @@
 <div class="float-left" style="width: 55%; ">
     <div class="card">
         <div class="card-header stTextCardHead">
-            <p> <h5> In this field, you must enter Name your project or task.</h5></p>
+            <p> <h5> In this field, you must enter Name your project or job.</h5></p>
         </div>
         <div class="card-content p-2">
            @*@Html.TextBoxFor(x =>x.jobs, new { @class = "stCardInput", data_role = "input", data_prepend = "Name project or task: " })*@
@@ -83,7 +83,7 @@
 
     <div class="card">
         <div class="card-header stTextCardHead">
-            <p> <h5> In this field, you must enter short Description about theme of the project or the task.</h5></p>
+            <p> <h5> In this field, you must enter short Description about the job or the task.</h5></p>
         </div>
         <div class="card-content p-2">
            @Html.TextBoxFor(x => x.Description, new { @class = "stCardInput", maxlength = "3000", id = "Description", Name = "Description", type = "text", data_role = "input", data_prepend = "Description of project or task: " })
@@ -96,7 +96,7 @@
 
     <div class="card">
         <div class="card-header stTextCardHead">
-            <p> <h5> In this field, you must select the category in which your project or task belongs.</h5></p>
+            <p> <h5> In this field, you must select the category in which your job or task belongs.</h5></p>
         </div>
         <div class="card-content p-2">
 
@@ -110,7 +110,7 @@
 
     <div class="card">
         <div class="card-header stTextCardHead">
-            <p><h5> In this field, you must select the City in which your project or task will be create.</h5></p>
+            <p><h5> In this field, you must select the City in which your job or task will be create.</h5></p>
         </div>
         <div class="card-content p-2">
 
@@ -123,7 +123,7 @@
     </div>
     <div class="card">
         <div class="card-header stTextCardHead">
-            <p><h5> In this field, you must enter the date for which the project will be created</h5></p>
+            <p><h5> In this field, you must enter the date when you posted this Ad </h5></p>
         </div>
         <div class="card-content p-2">
             @Html.TextBoxFor(Model => Model.date, new {type="text",	data_years_before="0",  data_input_format="%d/%m/%y", data_role="calendarpicker", data_prepend = "Enter the date for which the project will be created : " })
@@ -136,7 +136,7 @@
 
     <div class="card">
         <div class="card-header stTextCardHead">
-            <p> <h5> In this field, you must enter salary in your project or task.</h5></p>
+            <p> <h5> In this field, you must enter salary in your job or task.</h5></p>
         </div>
         <div class="card-content p-2">
 
