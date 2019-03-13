@@ -23,6 +23,11 @@ namespace BLLViews
             url: "{controller}/{action}/{id}/{ticket}",
             defaults: new { controller = "Home", action = "Ticket", id = UrlParameter.Optional, ticket = UrlParameter.Optional }
             );
+            routes.MapRoute(
+           name: "SubscribeManager",
+           url: "{controller}/{action}/{id}/{job_id}",
+           defaults: new { controller = "Home", action = "SubscribeManager", id = UrlParameter.Optional, job_id = UrlParameter.Optional }
+           );
         }
     }
 }
