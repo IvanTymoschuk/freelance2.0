@@ -112,7 +112,16 @@
 
                     $("#scrolList").append(data);
                     pageNo++;
-                }
+                },
+                beforeSend: function () {
+
+                    LoaderJS();
+                },
+                complete: function () {
+
+                    HideLoaderJS();
+                },
+               
             });
         }
         var searchData = "";

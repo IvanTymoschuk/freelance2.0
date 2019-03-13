@@ -116,7 +116,8 @@ namespace BLLViews.Models
             public ApplicationDbContext()
                 : base("DefaultConnection", throwIfV1Schema: false)
             {
-            }
+            this.Configuration.LazyLoadingEnabled = false;
+        }
             public virtual DbSet<Job> Jobs { get; set; }
             public virtual DbSet<JobMSGS> JobMSGs { get; set; }
             public virtual DbSet<Category> Categories { get; set; }
