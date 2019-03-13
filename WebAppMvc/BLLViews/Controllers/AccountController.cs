@@ -114,9 +114,9 @@ namespace BLLViews.Controllers
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 model.user = db.Users.FirstOrDefault(x => x.Id == user.Id);
-                model.user.City = db.Users.FirstOrDefault(x => x.Id == user.Id).City;
-                model.jobs = db.Jobs.Where(x => x.UserOwner.Id == userID).ToList();
-                model.Subs = db.Users.FirstOrDefault(x => x.Id == userID).Bets;
+                model.user.City = db.Users.Select(x=>x.City).ToList()[0];
+                model.jobs = db.Users.FirstOrDefault(x => x.Id == userID).OwnerJobs;
+                model.Subs = db.Users.FirstOrDefault(x => x.Id == userID).Subscribed;
                 model.AvaPath = user.AvaPath;
             }
             return View(model);
@@ -262,7 +262,8 @@ namespace BLLViews.Controllers
            
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var ava = @"https://static.thenounproject.com/png/17241-200.png";
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, AvaPath=ava };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

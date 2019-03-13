@@ -210,23 +210,23 @@ namespace BLLViews.Controllers
             return View(model);
         }
 
-        public ActionResult SubscribeManager(string id,int job_id)
+        public ActionResult SubscribeManager(string id,string job_id)
         {
 
             using (ApplicationDbContext ctx = new ApplicationDbContext())
             {
 
-
+                int JobId = Convert.ToInt32(job_id);
                 var lox = ctx.Users.Single(x => x.UserName == id);
-                if (!ctx.Jobs.Single(x => x.ID == job_id).subscribers.Contains(lox))
+                if (true)
                 {
-                    ctx.Jobs.Single(x => x.ID == job_id).subscribers.Add(lox);
+                    ctx.Jobs.Single(x => x.ID == JobId).subscribers.Add(lox);
 
                     return Json(new {state=true }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    ctx.Jobs.Single(x => x.ID == job_id).subscribers.Remove(lox);
+                    ctx.Jobs.Single(x => x.ID == JobId).subscribers.Remove(lox);
                     return Json(new { state = false }, JsonRequestBehavior.AllowGet);
                 }
 

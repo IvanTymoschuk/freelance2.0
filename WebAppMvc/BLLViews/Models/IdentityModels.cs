@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 using System.Security.Claims;
@@ -15,14 +16,17 @@ namespace BLLViews.Models
     {
         public ApplicationUser()
         {
-            Bets = new List<Job>();
+            Subscribed = new List<Job>();
             Statuses = new List<AccountStatus>();
+            OwnerJobs = new List<Job>();
         }
         public string FullName { get; set; }
         virtual public City City { get; set; }
         public string AvaPath { get; set; }
         public double Raiting { get; set; }
-        virtual public List<Job> Bets { get; set; }
+        [InverseProperty("subscribers")]
+        virtual public List<Job> Subscribed { get; set; }
+        virtual public List<Job> OwnerJobs { get; set; }
         virtual public BansList Ban { get; set; }
         virtual public ICollection<AccountStatus> Statuses { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -77,6 +81,7 @@ namespace BLLViews.Models
         public City City { get; set; }
         virtual public ICollection<ApplicationUser> subscribers { get; set; }
         public Category Category { get; set; }
+        [InverseProperty("OwnerJobs")]
         public ApplicationUser UserOwner { get; set; }
     }
     public class Ticket
