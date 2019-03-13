@@ -1,0 +1,48 @@
+﻿@model BLLViews.Models.JobMSG
+@{
+    /**/
+
+    ViewBag.Title = "Requests";
+}
+
+
+
+@foreach (var el in Model.msgs)
+{
+    if (el.Sender.UserName == User.Identity.Name)
+    {
+        <div data-role="panel"
+             class="cell-7 fg-white text-bold float-left"
+             data-title-caption="You"
+             data-collapsible="true">
+            @el.Text
+        </div>
+        <br />
+    }
+    else
+    {
+
+        <div data-role="panel"
+             class="cell-7 fg-white text-bold float-right"
+             data-title-caption="@el.Sender.FullName"
+             data-collapsible="true"
+             data-cls-title="fg-yellow text-bold">
+            @el.Text
+        </div>
+        <br />
+    }
+}
+<br />
+
+<div class="container">
+
+    @using (Html.BeginForm("Admticket", "Support", FormMethod.Post))
+    {
+        @Html.TextBoxFor(model => Model.NewMSG.job.ID, new { @type = "hidden" })
+        <br />
+        @Html.TextAreaFor(Model => Model.NewMSG.Text, new { data_role = "textarea", data_default_value = "Text" })
+        <br />
+        <button class="button alert outline cell-12">SEND</button>
+    }
+
+</div>

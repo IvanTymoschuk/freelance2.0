@@ -32,6 +32,8 @@
 <div class="container main-container">
 
     <h1 class="text-center">@Model.job.Name</h1>
+  
+
     <hr />
     <div class="grid">
         <div class="row">
@@ -77,9 +79,15 @@
                 <h4>@Model.job.City.Name</h4>
             </div>
         </div>
+
         <hr />
         <div id="map" style="height:400px"></div>
         <div id='geocoder' class='geocoder'></div>
+        <br />
+        <hr />
+        <br />
+        <div id="Chat"></div>
+        <button class="button outline alert cell-12" onclick="UpdateChat()">UPDATE CHAT</button>
     </div>
 </div>
 <script>
@@ -96,8 +104,19 @@
         accessToken: mapboxgl.accessToken,
        
     });
+    $(document).ready(function () {
+        UpdateChat();
+    })
+    function UpdateChat() {
+        $.ajax({
+            url: '@Url.Action("GetMSG","Home")/'+@Model.job.ID,
+            contentType: 'html',
+            success: function (objOperations) {            
+                $("#Chat").html(objOperations);
+            }
 
-  
+        });
+    }
 
 </script>
 

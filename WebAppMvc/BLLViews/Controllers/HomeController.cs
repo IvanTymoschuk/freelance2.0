@@ -28,16 +28,34 @@ namespace BLLViews.Controllers
         {
             return View();
         }
+        [Authorize]
         public ActionResult GetMSG(int id)
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
+                JobMSG model = new JobMSG();
+
                 var list = db.Jobs.FirstOrDefault(x => x.ID == id).JobMSGS.ToList();
-                return null;
+                model.msgs = list;
+                model.NewMSG = new JobMSGS();
+                model.NewMSG.job = new Job();
+                model.NewMSG.job.ID = id;
+                return PartialView("_Chat",model);
             }
              
         }
+        [Authorize]
+        public ActionResult AddMsgToChat(JobMSG model)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
 
+                db.JobMSGs.Add(new JobMSGS { job = db.Jobs.SingleOrDefault(x => x.ID == model.NewMSG.job.ID) });
+                db.SaveChanges();
+                return new EmptyResult();
+
+            }
+        }
 
         public ActionResult About()
         {
