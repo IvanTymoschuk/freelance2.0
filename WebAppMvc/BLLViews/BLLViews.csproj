@@ -320,6 +320,7 @@
     <Content Include="Views\Home\AllLinks.cshtml" />
     <Content Include="Views\Admin\_Users.cshtml" />
     <Content Include="Views\Home\JobView.cshtml" />
+    <Content Include="Views\Home\_Chat.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

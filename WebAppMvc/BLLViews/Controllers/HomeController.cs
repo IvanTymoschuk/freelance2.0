@@ -28,16 +28,34 @@ namespace BLLViews.Controllers
         {
             return View();
         }
+        [Authorize]
         public ActionResult GetMSG(int id)
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
+                JobMSG model = new JobMSG();
+
                 var list = db.Jobs.FirstOrDefault(x => x.ID == id).JobMSGS.ToList();
-                return null;
+                model.msgs = list;
+                model.NewMSG = new JobMSGS();
+                model.NewMSG.job = new Job();
+                model.NewMSG.job.ID = id;
+                return PartialView("_Chat",model);
             }
              
         }
+        [Authorize]
+        public ActionResult AddMsgToChat(JobMSG model)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
 
+                db.JobMSGs.Add(new JobMSGS { job = db.Jobs.SingleOrDefault(x => x.ID == model.NewMSG.job.ID) });
+                db.SaveChanges();
+                return new EmptyResult();
+
+            }
+        }
 
         public ActionResult About()
         {
@@ -190,6 +208,30 @@ namespace BLLViews.Controllers
             }
           
             return View(model);
+        }
+
+        public ActionResult SubscribeManager(string id,int job_id)
+        {
+
+            using (ApplicationDbContext ctx = new ApplicationDbContext())
+            {
+
+
+                var lox = ctx.Users.Single(x => x.UserName == id);
+                if (!ctx.Jobs.Single(x => x.ID == job_id).subscribers.Contains(lox))
+                {
+                    ctx.Jobs.Single(x => x.ID == job_id).subscribers.Add(lox);
+
+                    return Json(new {state=true }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    ctx.Jobs.Single(x => x.ID == job_id).subscribers.Remove(lox);
+                    return Json(new { state = false }, JsonRequestBehavior.AllowGet);
+                }
+
+                
+            }
         }
     }
 }

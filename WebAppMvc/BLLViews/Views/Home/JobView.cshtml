@@ -2,6 +2,44 @@
 @{
     ViewBag.Title = Model.job.Name;
 }
+<script>
+
+
+
+
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoiaXZhbnR5bW8iLCJhIjoiY2p0NXhiZXlsMGI5ajQ0cXprNHl1YmI5ciJ9.RbgpQDG-e3cQlkXMPVA_3Q';
+
+
+    var map = new mapboxgl.Map({
+        container: 'map', // container id
+        style: 'mapbox://styles/mapbox/streets-v9', // stylesheet location
+        center: ["26.251265","50.627868"],
+        zoom: 12
+    });
+    var geocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+
+    });
+
+        function Test() {
+        $.ajax({
+            url: '@Url.Action("SubscribeManager","Home")/' +@User.Identity.Name+'/' +@Model.job.ID,
+            data: '{model:' + JSON.stringify(check) + '}',
+            type: 'get',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (objOperations) {
+
+                console.log(objOperations);
+
+
+            }
+        });
+            } ;
+
+
+</script>
 
 
 <style>
@@ -32,11 +70,26 @@
 <div class="container main-container">
 
     <h1 class="text-center">@Model.job.Name</h1>
+  
+
     <hr />
     <div class="grid">
         <div class="row">
             <div class="cell-8"><h2>@Model.job.Salary</h2></div>
-            <div class="cell-4">@Html.ActionLink("Subscribe", "", new { @class = "button alert" })</div>
+
+
+            @if (Model.job.subscribers.FirstOrDefault(x => x.UserName == User.Identity.Name) != null)
+            {
+                <div class="cell-4"><button id="btnsub" onclick="Test()"  class="button alert">Subscribe</button></div>
+            }
+            else
+            {
+                <div class="cell-4"><button id="btnsub" style="background-color:aliceblue;color:black" onclick="Test()" class="button alert">Subscribed</button></div>
+
+            }
+
+
+
         </div>
         <br />
         <br />
@@ -77,9 +130,15 @@
                 <h4>@Model.job.City.Name</h4>
             </div>
         </div>
+
         <hr />
         <div id="map" style="height:400px"></div>
         <div id='geocoder' class='geocoder'></div>
+        <br />
+        <hr />
+        <br />
+        <div id="Chat"></div>
+        <button class="button outline alert cell-12" onclick="UpdateChat()">UPDATE CHAT</button>
     </div>
 </div>
 <script>
@@ -96,8 +155,19 @@
         accessToken: mapboxgl.accessToken,
        
     });
+    $(document).ready(function () {
+        UpdateChat();
+    })
+    function UpdateChat() {
+        $.ajax({
+            url: '@Url.Action("GetMSG","Home")/'+@Model.job.ID,
+            contentType: 'html',
+            success: function (objOperations) {            
+                $("#Chat").html(objOperations);
+            }
 
-  
+        });
+    }
 
 </script>
 
