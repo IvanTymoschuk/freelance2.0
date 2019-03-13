@@ -54,12 +54,20 @@ namespace BLLViews.Models
         public string Name { get; set; }
         public ICollection<Job> Jobs { get; set; }
     }
+    public class JobMSGS
+    {
+        public int ID { get; set; }
+        virtual public ApplicationUser Sender { get; set; }
+        virtual public Job job { get; set; }
+        public string Text { get; set; }
+    }
     public class Job
     {
         public Job()
         {
             subscribers = new List<ApplicationUser>();
         }
+        virtual public ICollection<JobMSGS>  JobMSGS { get; set; }
         public int ID { get; set; }
         public string Name { get; set; }
         public decimal Salary { get; set; }
@@ -176,7 +184,7 @@ namespace BLLViews.Models
 
 
 
-           // base.Seed(db);
+            base.Seed(db);
         }
     }
     public class Repos<T>
