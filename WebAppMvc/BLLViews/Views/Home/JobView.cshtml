@@ -27,6 +27,9 @@
          background-color:aliceblue;
          color:black;
     }
+    .stfieldEmail{
+        width:150px;
+    }
 </style>
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
@@ -84,10 +87,12 @@
                             <input data-role="rating" data-value="@Model.job.UserOwner.Raiting" readonly disabled data-star-color="violet" data-stared-color="red" data-round-func="floor">
                         </div>
                         <div class="cell-3">
-                            @Model.job.UserOwner.PhoneNumber
+                            @Model.job.UserOwner.Email
                         </div>
                         <div class="cell-3">
-                            @Model.job.UserOwner.Email
+                            <div class="stfieldEmail">
+                                <p style="width:150px;">@Model.job.UserOwner.PhoneNumber </p>
+                            </div>
                         </div>
                     </div>
             </div>

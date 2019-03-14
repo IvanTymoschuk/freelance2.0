@@ -46,8 +46,8 @@
 
         <ul class="app-bar-menu">
             <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">@Html.ActionLink("Home", "Index", "Home")</li>
-
-
+       
+            <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">@Html.ActionLink("Get Job", "JobsList", "Home")</li>
             <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';"> @Html.ActionLink("About", "About", "Home")</li>
             <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">
                 @if (User.IsInRole("Banned"))
