@@ -55,13 +55,13 @@
    
     <div class="row">
         <div class="cell-3 d-flex flex-justify-center">
-            <h2> JobsList</h2>
+            <h1> JobsList</h1>
         </div>
         <div class="cell-6" style="margin-bottom: 20px">
             @Html.TextBox("searchtextbox", "", new { type = "text",@class = " text", id="search", placeholder = "Search"})
         </div>
         <div class="cell-3 d-flex  flex-justify-center">
-            <button class="button btn-create">Create Job</button>
+            @Html.ActionLink("Create Job","CreateJobs","Home",new { @class = "button alert outline left-button cell-12" })
         </div>
     </div>
     <div class="row">
@@ -92,7 +92,7 @@
             @Html.Partial("_Items", Model)
         </div>
 
-
+        </div>
 
     </div>
 
