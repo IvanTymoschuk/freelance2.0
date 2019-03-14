@@ -199,6 +199,8 @@ namespace BLLViews.Controllers
 
                     if (el.Ban.IsPermanent || el.Ban.ToDate > DateTime.Now)
                         u.isBanned = true;
+                    else
+                        u.isBanned = false;
                 }
                 model.Add(u);
             }
