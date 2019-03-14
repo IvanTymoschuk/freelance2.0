@@ -66,18 +66,21 @@
     </div>
     <div class="row">
         <div class="cell-4">
-            <select data-role="select">
+            <select data-role="select" id="CTFilter">
+                <option value="ALL">ALL</option>
                 @foreach (var el in Model.Categories)
                 {
-                    <option>@el.Name</option>
+                    <option value="@el.Name">@el.Name</option>
                 }
             </select>
         </div>
         <div class="cell-4">
-            <select data-role="select">
+            <select data-role="select" id="CFilter">
+                <option value="ALL">ALL</option>
                 @foreach (var el in Model.Cities)
                 {
-                    <option>@el.Name</option>
+
+                    <option value="@el.Name">@el.Name</option>
                 }
             </select>
         </div>
@@ -103,11 +106,11 @@
       
 
 
-        function loadData(text) {
+        function loadData(text,filter) {
             
             $.ajax({
                 url: '/Home/JobsList/',
-                data: { search: text, page: pageNo },
+                data: { search: text, page: pageNo, Filter: filter },
                 success: function(data) {
 
                     $("#scrolList").append(data);
@@ -124,6 +127,31 @@
                
             });
         }
+        
+        $("#CFilter").change(function () {
+            var name = $("#CFilter").val();
+            if (name != "ALL") {
+                name = "city=" + name;
+                $("#scrolList").empty();
+                loadData("null", name);
+            }
+            else {
+                loadData(" ");
+            }
+
+        });
+        $("#CTFilter").change(function () {
+            var name = $("#CTFilter").val();
+            if (name != "ALL") {
+                name = "category=" + name;
+                $("#scrolList").empty();
+                loadData("null", name);
+            }
+            else {
+                loadData(" ");
+            }
+
+        });
         var searchData = "";
 
         $(document).on("scroll",function () {

@@ -50,7 +50,7 @@
             <div id="Subsc">
                 @if (Model.job.subscribers.FirstOrDefault(x => x.UserName == User.Identity.Name) == null)
                 {
-                    <div class="cell-4"><button id="btnsub" onclick="Ts1()" class="button alert">Subscribed</button></div>
+                    <div class="cell-4"><button id="btnsub" onclick="Ts1()" class="button alert">Subscribe</button></div>
                 }
                 else
                 {
@@ -171,12 +171,12 @@
                      
                 var res = objOperations;
                 if (res == true) {
-                    $("#btnsub").text("SUBSCRIBED");
+                    $("#btnsub").text("Subscribed");
                     $("#btnsub").addClass("Subs");
                     $("#btnsub").removeClass("Alert");
                 }
                 if (res == false) {
-                    $("#btnsub").text("SUBSCRIBE");
+                    $("#btnsub").text("Subscribe");
                     $("#btnsub").removeClass("Subs");
                        $("#btnsub").addClass("Alert");
                 }

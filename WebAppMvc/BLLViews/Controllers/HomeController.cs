@@ -182,7 +182,7 @@ namespace BLLViews.Controllers
 
         const int pageSize = 9;
 
-        public ActionResult JobsList(string search,int? page=0)
+        public ActionResult JobsList(string search,int? page=0,string filter=null)
         {
             if (User.IsInRole("Banned"))
             {
@@ -191,19 +191,50 @@ namespace BLLViews.Controllers
 
             var model = new JobsListModel();
             ApplicationDbContext ctx = new ApplicationDbContext();
+            if (filter == null)
+            {
+                int pageIndex = pageSize * page.Value;
+                model.jobs = ctx.Jobs.Include("UserOwner")
+                    .Include("Category")
+                    .Include("City")
+                    .Where(x => string.IsNullOrEmpty(search) ? true : x.Name.Contains(search))
+                    .OrderByDescending(x => x.Date)
+                    .Skip(pageIndex)
+                    .Take(pageSize).ToList();
+                model.Categories = ctx.Categories.ToList();
+                model.Cities = ctx.Cities.ToList();
+                model.Users = ctx.Users.ToList();
+            }
+            else
+            if (filter.Contains("city="))
+            {
+                var str = filter.Remove(0, 5);
 
-            int pageIndex = pageSize * page.Value;
-            model.jobs = ctx.Jobs.Include("UserOwner")
-                .Include("Category")
-                .Include("City")
-                .Where(x=>string.IsNullOrEmpty(search) ? true : x.Name.Contains(search))
-                .OrderByDescending(x => x.Date)
-                .Skip(pageIndex)
-                .Take(pageSize).ToList();
-            model.Categories = ctx.Categories.ToList();
-            model.Cities = ctx.Cities.ToList();
-            model.Users = ctx.Users.ToList();
-             
+                model.jobs = ctx.Jobs.Include("UserOwner")
+                    .Include("Category")
+                    .Include("City")
+                    .Where(x => x.City == ctx.Cities.FirstOrDefault(y => y.Name == str))
+                    .OrderByDescending(x => x.Date).ToList();
+
+                model.Categories = ctx.Categories.ToList();
+                model.Cities = ctx.Cities.ToList();
+                model.Users = ctx.Users.ToList();
+            }
+            else
+            if (filter.Contains("category="))
+            {
+                var str = filter.Remove(0, 9);
+
+                model.jobs = ctx.Jobs.Include("UserOwner")
+                    .Include("Category")
+                    .Include("City")
+                    .Where(x => x.Category == ctx.Categories.FirstOrDefault(y => y.Name == str))
+                    .OrderByDescending(x => x.Date).ToList();
+
+                model.Categories = ctx.Categories.ToList();
+                model.Cities = ctx.Cities.ToList();
+                model.Users = ctx.Users.ToList();
+            }
             if (Request.IsAjaxRequest())
             {
                 return PartialView("_Items", model);
