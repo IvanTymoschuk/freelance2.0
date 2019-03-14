@@ -11,7 +11,7 @@ using Microsoft.Owin.Security;
 using BLLViews.Models;
 using System.Threading;
 using System.Collections.Generic;
-
+using System.Data.Entity;
 namespace BLLViews.Controllers
 {
     [Authorize]
@@ -89,8 +89,14 @@ namespace BLLViews.Controllers
                 return Redirect("/");
             }
             BannedModel model = new BannedModel();
-            model.User = UserManager.FindById(User.Identity.GetUserId());
-            model.Ban = UserManager.FindById(User.Identity.GetUserId()).Ban;
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var uid = User.Identity.GetUserId();
+                var user = db.Users.FirstOrDefault(x => x.Id == uid);
+                db.Entry(user).Reference("Ban").Load();
+                model.User = user;
+                model.Ban = db.Users.FirstOrDefault(x => x.Id == uid).Ban;
+            }
             return View(model);
         }
 

@@ -140,6 +140,8 @@
     });
     $(document).ready(function () {
         UpdateChat();
+
+        setInterval(UpdateChat, 300000);
     })
     function UpdateChat() {
         $.ajax({
