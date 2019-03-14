@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+using CompareAttribute = System.ComponentModel.DataAnnotations.CompareAttribute;
 
 namespace BLLViews.Models
 {
@@ -68,6 +70,11 @@ namespace BLLViews.Models
 
     public class RegisterViewModel
     {
+        public RegisterViewModel()
+        {
+            ListCities = new List<SelectListItem>();
+        }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -81,8 +88,15 @@ namespace BLLViews.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public int CityID { get; set; }
+        [Display(Name = "City")]
+        public ICollection<SelectListItem> ListCities { get; set; }
+        [Required]
+        [Display(Name = "FullName")]
+        public string FullName { get; set; }
     }
 
     public class ResetPasswordViewModel

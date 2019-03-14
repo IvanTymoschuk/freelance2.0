@@ -55,45 +55,51 @@
    
     <div class="row">
         <div class="cell-3 d-flex flex-justify-center">
-            <h2> JobsList</h2>
+            <h1> JobsList</h1>
         </div>
         <div class="cell-6" style="margin-bottom: 20px">
             @Html.TextBox("searchtextbox", "", new { type = "text",@class = " text", id="search", placeholder = "Search"})
         </div>
         <div class="cell-3 d-flex  flex-justify-center">
-            <button class="button btn-create">Create Job</button>
+            @Html.ActionLink("Create Job","CreateJobs","Home",new { @class = "button alert outline left-button cell-12" })
         </div>
     </div>
-    <div class="row">
-        <div class="cell-4">
-            <select data-role="select">
-                @foreach (var el in Model.Categories)
-                {
-                    <option>@el.Name</option>
-                }
-            </select>
-        </div>
-        <div class="cell-4">
-            <select data-role="select">
-                @foreach (var el in Model.Cities)
-                {
-                    <option>@el.Name</option>
-                }
-            </select>
-        </div>
-    </div>
+    
 
 
     <div class="container style_list">
+        <div class="row">
+            <div class="cell-2">
+
+            </div>
+            <div class="cell-4">
+                <select data-role="select" id="CTFilter">
+                    <option value="ALL">ALL</option>
+                    @foreach (var el in Model.Categories)
+                    {
+                        <option value="@el.Name">@el.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="cell-4">
+                <select data-role="select" id="CFilter">
+                    <option value="ALL">ALL</option>
+                    @foreach (var el in Model.Cities)
+                    {
+
+                        <option value="@el.Name">@el.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
         <div id="scrolList">
             @Html.Partial("_Items", Model)
         </div>
 
-
+    </div>
 
     </div>
 
-</div>
 
 @section scripts{
     <script type="text/javascript">
@@ -103,11 +109,11 @@
       
 
 
-        function loadData(text) {
+        function loadData(text,filter) {
             
             $.ajax({
                 url: '/Home/JobsList/',
-                data: { search: text, page: pageNo },
+                data: { search: text, page: pageNo, Filter: filter },
                 success: function(data) {
 
                     $("#scrolList").append(data);
@@ -124,6 +130,31 @@
                
             });
         }
+        
+        $("#CFilter").change(function () {
+            var name = $("#CFilter").val();
+            if (name != "ALL") {
+                name = "city=" + name;
+                $("#scrolList").empty();
+                loadData("null", name);
+            }
+            else {
+                loadData(" ");
+            }
+
+        });
+        $("#CTFilter").change(function () {
+            var name = $("#CTFilter").val();
+            if (name != "ALL") {
+                name = "category=" + name;
+                $("#scrolList").empty();
+                loadData("null", name);
+            }
+            else {
+                loadData(" ");
+            }
+
+        });
         var searchData = "";
 
         $(document).on("scroll",function () {

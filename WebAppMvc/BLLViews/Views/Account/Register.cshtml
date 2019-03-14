@@ -17,6 +17,17 @@
         @Html.AntiForgeryToken()
         <h4 class="text-center">Create a new account</h4>
         <hr />
+
+        @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "fg-white" })
+        @Html.LabelFor(m => m.FullName)
+
+        @Html.TextBoxFor(m => m.FullName, new { @class = "cell-12" })
+        <br />
+        @Html.ValidationMessageFor(m => m.ListCities, "", new { @class = "fg-white" })
+        @Html.LabelFor(m => m.ListCities)
+
+        @Html.DropDownListFor(Model => Model.CityID, Model.ListCities, new { data_role = "select", @class = "cell-12" })
+        <br />
         // @Html.ValidationSummary("", new { @class = "fg-white" })
         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "fg-white" })
         @Html.LabelFor(m => m.Email)

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 namespace BLLViews.Controllers
 {
     public class AdminController : Controller
@@ -62,51 +63,36 @@ namespace BLLViews.Controllers
         [Authorize]
         public ActionResult BanUser(PartialBanModel model)
         {
-            if (!User.IsInRole("Admin") || !User.IsInRole("Support"))
-                return RedirectToAction("NotFound", "Home");
-            var user = UserManager.FindById(model.UserId);
-
-            if (model.Ban.IsPermanent)
+           
+            using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                UserManager.FindById(user.Id).Ban = new BansList() { IsPermanent = true, Reason = model.Ban.Reason, DateBan = DateTime.Now, ToDate = DateTime.Now.AddYears(120) };
-                UserManager.RemoveFromRole(user.Id, "User");
-                UserManager.AddToRole(user.Id, "Banned");
-                UserManager.SendEmail(user.Id, "Your account has been banned. Time:  " + DateTime.Now, $"Hello {user.UserName} Your account has been banned!!!");
-
-            }
-            else
-            {
-                UserManager.FindById(user.Id).Ban = new BansList() { IsPermanent = false, ToDate = DateTime.Now.AddHours(model.CountHour), Reason = model.Ban.Reason, DateBan = DateTime.Now };
-                UserManager.RemoveFromRole(user.Id, "User");
-                UserManager.AddToRole(user.Id, "Banned");
-                UserManager.SendEmail(user.Id, "Your account has been banned. Time:  " + DateTime.Now, $"Hello {user.UserName} Your account has been banned!!!");
-            }
-
-            ICollection<GetAllUsers> model1 = new List<GetAllUsers>();
-            Repos<ApplicationUser> repos = new Repos<ApplicationUser>();
-            var list = repos.ReadAll();
-            foreach (var el in list)
-            {
-                GetAllUsers u = new GetAllUsers();
-                u.user = el;
-                if (el.Ban != null)
+                var uid = model.UserId;
+                if (model.Ban.IsPermanent)
                 {
-                    u.ban = el.Ban;
 
-                    if (el.Ban.IsPermanent || el.Ban.ToDate > DateTime.Now)
-                        u.isBanned = true;
+                    db.Users.FirstOrDefault(x => x.Id == uid).Ban = new BansList() { IsPermanent = true, Reason = model.Ban.Reason, DateBan = DateTime.Now, ToDate = DateTime.Now.AddYears(120) };
+                    UserManager.RemoveFromRole(uid, "User");
+                    UserManager.AddToRole(uid, "Banned");
+                    UserManager.SendEmail(uid, "Your account has been banned. Time:  " + DateTime.Now, $"Hello {db.Users.FirstOrDefault(x => x.Id == uid).UserName} Your account has been banned!!!");
+                    db.SaveChanges();
+
                 }
-                model1.Add(u);
+                else
+                {
+                    db.Users.FirstOrDefault(x => x.Id == uid).Ban = new BansList() { IsPermanent = false, ToDate = DateTime.Now.AddHours(model.CountHour), Reason = model.Ban.Reason, DateBan = DateTime.Now };
+                    UserManager.RemoveFromRole(uid, "User");
+                    UserManager.AddToRole(uid, "Banned");
+                    UserManager.SendEmail(uid, "Your account has been banned. Time:  " + DateTime.Now, $"Hello {db.Users.FirstOrDefault(x => x.Id == uid).UserName} Your account has been banned!!!");
+                    db.SaveChanges();
+                }
             }
-            return PartialView("_Users", model1);
+            return PartialView("_Users", GetAllUsers());
         }
 
         [HttpPost]
         [Authorize]
         public ActionResult UpdateRoles(PartialRolesModel model)
         {
-            if (!User.IsInRole("Admin"))
-                return RedirectToAction("NotFound", "Home");
             var user = UserManager.FindById(model.UserID);
             if (user != null)
             {
@@ -145,66 +131,57 @@ namespace BLLViews.Controllers
         [Authorize]
         public ActionResult UnBan(string id)
         {
-            if (!User.IsInRole("Admin") || !User.IsInRole("Support"))
-                return RedirectToAction("NotFound", "Home");
 
+                var u = UserManager.FindById(id);
+                if (u == null)
+                    return RedirectToAction("NotFound", "Home");
+
+                UserManager.RemoveFromRole(u.Id, "Banned");
+                UserManager.AddToRole(u.Id, "User");
+                using (ApplicationDbContext db = new ApplicationDbContext())
+                {
+   
+                    db.Users.Include("Ban").FirstOrDefault(x => x.Id == id).Ban.ToDate = DateTime.Now;
+                    db.Users.Include("Ban").FirstOrDefault(x => x.Id == id).Ban.IsPermanent = false;
+                    db.SaveChanges();
+                }
             
 
-            var user = UserManager.FindById(id);
-            if(user==null)
-                return RedirectToAction("NotFound", "Home");
+
       
-            UserManager.RemoveFromRole(user.Id, "Banned");
-            UserManager.AddToRole(user.Id, "User");
+            return PartialView("_Users", GetAllUsers());
+        }
+
+        ICollection<GetAllUsers> GetAllUsers()
+        {
+            ICollection<GetAllUsers> model = new List<GetAllUsers>();
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                db.Users.FirstOrDefault(x => x.Id == user.Id).Ban.ToDate = DateTime.Now;
-                db.Users.FirstOrDefault(x => x.Id == user.Id).Ban.IsPermanent= false;
-                db.SaveChanges();
-            }
 
-            ICollection<GetAllUsers> model = new List<GetAllUsers>();
-            Repos<ApplicationUser> repos = new Repos<ApplicationUser>();
-            var list = repos.ReadAll();
-            foreach (var el in list)
-            {
-                GetAllUsers u = new GetAllUsers();
-                u.user = el;
-                if (el.Ban != null)
+                var list = db.Users.Include("Ban").ToList();
+                foreach (var el in list)
                 {
-                    u.ban = el.Ban;
+                    GetAllUsers u = new GetAllUsers();
+                    u.user = el;
+                    if (el.Ban != null)
+                    {
+                        u.ban = el.Ban;
 
-                    if (el.Ban.IsPermanent || el.Ban.ToDate > DateTime.Now)
-                        u.isBanned = true;
+                        if (el.Ban.IsPermanent || el.Ban.ToDate > DateTime.Now || UserManager.IsInRole(el.Id, "Banned") == true)
+                            u.isBanned = true;
+                    }
+                    model.Add(u);
                 }
-                model.Add(u);
+                return model;
             }
-            return PartialView("_Users", model);
         }
         [Authorize]
         public ActionResult GetUsers()
         {
             if (!User.IsInRole("Admin"))
                 return RedirectToAction("NotFound", "Home");
-            ICollection<GetAllUsers> model = new List<GetAllUsers>();
-            Repos<ApplicationUser> repos = new Repos<ApplicationUser>();
-            var list = repos.ReadAll();
-            foreach (var el in list)
-            {
-                GetAllUsers u = new GetAllUsers();
-                u.user = el;
-                if (el.Ban != null)
-                {
-                    u.ban = el.Ban;
-
-                    if (el.Ban.IsPermanent || el.Ban.ToDate > DateTime.Now)
-                        u.isBanned = true;
-                    else
-                        u.isBanned = false;
-                }
-                model.Add(u);
-            }
-            return PartialView("_Users", model);
+             
+            return PartialView("_Users", GetAllUsers());
         }
     }
 }

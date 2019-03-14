@@ -27,6 +27,9 @@
          background-color:aliceblue;
          color:black;
     }
+    .stfieldEmail{
+        width:150px;
+    }
 </style>
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
@@ -42,12 +45,12 @@
     <hr />
     <div class="grid">
         <div class="row">
-            <div class="cell-8"><h2>@Model.job.Salary$</h2></div>
+            <div class="cell-8"><h2>@Model.job.Salary₴</h2></div>
 
             <div id="Subsc">
                 @if (Model.job.subscribers.FirstOrDefault(x => x.UserName == User.Identity.Name) == null)
                 {
-                    <div class="cell-4"><button id="btnsub" onclick="Ts1()" class="button alert">Subscribed</button></div>
+                    <div class="cell-4"><button id="btnsub" onclick="Ts1()" class="button alert">Subscribe</button></div>
                 }
                 else
                 {
@@ -84,10 +87,12 @@
                             <input data-role="rating" data-value="@Model.job.UserOwner.Raiting" readonly disabled data-star-color="violet" data-stared-color="red" data-round-func="floor">
                         </div>
                         <div class="cell-3">
-                            @Model.job.UserOwner.PhoneNumber
+                            @Model.job.UserOwner.Email
                         </div>
                         <div class="cell-3">
-                            @Model.job.UserOwner.Email
+                            <div class="stfieldEmail">
+                                <p style="width:150px;">@Model.job.UserOwner.PhoneNumber </p>
+                            </div>
                         </div>
                     </div>
             </div>
@@ -135,6 +140,8 @@
     });
     $(document).ready(function () {
         UpdateChat();
+
+        setInterval(UpdateChat, 300000);
     })
     function UpdateChat() {
         $.ajax({
@@ -166,12 +173,12 @@
                      
                 var res = objOperations;
                 if (res == true) {
-                    $("#btnsub").text("SUBSCRIBED");
+                    $("#btnsub").text("Subscribed");
                     $("#btnsub").addClass("Subs");
                     $("#btnsub").removeClass("Alert");
                 }
                 if (res == false) {
-                    $("#btnsub").text("SUBSCRIBE");
+                    $("#btnsub").text("Subscribe");
                     $("#btnsub").removeClass("Subs");
                        $("#btnsub").addClass("Alert");
                 }

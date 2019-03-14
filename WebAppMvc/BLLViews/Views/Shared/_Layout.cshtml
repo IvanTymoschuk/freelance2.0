@@ -38,16 +38,16 @@
 
 
 
-        <a href="#" class="brand no-hover">
+        @Html.ActionLink("Pen.Guin","Index","Home",new {@class="fg-white fg-red-hover" })
             <span>
-                Pen.Guin<sup>.com</sup>
+               <sup>.com</sup>
             </span>
-        </a>
+    
 
         <ul class="app-bar-menu">
             <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">@Html.ActionLink("Home", "Index", "Home")</li>
-
-
+       
+            <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">@Html.ActionLink("Get Job", "JobsList", "Home")</li>
             <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';"> @Html.ActionLink("About", "About", "Home")</li>
             <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">
                 @if (User.IsInRole("Banned"))
@@ -58,7 +58,11 @@
         </ul>
         @if (User.Identity.IsAuthenticated)
         {
-            <ul class="app-bar-menu" > <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">@Html.ActionLink("Jobs", "JobsList", "Home")</li></ul>
+            <ul class="app-bar-menu" ><li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">@Html.ActionLink("Jobs", "JobsList", "Home")</li>
+                                      <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">@Html.ActionLink("Create Job", "CreateJobs", "Home")</li>
+        
+        
+        </ul>
             <button class="button pos-absolute pos-right-center bg-black"
                     id="sidebar-toggle-2">
                 <span class="mif-menu"></span>

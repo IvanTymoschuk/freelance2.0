@@ -10,7 +10,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BLLViews.Models;
 using System.Threading;
-
+using System.Collections.Generic;
+using System.Data.Entity;
 namespace BLLViews.Controllers
 {
     [Authorize]
@@ -88,8 +89,14 @@ namespace BLLViews.Controllers
                 return Redirect("/");
             }
             BannedModel model = new BannedModel();
-            model.User = UserManager.FindById(User.Identity.GetUserId());
-            model.Ban = UserManager.FindById(User.Identity.GetUserId()).Ban;
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var uid = User.Identity.GetUserId();
+                var user = db.Users.FirstOrDefault(x => x.Id == uid);
+                db.Entry(user).Reference("Ban").Load();
+                model.User = user;
+                model.Ban = db.Users.FirstOrDefault(x => x.Id == uid).Ban;
+            }
             return View(model);
         }
 
@@ -108,13 +115,15 @@ namespace BLLViews.Controllers
             UserInfoModel model = new UserInfoModel(); 
             var user = UserManager.FindById(id);
             if (user == null)
-                return HttpNotFound("User with id " + id + " not found!");
+                return RedirectToAction("NotFound","Home");
             model.user = user;
             string userID = user.Id;
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
+                ApplicationUser u = db.Users.FirstOrDefault(x => x.Id == user.Id);
                 model.user = db.Users.FirstOrDefault(x => x.Id == user.Id);
-                model.user.City = db.Users.Select(x=>x.City).ToList()[0];
+                db.Entry(u).Reference("City").Load();
+                model.user.City = db.Users.FirstOrDefault(x => x.Id == user.Id).City;
                 model.jobs = db.Jobs.Include("UserOwner").Where(x=>x.UserOwner.Id==userID).ToList();
                 model.Subs = db.Jobs.Include("UserOwner").Where(x => x.subscribers.FirstOrDefault(y=>y.Id==userID)!=null).ToList();
                 model.AvaPath = user.AvaPath;
@@ -249,7 +258,14 @@ namespace BLLViews.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            var model = new RegisterViewModel();
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                foreach (var el in db.Cities)
+                    model.ListCities.Add(new SelectListItem() { Text = el.Name, Value = el.Id.ToString() });
+            }
+
+            return View(model);
         }
 
         //
@@ -259,26 +275,32 @@ namespace BLLViews.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-           
+
             if (ModelState.IsValid)
             {
-                var ava = @"https://static.thenounproject.com/png/17241-200.png";
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, AvaPath=ava };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
 
-                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-     
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code },
-                               protocol: Request.Url.Scheme);
-                    UserManager.AddToRole(user.Id, "User");
-                    await UserManager.SendEmailAsync(user.Id, "Email Confirmation"+DateTime.Now,
-                               "To complete registration, go to the link:: <a href=\""
-                                                               + callbackUrl + "\">complete the registration </a>");
-                    return RedirectToAction("Login","Account");
+                using (ApplicationDbContext db = new ApplicationDbContext())
+                {
+                       var city =    db.Cities.FirstOrDefault(x => x.Id == model.CityID);
+
+                    var ava = @"https://static.thenounproject.com/png/17241-200.png";
+                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, AvaPath = ava, FullName = model.FullName, City = city };
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+
+                        var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+
+                        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code },
+                                   protocol: Request.Url.Scheme);
+                        UserManager.AddToRole(user.Id, "User");
+                        await UserManager.SendEmailAsync(user.Id, "Email Confirmation" + DateTime.Now,
+                                   "To complete registration, go to the link:: <a href=\""
+                                                                   + callbackUrl + "\">complete the registration </a>");
+                        return RedirectToAction("Login", "Account");
+                    }
+                    AddErrors(result);
                 }
-                AddErrors(result);
             }
             return View();
         }
