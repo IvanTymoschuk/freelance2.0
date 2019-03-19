@@ -42,119 +42,100 @@
     <h1> CreateAdvertisment</h1>
 
 </div>
-<div class="float-left" style="width : 40%;">
-    <div class="stMenuleft">
-        <a class="button stMenuleft" style="height:70px " id="context_toggle"><h6><span class="mif-warning ani-flash"></span> Before you add your advertisement you must do few this requirements:<span class="mif-warning ani-flash"></span></h6>  </a>
-        <ul class="d-menu  " data-role="dropdown" data-toggle-element="#context_toggle">
-            @*class="context"*@ 
-            @*IF add this context to ul class span and href will be in 1 line*@
-            <li class="stli"> <div class="container"><div class="row"><span class="mif-user icon"></span>@Html.ActionLink("You must be logged in.", "Login", "Account") </div> </div> </li>
-            <li class="stli"> <div class="container"><div class="row"><span class="mif-profile icon"></span>@Html.ActionLink("You must fill all your profile.", "Index", "Manage") </div> </div> </li>
-            <li class="stli"> <div class="container"><div class="row"><span class="mif-mail icon"></span>@Html.ActionLink("You must confirm your e-mail.", "Register", "Account") </div> </div> </li>
-            <li class="divider"></li>
-            <li class="stli"> <div class="container"><div class="row"><span class="mif-books icon"></span>@Html.ActionLink("Example AD.", "Index", "Home") </div> </div> </li>
-            <li class="stli"> <div class="container"><div class="row"><span class="mif-help icon"></span>@Html.ActionLink("Help", "MyTickets", "Support") </div> </div> </li>
-        </ul>
-    </div>
-    @*<h3> Before you add your advertisement you must do few this requirements:</h3>
-        <ul>
-            <li>You must be logged in.</li>
-            <li>You must confirm your e-mail.</li>
-            <li>You must be registered on the site for more than a week.</li>
-        </ul>*@
-</div>
+
 
 @using (Html.BeginForm("CreateJobs", "Home", FormMethod.Post))
 {
-<div class="float-left" style="width: 55%; ">
-    <div class="card">
-        <div class="card-header stTextCardHead">
-            <p> <h5> In this field, you must enter Name your project or job.</h5></p>
+<div class="text-center  container">
+    <div class="h-center">
+        <div class="card">
+            <div class="card-header stTextCardHead">
+                <p> <h5> In this field, you must enter Name your project or job.</h5></p>
+            </div>
+            <div class="card-content p-2">
+                @*@Html.TextBoxFor(x =>x.jobs, new { @class = "stCardInput", data_role = "input", data_prepend = "Name project or task: " })*@
+                @*@Html.TextBoxFor(model => Model.jobs.ID, new { @type = "hidden" })*@ @*<input class="stCardInput " maxlength="3000" id="Name" Name="Name" type="text" data-role="input" data-prepend="Name project or task: ">*@
+                @Html.TextBoxFor(model => Model.Name, new { @class = "cell-12", data_role = "input" })
+            </div>
+            <div class="card-footer stTextCardFooter">
+                <p>You must fill thi field.</p> @*Valitation message*@
+            </div>
         </div>
-        <div class="card-content p-2">
-           @*@Html.TextBoxFor(x =>x.jobs, new { @class = "stCardInput", data_role = "input", data_prepend = "Name project or task: " })*@
-            @*@Html.TextBoxFor(model => Model.jobs.ID, new { @type = "hidden" })*@ @*<input class="stCardInput " maxlength="3000" id="Name" Name="Name" type="text" data-role="input" data-prepend="Name project or task: ">*@
-            @Html.TextBoxFor(model => Model.Name, new { @class = "cell-12", data_role = "input", data_prepend = "Name project or task: " })
-        </div>
-        <div class="card-footer stTextCardFooter">
-            <p>You must fill thi field.</p> @*Valitation message*@
-        </div>
-    </div> 
 
-    <div class="card">
-        <div class="card-header stTextCardHead">
-            <p> <h5> In this field, you must enter short Description about the job or the task.</h5></p>
+        <div class="card">
+            <div class="card-header stTextCardHead">
+                <p> <h5> In this field, you must enter short Description about the job or the task.</h5></p>
+            </div>
+            <div class="card-content p-2">
+                @Html.TextBoxFor(x => x.Description, new { @class = "stCardInput", maxlength = "3000", id = "Description", Name = "Description", type = "text", data_role = "input" })
+                @* <input class="stCardInput" maxlength="3000" id="Description" Name="Description" type="text" data-role="input" data-prepend="Description of project or task: ">*@
+            </div>
+            <div class="card-footer stTextCardFooter">
+                <p>The text should be less than 30000 symbols.</p> @*Valitation message*@
+            </div>
         </div>
-        <div class="card-content p-2">
-           @Html.TextBoxFor(x => x.Description, new { @class = "stCardInput", maxlength = "3000", id = "Description", Name = "Description", type = "text", data_role = "input", data_prepend = "Description of project or task: " })
-           @* <input class="stCardInput" maxlength="3000" id="Description" Name="Description" type="text" data-role="input" data-prepend="Description of project or task: ">*@
+
+        <div class="card">
+            <div class="card-header stTextCardHead">
+                <p> <h5> In this field, you must select the category in which your job or task belongs.</h5></p>
+            </div>
+            <div class="card-content p-2">
+
+                @Html.DropDownListFor(x => x.CategoryID, new SelectList(Model.Categories, "Value", "Text"), new { data_role = "select" })
+
+            </div>
+            <div class="card-footer stTextCardFooter">
+                <p>You must selecte category</p> @*Valitation message*@
+            </div>
         </div>
-        <div class="card-footer stTextCardFooter">
-            <p>The text should be less than 30000 symbols.</p> @*Valitation message*@
+
+        <div class="card">
+            <div class="card-header stTextCardHead">
+                <p><h5> In this field, you must select the City in which your job or task will be create.</h5></p>
+            </div>
+            <div class="card-content p-2">
+
+                @Html.DropDownListFor(x => x.CityID, new SelectList(Model.Cities, "Value", "Text"), new { data_role = "select" })
+
+            </div>
+            <div class="card-footer stTextCardFooter">
+                @*@Html.ValidationMessageFor(x => x.Cities)*@<p>You must selecte city</p> @*Valitation message*@
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header stTextCardHead">
+                <p><h5> In this field, you must enter the date when you posted this Ad </h5></p>
+            </div>
+            <div class="card-content p-2">
+                @Html.TextBoxFor(Model => Model.date, new { type = "text", data_years_before = "0", data_input_format = "%d/%m/%y", data_role = "calendarpicker" })
+                @* <input class="stCardInput" maxlength="3000" id="Date" Name="Date" type="date" data-role="input" data-prepend="Enter the date for which the project will be created : ">*@
+            </div>
+            <div class="card-footer stTextCardFooter">
+                <p>You must selecte date</p> @*Valitation message*@
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header stTextCardHead">
+                <p> <h5> In this field, you must enter salary in your job or task.</h5></p>
+            </div>
+            <div class="card-content p-2">
+
+                @Html.TextBoxFor(x => x.Salary, new { type = "text", data_role = "spinner", data_min_value = "5", data_max_value = "100000" })
+
+            </div>
+            <div class="card-footer stTextCardFooter">
+                <p>The salary should be more than 5 unit of any currency</p> @*Valitation message*@
+            </div>
         </div>
     </div>
 
-    <div class="card">
-        <div class="card-header stTextCardHead">
-            <p> <h5> In this field, you must select the category in which your job or task belongs.</h5></p>
-        </div>
-        <div class="card-content p-2">
-
-         @Html.DropDownListFor(x => x.CategoryID, new SelectList(Model.Categories, "Value", "Text"), new { data_role = "select" })
-
-        </div>
-        <div class="card-footer stTextCardFooter">
-            <p>You must selecte category</p> @*Valitation message*@
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-header stTextCardHead">
-            <p><h5> In this field, you must select the City in which your job or task will be create.</h5></p>
-        </div>
-        <div class="card-content p-2">
-
-            @Html.DropDownListFor(x => x.CityID, new SelectList(Model.Cities, "Value", "Text"), new { data_role = "select" })
-
-        </div>
-        <div class="card-footer stTextCardFooter">
-            @*@Html.ValidationMessageFor(x => x.Cities)*@<p>You must selecte city</p> @*Valitation message*@
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-header stTextCardHead">
-            <p><h5> In this field, you must enter the date when you posted this Ad </h5></p>
-        </div>
-        <div class="card-content p-2">
-            @Html.TextBoxFor(Model => Model.date, new {type="text",	data_years_before="0",  data_input_format="%d/%m/%y", data_role="calendarpicker", data_prepend = "Enter the date for which the project will be created : " })
-           @* <input class="stCardInput" maxlength="3000" id="Date" Name="Date" type="date" data-role="input" data-prepend="Enter the date for which the project will be created : ">*@
-        </div>
-        <div class="card-footer stTextCardFooter">
-            <p>You must selecte date</p> @*Valitation message*@
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-header stTextCardHead">
-            <p> <h5> In this field, you must enter salary in your job or task.</h5></p>
-        </div>
-        <div class="card-content p-2">
-
-            @Html.TextBoxFor(x => x.Salary, new { type = "text", data_role = "spinner", data_min_value = "5", data_max_value = "100000", data_prepend = "Salary of project or task: " })
-
-        </div>
-        <div class="card-footer stTextCardFooter">
-            <p>The salary should be more than 1 unit of any currency</p> @*Valitation message*@
-        </div>
-    </div>
-
-
-    <div class="text-center">
+    <div class="text-center pos-top-center">
         <div class="row">
             <div class="cell-3">
 
             </div>
-            <button class="button alert outline cell-6 stbutt">Add new AD</button>
+            <button class="button alert outline cell-11 h-center stbutt">Add new AD</button>
             <div class="cell-3">
 
             </div>

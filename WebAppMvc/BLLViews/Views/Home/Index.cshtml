@@ -37,8 +37,6 @@
     .stdivborder {
         border-left: 4px double black;
         border-left-color: red;
-        padding: 10px;
-        height: 100px;
     }
 
     .img {
@@ -68,7 +66,7 @@
 </style>
 <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@4.1.1/dist/simpleParallax.min.js"></script>
 
-<img class="parallax-container" src="~/Content/SiteImages/mainback.jpg" />
+<img class="parallax-container container-fluid" src="~/Content/SiteImages/mainback.jpg" />
 <p>
     <h1 class="main-h text-center">
         Hire workers.<br />
@@ -88,24 +86,28 @@
     </div>
 </div>
 <hr />
-<div class=" text-center">
-    <div class="float-left" style="width:20%;">
-        <p>
-            <h3>
-                Hire for any scope
-                of work:
-            </h3>
-        </p>
+<div class="text-center">
+    <p>
+        <h3>
+            Hire for any scope
+            of work:
+        </h3>
+    </p>
+</div>
+<div class=" text-center h-center row container">
+  
+
+    <div class=" cell-12 cell-md-3 ">
+        <div>
+            <h4>
+                Short-term tasks
+            </h4>
+            <p>
+                Build a pool of diverse experts for one-off tasks
+            </p>
+        </div>
     </div>
-    <div class="stdivborder float-left" style="width:20%;">
-        <h4>
-            Short-term tasks
-        </h4>
-        <p>
-            Build a pool of diverse experts for one-off tasks
-        </p>
-    </div>
-    <div class="stdivborder float-left" style="width:20%;">
+    <div class="cell-12 cell-md-3">
         <h4>
             Recurring projects
         </h4>
@@ -113,7 +115,8 @@
             Have a go-to team with specialized skills
         </p>
     </div>
-    <div class="stdivborder float-left" style="width:20%;">
+    <hr />
+    <div class="cell-12 cell-md-3">
         <h4>
             Full-time contract work
         </h4>
@@ -121,7 +124,7 @@
             Expand your staff with a dedicated team
         </p>
     </div>
-    <div class="stdivborder float-left" style="width:20%;">
+    <div class="cell-12 cell-md-3">
         <h4>
             Contract with freelancers.
         </h4>
@@ -143,69 +146,71 @@
         <button class="button alert outline left-button"> How it works</button>  @*disabled*@
     </div>
     <hr />
-    <div class="float-left" style="width:25%;">
-        <div class="card image-header img stbordercards">
-            <div class="card-header fg-white"
-                 style="background-image: url(https://www.upwork.com/ab/assets/Adquiro/9eefcd5/wp/images/item1.b82e85601f00.svg)">
+    <div class="row">
+        <div class="cell-12 cell-md-3">
+            <div class="card image-header img stbordercards">
+                <div class="card-header fg-white"
+                     style="background-image: url(https://www.upwork.com/ab/assets/Adquiro/9eefcd5/wp/images/item1.b82e85601f00.svg)">
 
-            </div>
-            <div class="card-content p-2">
-                <p>Post a job(it’s free)</p>
+                </div>
+                <div class="card-content p-2">
+                    <p>Post a job(it’s free)</p>
 
-            </div>
-            <div class="card-footer">
-                Tell us about your project. Upwork connects you with top talent around the world, or near you.
+                </div>
+                <div class="card-footer">
+                    Tell us about your project. Upwork connects you with top talent around the world, or near you.
+                </div>
             </div>
         </div>
-    </div>
-    <div class="float-left" style="width:25%;">
-        <div class="card image-header img stbordercards">
-            <div class="card-header fg-white"
-                 style="background-image: url(https://www.upwork.com/ab/assets/Adquiro/9eefcd5/wp/images/item2.6d8f26d2ef92.svg)">
+        <div class="cell-12 cell-md-3">
+            <div class="card image-header img stbordercards">
+                <div class="card-header fg-white"
+                     style="background-image: url(https://www.upwork.com/ab/assets/Adquiro/9eefcd5/wp/images/item2.6d8f26d2ef92.svg)">
 
-            </div>
-            <div class="card-content p-2">
-                <p>Freelancers come to you</p>
+                </div>
+                <div class="card-content p-2">
+                    <p>Freelancers come to you</p>
 
-            </div>
-            <div class="card-footer">
-                Get qualified proposals within 24 hours. Compare bids, reviews, and prior work.
-            </div>
-        </div>
-    </div>
-    <div class="float-left" style="width:25%;">
-        <div class="card image-header img stbordercards ">
-            <div class="card-header fg-white"
-                 style="background-image: url(https://www.upwork.com/ab/assets/Adquiro/9eefcd5/wp/images/item3.325b8bf8553d.svg)">
-
-            </div>
-            <div class="card-content p-2">
-                <p>Collaborate easily</p>
-
-            </div>
-            <div class="card-footer">
-                Use Upwork to chat or video call, share files, and track project milestones from your desktop or mobile.
+                </div>
+                <div class="card-footer">
+                    Get qualified proposals within 24 hours. Compare bids, reviews, and prior work.
+                </div>
             </div>
         </div>
-    </div>
-    <div class="float-left" style="width:25%;">
-        <div class="card image-header img stbordercards">
-            <div class="card-header fg-white"
-                 style="background-image: url(https://www.upwork.com/ab/assets/Adquiro/9eefcd5/wp/images/item4.f6b3affd28b3.svg)">
+        <div class="cell-12 cell-md-3">
+            <div class="card image-header img stbordercards ">
+                <div class="card-header fg-white"
+                     style="background-image: url(https://www.upwork.com/ab/assets/Adquiro/9eefcd5/wp/images/item3.325b8bf8553d.svg)">
 
-            </div>
-            <div class="card-content p-2">
-                <p>Payment simplified</p>
+                </div>
+                <div class="card-content p-2">
+                    <p>Collaborate easily</p>
 
-            </div>
-            <div class="card-footer">
-                Pay hourly or fixed-price and receive invoices through Upwork. Only pay for work you authorize.
+                </div>
+                <div class="card-footer">
+                    Use Upwork to chat or video call, share files, and track project milestones from your desktop or mobile.
+                </div>
             </div>
         </div>
+        <div class="cell-12 cell-md-3">
+            <div class="card image-header img stbordercards">
+                <div class="card-header fg-white"
+                     style="background-image: url(https://www.upwork.com/ab/assets/Adquiro/9eefcd5/wp/images/item4.f6b3affd28b3.svg)">
+
+                </div>
+                <div class="card-content p-2">
+                    <p>Payment simplified</p>
+
+                </div>
+                <div class="card-footer">
+                    Pay hourly or fixed-price and receive invoices through Upwork. Only pay for work you authorize.
+                </div>
+            </div>
+        </div>
+
+
+
     </div>
-
-
-
 </div>
 <hr />
 <div class="container text-center">
@@ -213,114 +218,116 @@
         <button class="button alert outline left-button stbutt">Choose the offering that works best for you</button>
     </div>
     <hr />
-    <div class="float-left" style="width:25%">
-        <div class="card stbordercards">
-            <div class="card-header stcard2">
-                <div style="height:73px;">
-                    <h4>Basic</h4>
-                    <p>
-                        The essentials to start hiring, today.
-                    </p>
+    <div class="row">
+        <div class="cell-12 cell-md-3">
+            <div class="card stbordercards">
+                <div class="card-header stcard2">
+                    <div style="height:73px;">
+                        <h4>Basic</h4>
+                        <p>
+                            The essentials to start hiring, today.
+                        </p>
+                    </div>
+                    <button style="margin-top:15%" disabled class="button alert outline stbuttCard2">Selected</button>
+
+                    <h6 class="text-center">Free</h6>
                 </div>
-                <button style="margin-top:15%" disabled class="button alert outline stbuttCard2">Selected</button>
+                <div class="card-content p-2 stcard2">
+                    <p><span class="mif-checkmark fg-green"></span> <a> Verified freelancer work history and reviews</a></p>
+                    <p><span class="mif-checkmark fg-green"></span> <a> Unlimited proposals from freelancers </a></p>
+                    <p><span class="mif-checkmark fg-green"></span> <a> Built-in collaboration tools and easy payments</a></p>
 
-                <h6 class="text-center">Free</h6>
-            </div>
-            <div class="card-content p-2 stcard2">
-                <p><span class="mif-checkmark fg-green"></span> <a> Verified freelancer work history and reviews</a></p>
-                <p><span class="mif-checkmark fg-green"></span> <a> Unlimited proposals from freelancers </a></p>
-                <p><span class="mif-checkmark fg-green"></span> <a> Built-in collaboration tools and easy payments</a></p>
-
-            </div>
-
-        </div>
-    </div>
-    <div class="float-left" style="width:25%">
-        <div class="card stbordercards">
-            <div class="card-header stcard2">
-                <div style="height:73px;">
-                    <h4>Plus</h4>
-                    <p>
-                        For teams looking to stand out to quality talent and scale hiring fast.
-                    </p>
                 </div>
-                @if (!User.IsInRole("Plus"))
-                {
-                    @Ajax.ActionLink("Select Plus", "BuyStatus", "Account", new { id = 1 }, new AjaxOptions { OnFailure = "ErrorJS", OnSuccess = "RolesUpdated", OnBegin = "LoaderJS", OnComplete = "HideLoaderJS" }, new { style = "margin-top:15%", @class = "button alert outline stbuttCard2" })
-                }
-                else
-                {
-                    <button style="margin-top:15%" disabled class="button alert outline stbuttCard2">  Selected </button>
-                }
-
-                <h6 class="text-center">$49.99/month*</h6>
-            </div>
-            <div class="card-content p-2 stcard2">
-                <p class="fg-gray">Everything in Basic, and:</p>
-                <p><span class="mif-checkmark fg-green"></span> <a> Dedicated account managers to help you find and hire quality talent fast</a></p>
-                <p><span class="mif-checkmark fg-green"></span> <a> Project tracking and collaboration tools for teams </a></p>
-                <p><span class="mif-checkmark fg-green"></span> <a> Tailored search results featuring Top Rated and Rising Talent</a></p>
 
             </div>
-
         </div>
-    </div>
-    <div class="float-left" style="width:25%">
-        <div class="card stbordercards">
-            <div class="card-header stcard2">
-                <div style="height:73px;">
-                    <h4>Business</h4>
-                    <p>
-                        For businesses looking for a flexible talent solution that scales with them.
-                    </p>
+        <div class="cell-12 cell-md-3">
+            <div class="card stbordercards">
+                <div class="card-header stcard2">
+                    <div style="height:73px;">
+                        <h4>Plus</h4>
+                        <p>
+                            For teams looking to stand out to quality talent and scale hiring fast.
+                        </p>
+                    </div>
+                    @if (!User.IsInRole("Plus"))
+                    {
+                        @Ajax.ActionLink("Select Plus", "BuyStatus", "Account", new { id = 1 }, new AjaxOptions { OnFailure = "ErrorJS", OnSuccess = "RolesUpdated", OnBegin = "LoaderJS", OnComplete = "HideLoaderJS" }, new { style = "margin-top:15%", @class = "button alert outline stbuttCard2" })
+                    }
+                    else
+                    {
+                        <button style="margin-top:15%" disabled class="button alert outline stbuttCard2">  Selected </button>
+                    }
+
+                    <h6 class="text-center">$49.99/month*</h6>
                 </div>
-                @if (!User.IsInRole("Business"))
-                {
-                    @Ajax.ActionLink("Select Business", "BuyStatus", "Account", new { id = 2 }, new AjaxOptions {OnFailure = "ErrorJS", OnSuccess = "RolesUpdated", OnBegin = "LoaderJS", OnComplete = "HideLoaderJS" }, new { style = "margin-top:15%", @class = "button alert outline stbuttCard2" })
-                }
-                else
-                {
-            <button style="margin-top:15%" disabled class="button alert outline stbuttCard2"> Selected </button>
-                }
+                <div class="card-content p-2 stcard2">
+                    <p class="fg-gray">Everything in Basic, and:</p>
+                    <p><span class="mif-checkmark fg-green"></span> <a> Dedicated account managers to help you find and hire quality talent fast</a></p>
+                    <p><span class="mif-checkmark fg-green"></span> <a> Project tracking and collaboration tools for teams </a></p>
+                    <p><span class="mif-checkmark fg-green"></span> <a> Tailored search results featuring Top Rated and Rising Talent</a></p>
 
-
-                <h6 class="text-center">$499/month**</h6>
-            </div>
-            <div class="card-content p-2 stcard2">
-                <p class="fg-gray">Everything in Plus, and:</p>
-                <p><span class="mif-checkmark fg-green"></span> <a> Consolidated billing and invoicing with net 30 pay</a></p>
-                <p><span class="mif-checkmark fg-green"></span> <a> Dedicated team of advisors to get you hiring faster and more successfully </a></p>
-                <p><span class="mif-checkmark fg-green"></span> <a> Detailed reporting with company insights and trends</a></p>
-
-            </div>
-
-        </div>
-    </div>
-    <div class="float-left" style="width:25%">
-        <div class="card stbordercards">
-            <div class="card-header stcard2">
-                <div style="height:73px;">
-                    <h4>Enterprise</h4>
-                    <p>
-                        For companies looking for a solution that fits into their workforce program.
-                    </p>
                 </div>
-                @Html.ActionLink("Select Enterprise", "MyTickets", "Support", null, new { style = "margin-top:15%", @class = "button alert outline stbuttCard2" })
-
-                <h6 class="text-center">@Html.ActionLink("Price varies - contact us for a demo", "AboutContactUs", "Home", new { @class = "fg-white fg-red-hover" }) </h6>
-            </div>
-            <div class="card-content p-2 stcard2">
-                <p class="fg-gray">Everything in Business, and:</p>
-                <p><span class="mif-checkmark fg-green"></span> <a> Custom configurable contracting and onboarding process</a></p>
-                <p><span class="mif-checkmark fg-green"></span> <a> Worker classification compliance services </a></p>
-                <p><span class="mif-checkmark fg-green"></span> <a> Project-based or managed solutions, and dedicated account executive</a></p>
 
             </div>
-
         </div>
+        <div class="cell-12 cell-md-3">
+            <div class="card stbordercards">
+                <div class="card-header stcard2">
+                    <div style="height:73px;">
+                        <h4>Business</h4>
+                        <p>
+                            For businesses looking for a flexible talent solution that scales with them.
+                        </p>
+                    </div>
+                    @if (!User.IsInRole("Business"))
+                    {
+                        @Ajax.ActionLink("Select Business", "BuyStatus", "Account", new { id = 2 }, new AjaxOptions { OnFailure = "ErrorJS", OnSuccess = "RolesUpdated", OnBegin = "LoaderJS", OnComplete = "HideLoaderJS" }, new { style = "margin-top:15%", @class = "button alert outline stbuttCard2" })
+                    }
+                    else
+                    {
+                        <button style="margin-top:15%" disabled class="button alert outline stbuttCard2"> Selected </button>
+                    }
+
+
+                    <h6 class="text-center">$499/month**</h6>
+                </div>
+                <div class="card-content p-2 stcard2">
+                    <p class="fg-gray">Everything in Plus, and:</p>
+                    <p><span class="mif-checkmark fg-green"></span> <a> Consolidated billing and invoicing with net 30 pay</a></p>
+                    <p><span class="mif-checkmark fg-green"></span> <a> Dedicated team of advisors to get you hiring faster and more successfully </a></p>
+                    <p><span class="mif-checkmark fg-green"></span> <a> Detailed reporting with company insights and trends</a></p>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="cell-12 cell-md-3">
+            <div class="card stbordercards">
+                <div class="card-header stcard2">
+                    <div style="height:73px;">
+                        <h4>Enterprise</h4>
+                        <p>
+                            For companies looking for a solution that fits into their workforce program.
+                        </p>
+                    </div>
+                    @Html.ActionLink("Select Enterprise", "MyTickets", "Support", null, new { style = "margin-top:15%", @class = "button alert outline stbuttCard2" })
+
+                    <h6 class="text-center">@Html.ActionLink("Price varies - contact us for a demo", "AboutContactUs", "Home", new { @class = "fg-white fg-red-hover" }) </h6>
+                </div>
+                <div class="card-content p-2 stcard2">
+                    <p class="fg-gray">Everything in Business, and:</p>
+                    <p><span class="mif-checkmark fg-green"></span> <a> Custom configurable contracting and onboarding process</a></p>
+                    <p><span class="mif-checkmark fg-green"></span> <a> Worker classification compliance services </a></p>
+                    <p><span class="mif-checkmark fg-green"></span> <a> Project-based or managed solutions, and dedicated account executive</a></p>
+
+                </div>
+
+            </div>
+        </div>
+
     </div>
-
-
 
 
 

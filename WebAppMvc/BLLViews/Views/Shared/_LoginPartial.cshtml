@@ -1,5 +1,7 @@
 ﻿@model BLLViews.Models.GetUserInfo
-
+<style>
+   
+</style>
 <aside class="sidebar pos-absolute z-2  bg-black" data-role="sidebar" data-toggle="#sidebar-toggle-2" id="sb2" data-shift=".shifted-content">
     <br />
     <br />
@@ -28,11 +30,10 @@
                 @Html.ActionLink("Profile", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
 
             </li>
-            <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">@Html.ActionLink("CreateJobs", "CreateJobs", "Home")</li>
             <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">
                 <a href="~/support/MyTickets"> Support</a>
             </li>
-            <li class="divider"></li>
+            <li class="divider fg-red bg-red"></li>
             if (User.IsInRole("Admin") || User.IsInRole("Support") || User.IsInRole("Banned"))
             {
                 <li class="group-title fg-white">Pannels</li>
@@ -57,7 +58,7 @@
 
         }
 
-        <li class="divider"></li>
+        <li class="divider fg-red bg-red"></li>
 
         <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">
             @Html.AntiForgeryToken()

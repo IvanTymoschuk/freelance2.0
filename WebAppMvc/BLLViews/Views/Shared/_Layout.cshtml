@@ -25,9 +25,7 @@
         }
 
 
-        .app-bar-menu li {
-            list-style: none !important;
-        }
+
     </style>
 </head>
 <body id="TableUsers">
@@ -37,17 +35,19 @@
 
 
 
+        <div style="margin-left:50px"></div>
 
-        @Html.ActionLink("Pen.Guin","Index","Home",new {@class="fg-white fg-red-hover" })
-            <span>
-               <sup>.com</sup>
+        <a href="#" class="fg-white" id="sidebar-toggle-2" style="text-decoration:none">
+            <span >
+                Pen.Guin
+                <sup>.com</sup>
             </span>
-    
+        </a>
+
 
         <ul class="app-bar-menu">
             <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">@Html.ActionLink("Home", "Index", "Home")</li>
-       
-            <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">@Html.ActionLink("Get Job", "JobsList", "Home")</li>
+
             <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';"> @Html.ActionLink("About", "About", "Home")</li>
             <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">
                 @if (User.IsInRole("Banned"))
@@ -58,15 +58,12 @@
         </ul>
         @if (User.Identity.IsAuthenticated)
         {
-            <ul class="app-bar-menu" ><li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">@Html.ActionLink("Jobs", "JobsList", "Home")</li>
-                                      <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">@Html.ActionLink("Create Job", "CreateJobs", "Home")</li>
-        
-        
-        </ul>
-            <button class="button pos-absolute pos-right-center bg-black"
-                    id="sidebar-toggle-2">
-                <span class="mif-menu"></span>
-            </button>
+            <ul class="app-bar-menu">
+                <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">@Html.ActionLink("Jobs", "JobsList", "Home")</li>
+                <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">@Html.ActionLink("Create Job", "CreateJobs", "Home")</li>
+
+
+            </ul>
         }
         else
         {

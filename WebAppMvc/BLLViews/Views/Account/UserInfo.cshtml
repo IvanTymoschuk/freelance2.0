@@ -4,7 +4,12 @@
     ViewBag.Title = "User";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+    <style>
+    .table-container {
+  width: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}</style>
 
     <div class="container">
         <h3 class="text-center text-bold">@Model.user.FullName</h3>
@@ -24,15 +29,15 @@
                 <h3>Statistic</h3>
                 <hr />
                 <div class="row">
-                    <div class="cell-2">
+                    <div class="cell-12 cell-md-2">
                         <p style="font-size:20px">City: @Model.user.City.Name</p>
                         <p style="font-size:20px">Rating: @Model.user.Raiting @*<input data-role="rating" data-star-color="red" data-static="true" data-value="@Model.user.Raiting">*@</p>
                     </div>
-                    <div class="cell-3">
+                    <div class="cell-md-3 cell-12 ">
                         <p style="font-size:20px">count of projects : @Model.jobs.Count</p>
                         <p style="font-size:20px"> projects subscribeds : @Model.Subs.Count</p>
                     </div>
-                    <div class="cell-7">
+                    <div class="cell-md-7 cell-12 ">
                         @if (User.Identity.IsAuthenticated)
                         {
                             <p style="font-size:20px">Phone : @Model.user.PhoneNumber</p>
@@ -59,7 +64,7 @@
                     </ul>
                     <div class="border bd-default no-border-top p-2">
                         <div id="MyJobs">
-                            <table class="table"
+                            <table class="table table-container"
                                    data-role="table"
                                    data-show-search="false"
                                    data-show-rows-steps="false"
@@ -87,7 +92,7 @@
                             </table>
                         </div>
                         <div id="MySubs">
-                            <table class="table"
+                            <table class="table table-container"
                                    data-role="table"
                                    data-show-search="false"
                                    data-show-rows-steps="false"

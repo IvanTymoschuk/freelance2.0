@@ -1,39 +1,30 @@
 ﻿@{
     ViewBag.Title = "AboutContactUs";
 }
-<style>
-    .stmenu {
-        margin-left: 40%;
-        margin-right: 41%;
-        width: 358px;
-    }
 
-    .stText {
-        margin-left: 20%;
-        margin-right: 20%;
-    }
-    .stbordercards {
-        border: 4px thin black;
-        border-color: red;
-        padding: 10px;
-    }
-</style>
 <div class="text-center">
     <h1>Contact Pen.Guin</h1>
     <h4>All information about our team</h4>
 </div>
-<div class="text-center stmenu ">
-    <ul class="h-menu">
-        <li>@Html.ActionLink("About Us", "About", "Home")</li>
-        <li>@Html.ActionLink("Carrers", "AboutCarrers", "Home")</li>
-       
-        <li>@Html.ActionLink("Press", "AboutPress", "Home")</li>
-        <li>@Html.ActionLink("ContactUs", "AboutContactUs", "Home")</li>
-    </ul>
+<br />
+<br />
+<div class="container row h-center">
+    <div class="pos-center stmenu cell-12 cell-md-10 h-center">
+        <ul class="h-menu">
+            <li>@Html.ActionLink("About Us", "About", "Home")</li>
+            <li>@Html.ActionLink("Carrers", "AboutCarrers", "Home")</li>
+
+            <li>@Html.ActionLink("Press", "AboutPress", "Home")</li>
+            <li>@Html.ActionLink("ContactUs", "AboutContactUs", "Home")</li>
+        </ul>
+    </div>
 </div>
-<div class="stText text-center">
-    <h2>Our offices</h2>
-    <div style="width:30%;" class="float-left ">
+<br />
+<h2 class="text-center">Our offices</h2>
+<br />
+<div class="row container h-center text-center">
+
+    <div class="cell-10 cell-md-4">
         <div class="card image-header stbordercards">
             <div class="card-header fg-white"
                  style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfPWzIUamKMPlQRn1MIMBq8_TfiFSU7A8AErlxokdXrqLS6pSOVQ)">
@@ -48,7 +39,8 @@
             </div>
         </div>
     </div>
-    <div style="width:30%;" class="float-left ">
+
+    <div class="cell-10 cell-md-4">
         <div class="card image-header stbordercards">
             <div class="card-header fg-white"
                  style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfPWzIUamKMPlQRn1MIMBq8_TfiFSU7A8AErlxokdXrqLS6pSOVQ)">
@@ -63,7 +55,8 @@
             </div>
         </div>
     </div>
-    <div style="width:35%;" class="float-left ">
+
+    <div class="cell-10 cell-md-4">
         <div class="card image-header stbordercards">
             <div class="card-header fg-white"
                  style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfPWzIUamKMPlQRn1MIMBq8_TfiFSU7A8AErlxokdXrqLS6pSOVQ)">
@@ -78,29 +71,30 @@
             </div>
         </div>
     </div>
-    <h2>Developers contacts</h2>
+</div>
+<br />
+
+<h2 class="text-center">Developers contacts</h2>
+<div class="container h-center">
     <div class="text-center">
 
         <ul data-role="listview" data-view="icons-medium">
-            
-            <li class="text-left" data-caption="GitHub our developers">
+
+            <li class="text-center" data-caption="GitHub our developers">
                 <ul>
-                   
-                    <li style="width: 20%;" data-icon="<span class='mif-github fg-green'>"><a href="https://github.com/IvanTymoschuk">Ivan Tymoschuk</a></li>
-                    <li style="width: 20%;" data-icon="<span class='mif-github fg-cyan'>"><a href="https://github.com/AnonimVadim">Vadim Boyarchuk</a></li>
-                    <li style="width: 20%;" data-icon="<span class='mif-github fg-green'>"><a href="https://github.com/Andriy22">Andriy Alexandruk</a></li>
+                    <li style="width: 40%;" data-icon="<span class='mif-github fg-cyan'>"><a href="https://github.com/AnonimVadim">Vadim Boyarchuk</a></li>
+                    <li style="width: 40%;" data-icon="<span class='mif-github fg-green'>"><a href="https://github.com/Andriy22">Andriy Alexandruk</a></li>
                 </ul>
             </li>
-           
-            <li class="text-left"  data-caption="E-mail our developers">
+
+            <li class="text-center" data-caption="E-mail our developers">
                 <ul>
-                    <li style="width: 20%;" data-icon="<span class='mif-google fg-green'>" data-caption="Ivan Tymoschuk">ivantymo99@gmail.com</li>
-                    <li style="width: 20%;" data-icon="<span class='mif-google fg-cyan'>" data-caption="Vadim Boyarchuk">vadimca1.boyarchuc@gmail.com</li>
-                    <li style="width: 20%;" data-icon="<span class='mif-google fg-green'>" data-caption="Andriy Alexandruk">istep.andriy@gmail.com</li>
+                    <li style="width: 40%;" data-icon="<span class='mif-google fg-cyan'>" data-caption="Vadim Boyarchuk">vadimca1.boyarchuc@gmail.com</li>
+                    <li style="width: 40%;" data-icon="<span class='mif-google fg-green'>" data-caption="Andriy Alexandruk">istep.andriy@gmail.com</li>
                 </ul>
             </li>
         </ul>
 
     </div>
-</div>
 
+    </div>

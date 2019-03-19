@@ -3,10 +3,17 @@
     ViewBag.Title = "_Users";
 
 }
-<table class="table  striped  table-border cell-border" id="Test1" data-role="table" data-show-activity="false" data-rownum="true">
+<style>
+    .table-container {
+  width: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+</style>
+<table class="table  striped table-container  table-border cell-border" id="Test1" data-role="table" data-show-activity="false" data-rownum="true">
     <thead>
         <tr>
-            <th>FullName</th>
+            <th class="d-none-fs d-block-md">FullName</th>
             <th>Username</th>
             <th>isBanned</th>
             <th>Actions</th>

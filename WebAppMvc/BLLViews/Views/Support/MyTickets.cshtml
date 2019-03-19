@@ -2,12 +2,19 @@
 @{
     ViewBag.Title = "Requests";
 }
+<style>
+    .table-container {
+        width: 100%;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+</style>
 <div class="container">
     <br />
     <h2 style="text-align:center">@ViewBag.Title</h2>
 
 
-    <table class="table">
+    <table class="table table-container">
         <thead>
             <tr>
                 <th>ID</th>

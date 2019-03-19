@@ -1,26 +1,18 @@
 ﻿@{
     ViewBag.Title = "AboutCarrers";
 }
-<style>
-    .stmenu {
-        margin-left: 40%;
-        margin-right: 41%;
-        width: 358px;
-    }
-    .stText{
-        margin-left:20%;
-        margin-right:20%;
-    }
-</style>
+
 <div class="text-center">
     <h1> Change how the world works</h1>
     <h4>Join our team as we redefine work</h4>
 </div>
-<div class="text-center stmenu ">
+<br />
+<br />
+<div class="pos-center stmenu cell-12 cell-md-10 h-center">
     <ul class="h-menu">
         <li>@Html.ActionLink("About Us", "About", "Home")</li>
         <li>@Html.ActionLink("Carrers", "AboutCarrers", "Home")</li>
-       
+
         <li>@Html.ActionLink("Press", "AboutPress", "Home")</li>
         <li>@Html.ActionLink("ContactUs", "AboutContactUs", "Home")</li>
     </ul>
@@ -30,111 +22,99 @@
 </div>
 <div class="stText">
     <div class="container">
-        <div style="width:30%;" class="float-left">
-            <p>
-                <div class="text-center"><a href="#"><span class="mif-earth mif-5x fg-green"></span> </a></div>
-                <h3>COME MAKE HISTORY</h3>
-                <br />
-                <h6>Help bring online work to every corner of the world.</h6>
-            </p>
-        </div>
-        <div style="width:30%;" class="float-left">
-            <p>
-                <div class="text-center"><a href="#"><span class="mif-organization mif-5x fg-green"></span> </a></div>
+        <div class="row">
+            <div class="cell-12 cell-md-3">
+                <p>
+                    <div class="text-center"><a href="#"><span class="mif-earth mif-5x fg-green"></span> </a></div>
+                    <h3>COME MAKE HISTORY</h3>
+                    <br />
+                    <h6>Help bring online work to every corner of the world.</h6>
+                </p>
+            </div>
+            <div class="cell-12 cell-md-3">
+                <p>
+                    <div class="text-center"><a href="#"><span class="mif-organization mif-5x fg-green"></span> </a></div>
 
-                <h3>DO STUFF YOU’RE PROUD OF</h3>
-                <h6>
-                    Be part of a fun and passionate crew reinventing an
-                    industry. Along the way you’ll draw a nice paycheck
-                    and work on projects that truly matter.
-                </h6>
-            </p>
-        </div>
-        <div style="width:35%;" class="float-left">
-            <p>
-                <div class="text-center"><a href="#"><span class="mif-grav mif-5x fg-green"></span> </a></div>
-                <h3>WHISTLE WHILE YOU WORK</h3>
-                <div style="margin-left:5px;">
+                    <h3>DO STUFF YOU’RE PROUD OF</h3>
                     <h6>
-                        Enjoy a healthy work/life balance, with great perks
-                        from free lunches and fun afternoon social activities to
-                        work-from-home Wednesdays.
+                        Be part of a fun and passionate crew reinventing an
+                        industry. Along the way you’ll draw a nice paycheck
+                        and work on projects that truly matter.
                     </h6>
-                </div>
-            </p>
+                </p>
+            </div>
+            <div class="cell-12 cell-md-3">
+                <p>
+                    <div class="text-center"><a href="#"><span class="mif-grav mif-5x fg-green"></span> </a></div>
+                    <h3>WHISTLE WHILE YOU WORK</h3>
+                    <div style="margin-left:5px;">
+                        <h6>
+                            Enjoy a healthy work/life balance, with great perks
+                            from free lunches and fun afternoon social activities to
+                            work-from-home Wednesdays.
+                        </h6>
+                    </div>
+                </p>
+            </div>
         </div>
     </div>
-    <div class="text-center">
+    <div class="text-center container">
         <h2>See what it's like to work for Pen.Guin</h2>
         <h4>Meet Pen.Guin Employees</h4>
-        <div style="width:30%;" class="float-left">
-            <div class="card image-header">
-                <div class="card-header fg-white"
-                     style="background-image: url(https://avatars0.githubusercontent.com/u/38703198?s=460&v=4)">
-                   
+        <div class="row text-center">
+            <div class="cell-10 cell-md-5">
+                <div class="card image-header">
+                    <div class="card-header fg-white"
+                         style="background-image: url(https://znaj.ua/crops/49558f/360x0/1/0/2018/05/20/571992-gallery-world.jpg)">
+                        Vadim
+                    </div>
+                    <div class="card-content p-2" style="height:140px;">
+                        <p class="fg-gray">Posted on March 03, 2019</p>
+                        Information.....
+                    </div>
+                    <div class="card-footer">
+                        <button class="button secondary">Read More</button>
+                    </div>
                 </div>
-                <div class="card-content p-2">
-                    <p class="fg-gray">Posted on March 03, 2019</p>
-                    This is a very intelligent and cheerful person who works in our company.
-                    He is very famous developer.We have met at the IT-academy then I have understanded that he would become very successful.
-                </div>
-                <div class="card-footer">
-                    <button class="button secondary">Read More</button>
+            </div>
+            <div class="cell-10 cell-md-5">
+                <div class="card image-header">
+                    <div class="card-header fg-white"
+                         style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0DbF65O-yX-1v0spr7hnD4gO1tJE0_lyWhfuZBH7XuZZcDW9jeQ)">
+                        Andriy
+                    </div>
+                    <div class="card-content p-2" style="height:140px;">
+                        <p class="fg-gray">Posted on March 03, 2019</p>
+                        Information.....
+                    </div>
+                    <div class="card-footer">
+                        <button class="button secondary">Read More</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <div style="width:30%;" class="float-left">
-            <div class="card image-header">
-                <div class="card-header fg-white"
-                     style="background-image: url(https://znaj.ua/crops/49558f/360x0/1/0/2018/05/20/571992-gallery-world.jpg)">
-                    Vadim
-                </div>
-                <div class="card-content p-2" style="height:140px;">
-                    <p class="fg-gray">Posted on March 03, 2019</p>
-                    Information.....
-                </div>
-                <div class="card-footer">
-                    <button class="button secondary">Read More</button>
-                </div>
-            </div>
-        </div>
-        <div style="width:30%;" class="float-left">
-            <div class="card image-header">
-                <div class="card-header fg-white"
-                     style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0DbF65O-yX-1v0spr7hnD4gO1tJE0_lyWhfuZBH7XuZZcDW9jeQ)">
-                    Andriy
-                </div>
-                <div class="card-content p-2" style="height:140px;">
-                    <p class="fg-gray">Posted on March 03, 2019</p>
-                    Information.....
-                </div>
-                <div class="card-footer">
-                    <button class="button secondary">Read More</button>
-                </div>
-            </div>
-        </div>
-
 
 
 
 
     </div>
-    <h2>Working Pen.Guin’s offices</h2>
-    <div data-role="carousel"
-         data-height="21/9"
-         data-cls-controls="fg-red"
-         data-cls-bullet="bullet-big"
-         data-cls-bullet-on="bg-red drop-shadow"
-         data-cls-slides="rounded"
-         data-control-next="<span class='mif-arrow-right'></span>"
-         data-control-prev="<span class='mif-arrow-left'></span>"
-         data-auto-start="true"
-         data-period="3000"
-         data-duration="1000">
-        <div class="slide" data-cover="https://steamuserimages-a.akamaihd.net/ugc/171540560021820766/86F30A69B052B7BF6A119966D17FB2345512E02F/"></div>
-        <div class="slide" data-cover="https://roadtovrlive-5ea0.kxcdn.com/wp-content/uploads/2018/11/spheres-1.jpg"></div>
-        <div class="slide" data-cover="https://cdn.pixabay.com/photo/2015/05/06/21/41/space-755811_960_720.jpg"></div>
-        <div class="slide" data-cover="https://www.adriaeco.eu/wp-content/uploads/2017/11/Spazio.jpg"></div>
+    <h2 class="text-center">Working Pen.Guin’s offices</h2>
+    <div class="container">
+        <div data-role="carousel"
+             data-height="21/9"
+             data-cls-controls="fg-red"
+             data-cls-bullet="bullet-big"
+             data-cls-bullet-on="bg-red drop-shadow"
+             data-cls-slides="rounded"
+             data-control-next="<span class='mif-arrow-right'></span>"
+             data-control-prev="<span class='mif-arrow-left'></span>"
+             data-auto-start="true"
+             data-period="3000"
+             data-duration="1000">
+            <div class="slide" data-cover="https://steamuserimages-a.akamaihd.net/ugc/171540560021820766/86F30A69B052B7BF6A119966D17FB2345512E02F/"></div>
+            <div class="slide" data-cover="https://roadtovrlive-5ea0.kxcdn.com/wp-content/uploads/2018/11/spheres-1.jpg"></div>
+            <div class="slide" data-cover="https://cdn.pixabay.com/photo/2015/05/06/21/41/space-755811_960_720.jpg"></div>
+            <div class="slide" data-cover="https://www.adriaeco.eu/wp-content/uploads/2017/11/Spazio.jpg"></div>
+        </div>
     </div>
-
 </div>
