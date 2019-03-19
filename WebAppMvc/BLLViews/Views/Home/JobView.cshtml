@@ -5,126 +5,94 @@
 }
 
 <style>
-    .main-container {
-        border: 2px solid darkred;
-    }
-
-    .avatar {
-        border-radius: 10px;
-    }
-
-    .user-info {
-        margin: 5px;
-        border-radius: 10px;
-        background-color: dimgray;
-    }
-
-    #mapid {
-        height: 180px;
-    }
-    .Subs
-    {
-         background-color:aliceblue;
-         color:black;
-    }
-    .stfieldEmail{
-        width:150px;
+    .table-container {
+        width: 100%;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
     }
 </style>
-<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
-<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.4/mapbox-gl-geocoder.min.js'></script>
-<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.4/mapbox-gl-geocoder.css' type='text/css' />
 
+<div class="container">
+    <h3 class="text-center text-bold">@Model.job.Name</h3>
+    <div class="row">
+        <div class="cell-12">
+            <br />
+            <h3 class="text-center">Owner INFO</h3>
+            <hr />
+            <div class="row">
+                <div class="img-container cell-2">
+                    <div data-role="panel" data-width="170" data-height="120">
+                        <img style="width:150px; height:100px" src="@Model.job.UserOwner.AvaPath">
+                        <div class="image-overlay op-black"></div>
+                    </div>
 
-<div class="container main-container">
+                </div>
+                <div class="cell-12 cell-md-3">
+                    <p style="font-size:20px">Name: @Model.job.UserOwner.FullName</p>
+                    <p style="font-size:20px">Project city: @Model.job.City.Name@*<input data-role="rating" data-star-color="red" data-static="true" data-value="@Model.user.Raiting">*@</p>
+                </div>
+                <div class="cell-md-7 cell-12 ">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <p style="font-size:20px">Phone : @Model.job.UserOwner.PhoneNumber</p>
+                        <p style="font-size:20px">Email : @Model.job.UserOwner.Email</p>
+                    }
+                    else
+                    {
+                        <p style="font-size:20px">Phone : hidden</p>
+                        <p style="font-size:20px">Email : hidden</p>
+                    }
 
-    <h1 class="text-center">@Model.job.Name</h1>
+                </div>
 
-
-    <hr />
-    <div class="grid">
-        <div class="row">
-            <div class="cell-8"><h2>@Model.job.Salary₴</h2></div>
-
-            <div id="Subsc">
-                @if (Model.job.subscribers.FirstOrDefault(x => x.UserName == User.Identity.Name) == null)
-                {
-                    <div class="cell-4"><button id="btnsub" onclick="Ts1()" class="button alert">Subscribe</button></div>
-                }
-                else
-                {
-                    <div class="cell-4"><button id="btnsub" onclick="Ts1()" class="button alert">Subscribed</button></div>
-
-                }
             </div>
+            <hr />
+            <div>
+                <br />
+                <h3 class="text-center">DESCRIPTIONS</h3>
+                <hr />
+                <p style="font-size:18px">@Model.job.Description</p>
+            </div>
+            <hr />
+            <br />
+            <br />
+            <h3 class="text-center">ACTIONS</h3>
+            <hr />
+            <div>
+                <ul class="bottom text-center" data-role="tabs">
+                    <li class="bg-darkRed fg-white fg-yellow-hover"><a href="#MyJobs">Buttons</a></li>
+                    <li class="bg-darkRed fg-white fg-yellow-hover"><a href="#MySubs">Chat</a></li>
+                </ul>
+                <div class="border bd-default no-border-top p-2">
+                    <div id="MyJobs">
+                        <button id="btnsub" onclick="Ts1();" class="button cell-12 outline alert" style="margin-bottom:10px">SUBSCIBE</button>
+                        <button class="button cell-12 outline alert" style="margin-bottom:10px" disabled>SEND RESUME [IN DEV]</button>
+                        @if (Model.job.UserOwner.Id == User.Identity.GetUserId() || User.IsInRole("Admin"))
+                        {
+                            @Html.ActionLink("REMOVE", "Index", "Manage", null, htmlAttributes: new { style="margin-bottom:10px", @class = "button alert outline cell-12" })
+                        }
+                    </div>
+                    <div id="MySubs">
+                        <div id="Chat">
 
-
-        </div>
-        <br />
-        <br />
-        <label>Description:</label>
-        <div class="container row">
-            @Model.job.Description
-        </div>
-
-
-
-        <br />
-        <br />
-        <br />
-        <br />
-
-        <div class="row">
-            <div class="cell-8">
-                <a href='@Url.Action("UserInfo","Account",new {id=Model.job.UserOwner.Id })' style="text-decoration:none; color:white">
-                    <div class="row user-info">
-                        <div class="cell-3">
-                            <img width="30" class="avatar" height="30" src="@Model.job.UserOwner.AvaPath">
-                            @Model.job.UserOwner.FullName
-                        </div>
-                        <div class="cell-3">
-                            <input data-role="rating" data-value="@Model.job.UserOwner.Raiting" readonly disabled data-star-color="violet" data-stared-color="red" data-round-func="floor">
-                        </div>
-                        <div class="cell-3">
-                            @Model.job.UserOwner.Email
-                        </div>
-                        <div class="cell-3">
-                            <div class="stfieldEmail">
-                                <p style="width:150px;">@Model.job.UserOwner.PhoneNumber </p>
-                            </div>
                         </div>
                     </div>
-            </div>
-            </a>
-            <div class="cell-2">
-                <h6>@Model.job.Date</h6>
-            </div>
-            <div class="cell-2">
-                <h4>@Model.job.City.Name</h4>
+                </div>
             </div>
         </div>
 
-        <hr />
-        <div>
-            <ul class="bottom text-center" data-role="tabs">
-                <li class="bg-darkRed fg-white fg-yellow-hover"><a href="#Cart">Cart</a></li>
-                <li class="bg-darkRed fg-white fg-yellow-hover"><a href="#Chat">Chat</a></li>
-            </ul>
-            <div class="border bd-default no-border-top p-2">
-                <div id="Cart">
-                    <div id="map" style="height:400px"></div>
-                    <div id='geocoder' class='geocoder'></div>
-                </div>
-                <div id="Chat">
-                    <button class="button outline alert cell-6" onclick="UpdateChat()">UPDATE CHAT</button>
-                </div>
-            </div>
-        </div>
-        <hr />
     </div>
 </div>
+
+@*@if (Model.job.UserOwner.Id == User.Identity.GetUserId() || User.IsInRole("Admin"))
+{
+    @Html.ActionLink("REMOVE", "Index", "Manage", null, htmlAttributes: new { @class = "button alert outline cell-12" })
+}*@
 <script>
+    
+    $(function() {
+       UpdateChat(); setInterval(UpdateChat, 150000);
+  });
     mapboxgl.accessToken = 'pk.eyJ1IjoiaXZhbnR5bW8iLCJhIjoiY2p0NXhiZXlsMGI5ajQ0cXprNHl1YmI5ciJ9.RbgpQDG-e3cQlkXMPVA_3Q';
 
 
@@ -138,11 +106,8 @@
         accessToken: mapboxgl.accessToken,
 
     });
-    $(document).ready(function () {
-        UpdateChat();
 
-        setInterval(UpdateChat, 300000);
-    })
+ 
     function UpdateChat() {
         $.ajax({
             url: '@Url.Action("GetMSG","Home")/'+@Model.job.ID,
@@ -158,27 +123,27 @@
 
                     HideLoaderJS();
                 },
-               
+
 
         });
     }
 
     function Ts1() {
-
+          UpdateChat();
         $.ajax({
             url: '@Url.Action("SubscribeManager","Home")/@Model.job.ID',
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (objOperations) {
-                     
+
                 var res = objOperations;
                 if (res == true) {
-                    $("#btnsub").text("Subscribed");
+                    $("#btnsub").text("SUBSCIBED");
                     $("#btnsub").addClass("Subs");
                     $("#btnsub").removeClass("Alert");
                 }
                 if (res == false) {
-                    $("#btnsub").text("Subscribe");
+                    $("#btnsub").text("SUBSCIBE");
                     $("#btnsub").removeClass("Subs");
                        $("#btnsub").addClass("Alert");
                 }
@@ -192,7 +157,7 @@
 
                     HideLoaderJS();
                 },
-               
+
         });
             } ;
 </script>
