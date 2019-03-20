@@ -28,6 +28,28 @@ namespace BLLViews.Controllers
         {
             return View();
         }
+
+        [Authorize]
+        public ActionResult RemoveJob(int id)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                if (User.IsInRole("Admin") || db.Jobs.FirstOrDefault(y => y.ID == id).UserOwner.Id==User.Identity.GetUserId())
+                {
+
+                    db.JobMSGs.RemoveRange(db.JobMSGs.Where(x => x.job == db.Jobs.FirstOrDefault(y => y.ID == id)));
+                    db.Jobs.FirstOrDefault(y => y.ID == id).subscribers = null;
+                    db.Jobs.Remove(db.Jobs.FirstOrDefault(x => x.ID == id));
+                    db.SaveChanges();
+
+                }
+                else
+                {
+                    return RedirectToAction("NotFound", "Home");
+                }
+            }
+            return RedirectToAction("JobsList","Home");
+        }
         [Authorize]
         public ActionResult GetMSG(int id)
         {

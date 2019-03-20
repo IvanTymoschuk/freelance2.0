@@ -69,7 +69,7 @@
                         <button class="button cell-12 outline alert" style="margin-bottom:10px" disabled>SEND RESUME [IN DEV]</button>
                         @if (Model.job.UserOwner.Id == User.Identity.GetUserId() || User.IsInRole("Admin"))
                         {
-                            @Html.ActionLink("REMOVE", "Index", "Manage", null, htmlAttributes: new { style="margin-bottom:10px", @class = "button alert outline cell-12" })
+                            @Html.ActionLink("REMOVE", "RemoveJob", "Home", new { id=Model.job.ID }, htmlAttributes: new { style="margin-bottom:10px", @class = "button alert outline cell-12" })
                         }
                     </div>
                     <div id="MySubs">
