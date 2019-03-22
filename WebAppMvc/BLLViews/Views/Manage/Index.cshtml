@@ -22,7 +22,9 @@
     <br />
 </div>
 <div style="margin:20px">
-    @Html.DropDownListFor(Model => Model.CityID, Model.ListCities, new { data_role="select", @class = "cell-12", data_prepend = "City: " })
+    @Html.TextBoxFor(model => Model.ResumeFile, new { data_cls_caption = "bg-darkred fg-white", data_cls_button = "bg-darkorange fg-white", type = "file", @class = "cell-12", data_role = "file", data_prepend = "Resume File: ", accept = ".txt,.jpg,.jpeg,.png,.doc,.docx" })
+    <br />
+    @Html.DropDownListFor(Model => Model.CityID, Model.ListCities, new { data_role = "select", @class = "cell-12", data_prepend = "City: " })
     <br />
     <input style="width:100%;" class="button alert outline cell-12" type="submit" value="Save" />
 </div>

@@ -24,6 +24,7 @@ namespace BLLViews.Models
         public string FullName { get; set; }
         virtual public City City { get; set; }
         public string AvaPath { get; set; }
+        public string ResumePath { get; set; }
         public double Raiting { get; set; }
         [InverseProperty("subscribers")]
         virtual public List<Job> Subscribed { get; set; }
@@ -36,6 +37,16 @@ namespace BLLViews.Models
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             return userIdentity;
         }
+    }
+    public class Resume
+    {
+        public int Id { get; set; }
+        public string path { get; set; }
+        public DateTime TimeSend { get; set; }
+        public DateTime TimeAnswer { get; set; }
+        public string Status { get; set; }
+        public Job job { get; set; }
+        public ApplicationUser own { get; set; }
     }
     public class City
     {
@@ -72,6 +83,7 @@ namespace BLLViews.Models
         {
             subscribers = new List<ApplicationUser>();
             JobMSGS = new List<JobMSGS>();
+            Resumes = new List<Resume>();
         }
         virtual public ICollection<JobMSGS>  JobMSGS { get; set; }
         public int ID { get; set; }
@@ -80,6 +92,8 @@ namespace BLLViews.Models
         public DateTime Date { get; set; }
         public string Description { get; set; }
         public City City { get; set; }
+
+        virtual public ICollection<Resume> Resumes { get; set; }
         virtual public ICollection<ApplicationUser> subscribers { get; set; }
         public Category Category { get; set; }
         [InverseProperty("OwnerJobs")]
@@ -125,6 +139,7 @@ namespace BLLViews.Models
             this.Configuration.LazyLoadingEnabled = false;
         }
             public virtual DbSet<Job> Jobs { get; set; }
+            public virtual DbSet<Resume> Resumes { get; set; }
             public virtual DbSet<JobMSGS> JobMSGs { get; set; }
             public virtual DbSet<Category> Categories { get; set; }
             public virtual DbSet<City> Cities { get; set; }

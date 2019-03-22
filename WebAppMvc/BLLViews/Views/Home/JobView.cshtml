@@ -66,7 +66,7 @@
                 <div class="border bd-default no-border-top p-2">
                     <div id="MyJobs">
                         <button id="btnsub" onclick="Ts1();" class="button cell-12 outline alert" style="margin-bottom:10px">SUBSCIBE</button>
-                        <button class="button cell-12 outline alert" style="margin-bottom:10px" disabled>SEND RESUME [IN DEV]</button>
+                        <button id="Resum" onclick="SendRes();" class="button cell-12 outline alert" style="margin-bottom:10px">SEND RESUME</button>
                         @if (Model.job.UserOwner.Id == User.Identity.GetUserId() || User.IsInRole("Admin"))
                         {
                             @Html.ActionLink("REMOVE", "RemoveJob", "Home", new { id=Model.job.ID }, htmlAttributes: new { style="margin-bottom:10px", @class = "button alert outline cell-12" })
@@ -159,7 +159,36 @@
                 },
 
         });
-            } ;
+    };
+      function SendRes() {
+          UpdateChat();
+        $.ajax({
+            url: '@Url.Action("SendResume","Home")/@Model.job.ID',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (objOperations) {
+
+                var res = objOperations;
+                if (res == true) {
+                    $("#resum").text("REMOVE RESUME");
+                }
+                if (res == false) {
+                   $("#resum").text("SEND RESUME");
+                }
+            },
+
+              beforeSend: function () {
+
+                    LoaderJS();
+                },
+                complete: function () {
+
+                    HideLoaderJS();
+                },
+
+        });
+    };
+
 </script>
 
 @*/@User.Identity.GetUserId()/@Model.job.ID'*@

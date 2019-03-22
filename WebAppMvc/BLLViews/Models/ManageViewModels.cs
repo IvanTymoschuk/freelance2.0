@@ -23,7 +23,8 @@ namespace BLLViews.Models
         public ApplicationUser user { get; set; }
         public int CityID { get; set; }
         public HttpPostedFileBase Upload { get; set; }
-
+        public HttpPostedFileBase ResumeFile { get; set; }
+        
         public ICollection<SelectListItem> ListCities { get; set; }
     }
 

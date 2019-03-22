@@ -39,6 +39,7 @@ namespace BLLViews.Controllers
 
                     db.JobMSGs.RemoveRange(db.JobMSGs.Where(x => x.job == db.Jobs.FirstOrDefault(y => y.ID == id)));
                     db.Jobs.FirstOrDefault(y => y.ID == id).subscribers = null;
+                    db.Jobs.FirstOrDefault(y => y.ID == id).Resumes = null;
                     db.Jobs.Remove(db.Jobs.FirstOrDefault(x => x.ID == id));
                     db.SaveChanges();
 
@@ -264,7 +265,54 @@ namespace BLLViews.Controllers
           
             return View(model);
         }
+        public ActionResult UpdateResume(int id, bool isTrue)
+        {
+            
 
+            using (ApplicationDbContext ctx = new ApplicationDbContext())
+            {
+                if (ctx.Resumes.Include("job").FirstOrDefault(x => x.Id != id).job.UserOwner.Id == User.Identity.GetUserId())
+                    return RedirectToAction("notfound");
+                if (isTrue)
+                    ctx.Resumes.FirstOrDefault(x => x.Id == id).Status = "ACCEPT";
+                else
+                    ctx.Resumes.FirstOrDefault(x => x.Id == id).Status = "DENIED";
+                ctx.SaveChanges();
+            }
+   
+            return new EmptyResult();
+        }
+        public ActionResult SendResume(int id)
+        {
+
+            using (ApplicationDbContext ctx = new ApplicationDbContext())
+            {
+
+
+                string uid = User.Identity.GetUserId();
+                var u = UserManager.FindById(uid);
+                if (ctx.Jobs.Include("Resumes").FirstOrDefault(x => x.ID == id).Resumes.FirstOrDefault(x => x.path ==u.ResumePath) == null)
+                {
+                    ctx.Resumes.Add(new Resume() {
+                        job = ctx.Jobs.FirstOrDefault(x => x.ID == id),
+                        path = u.ResumePath,
+                        own = ctx.Users.FirstOrDefault(x=>x.Id==uid),
+                        Status = "PROCESSING",
+                        TimeSend = DateTime.Now,
+                        TimeAnswer = DateTime.Now
+          
+                    });
+                    ctx.SaveChanges();
+                    return Json(true, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    ctx.Jobs.Include("Resumes").FirstOrDefault(x => x.ID == id).Resumes.Remove(ctx.Resumes.FirstOrDefault(x => x.own.Id == uid));
+                    ctx.SaveChanges();
+                    return Json(false, JsonRequestBehavior.AllowGet);
+                }
+            }
+        }
         public ActionResult SubscribeManager(int id)
         {
 

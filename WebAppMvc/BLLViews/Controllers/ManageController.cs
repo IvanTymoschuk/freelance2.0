@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BLLViews.Models;
 using System.Collections.Generic;
+using System.IO;
 
 namespace BLLViews.Controllers
 {
@@ -92,27 +93,60 @@ namespace BLLViews.Controllers
         [HttpPost]
         public ActionResult Index( IndexViewModel model)
         {
-            string fileName=null;
-            string serverFileName=null;
-            var userId = User.Identity.GetUserId();
-            if (model.Upload!=null)
-            {
-                 fileName = System.IO.Path.GetFileName(model.Upload.FileName);
-                 serverFileName = string.Format(Server.MapPath("~/Content/AvaFiles/" + fileName));
-                 model.Upload.SaveAs(serverFileName);
-            }
-            
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                if(!string.IsNullOrEmpty(serverFileName))
-                    db.Users.FirstOrDefault(x => x.Id == userId).AvaPath = "/Content/AvaFiles/" + fileName;
-                if(!string.IsNullOrEmpty(model.user.FullName))
+
+                string fileName = null;
+                string serverFileName = null;
+                string rosh = null;
+                var userId = User.Identity.GetUserId();
+                if (model.Upload != null)
+                {
+
+                    if (db.Users.FirstOrDefault(x => x.Id == userId).AvaPath != null)
+                    {
+                        System.IO.File.Delete(Server.MapPath(db.Users.FirstOrDefault(x => x.Id == userId).AvaPath));
+                    }
+
+                    fileName = System.IO.Path.GetFileName(model.Upload.FileName);
+                    int dotid = fileName.IndexOf('.');
+                    rosh = fileName.Remove(0, dotid);
+                    serverFileName = string.Format(Server.MapPath("~/Content/AvaFiles/" + User.Identity.GetUserName() + rosh));
+
+                    model.Upload.SaveAs(serverFileName);
+
+                    db.Users.FirstOrDefault(x => x.Id == userId).AvaPath = "/Content/AvaFiles/" + User.Identity.GetUserName()+ rosh;
+                }
+                fileName = null;
+                serverFileName = null;
+                if (model.ResumeFile != null)
+                {
+
+                    if (db.Users.FirstOrDefault(x => x.Id == userId).ResumePath!=null)
+                    {
+                        System.IO.File.Delete(Server.MapPath(db.Users.FirstOrDefault(x => x.Id == userId).ResumePath));
+                    }
+
+                    fileName = System.IO.Path.GetFileName(model.ResumeFile.FileName);
+                    int dotid = fileName.IndexOf('.');
+                    rosh = fileName.Remove(0, dotid);
+                    serverFileName = string.Format(Server.MapPath("~/Content/Resumes/" + User.Identity.GetUserName()+rosh));
+                  
+                    model.ResumeFile.SaveAs(serverFileName);
+
+                    db.Users.FirstOrDefault(x => x.Id == userId).ResumePath = "/Content/Resumes/" + User.Identity.GetUserName()+ rosh;
+                }
+
+                if (!string.IsNullOrEmpty(serverFileName))
+                  
+                if (!string.IsNullOrEmpty(model.user.FullName))
                     db.Users.FirstOrDefault(x => x.Id == userId).FullName = model.user.FullName;
 
                 db.Users.FirstOrDefault(x => x.Id == userId).City = db.Cities.FirstOrDefault(x => x.Id == model.CityID);
                 db.SaveChanges();
+
+                return Redirect("/account/UserInfo/" + userId);
             }
-            return Redirect("/account/UserInfo/" + userId);
         }
         //
         // POST: /Manage/RemoveLogin

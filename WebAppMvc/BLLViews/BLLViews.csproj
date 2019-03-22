@@ -196,6 +196,14 @@
     <Compile Include="Migrations\201903131822321_Test2.Designer.cs">
       <DependentUpon>201903131822321_Test2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903221516365_jobUpdated.cs" />
+    <Compile Include="Migrations\201903221516365_jobUpdated.Designer.cs">
+      <DependentUpon>201903221516365_jobUpdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903221523351_figjfdigi.cs" />
+    <Compile Include="Migrations\201903221523351_figjfdigi.Designer.cs">
+      <DependentUpon>201903221523351_figjfdigi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminModels.cs" />
@@ -357,6 +365,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903131822321_Test2.resx">
       <DependentUpon>201903131822321_Test2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903221516365_jobUpdated.resx">
+      <DependentUpon>201903221516365_jobUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903221523351_figjfdigi.resx">
+      <DependentUpon>201903221523351_figjfdigi.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
