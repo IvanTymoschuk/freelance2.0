@@ -1,0 +1,67 @@
+﻿@model BLLViews.Models.ResumeListModel
+@{
+    ViewBag.Title = "ResumeList";
+
+}
+<style>
+    .table-container {
+        width: 100%;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+</style>
+<table class="table  striped table-container  table-border cell-border" id="Test1" data-role="table" data-show-activity="false" data-rownum="true">
+    <thead>
+        <tr>
+            <th class="d-none-fs d-block-md">FullName</th>
+            <th>Username</th>
+            <th>Resume</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody class="fg-white">
+        @foreach (var el in Model.list)
+        {
+
+            <tr class="bd-darkRed">
+                <td>@el.own.FullName</td>
+                <td>@el.own.UserName</td>
+                <td><a class="cell-12 button alert outline" href="@el.path">Download</a></td>
+
+                <td>
+
+                    @*<button  id="@el.user.Id" class=" elemClass button alert outline cell-12" type="button" >Roles</button>*@
+                    @Ajax.ActionLink("ACCEPT", "AcceptResume", new { id = el.Id },
+                            new AjaxOptions
+                            {
+
+                                OnBegin = "LoaderJS",
+                                OnComplete = "HideLoaderJS",
+                                UpdateTargetId = "MyResumes",
+                                InsertionMode = InsertionMode.Replace
+                            },
+                    new { @class = "button alert outline cell-6" })
+                    @Ajax.ActionLink("DEINED", "DeinedResume", new { id = el.Id },
+                         new AjaxOptions
+                         {
+
+                             OnBegin = "LoaderJS",
+                             OnComplete = "HideLoaderJS",
+                             UpdateTargetId = "MyResumes",
+                             InsertionMode = InsertionMode.Replace
+                         },
+                 new { @class = "button alert outline cell-5" })
+                </td>
+
+            </tr>
+        }
+
+
+    </tbody>
+</table>
+@Scripts.Render("~/bundles/MetroUI")
+
+<script>
+  
+
+</script>

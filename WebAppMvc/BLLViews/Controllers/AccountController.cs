@@ -370,6 +370,19 @@ namespace BLLViews.Controllers
             return code == null ? View("Error") : View();
         }
 
+        ICollection<Resume> GetMyResumes()
+        {
+            var uid = User.Identity.GetUserId();
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+
+                return db.Resumes.Include("job").Include("own").Where(x => x.own.Id == uid).ToList();
+            }
+        }
+        public ActionResult MyResumes()
+        {
+            return View(GetMyResumes());
+        }
         //
         // POST: /Account/ResetPassword
         [HttpPost]

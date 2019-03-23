@@ -337,6 +337,8 @@
     <Content Include="Views\Admin\_Users.cshtml" />
     <Content Include="Views\Home\JobView.cshtml" />
     <Content Include="Views\Home\_Chat.cshtml" />
+    <Content Include="Views\Home\ResumeList.cshtml" />
+    <Content Include="Views\Account\MyResumes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

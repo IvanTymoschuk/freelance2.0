@@ -23,6 +23,14 @@ namespace BLLViews.Models
         public ICollection<JobMSGS> msgs { get; set; }
         public JobMSGS NewMSG { get; set; }
     }
+    public class ResumeListModel
+    {
+        public ResumeListModel()
+        {
+            list = new List<Resume>();
+        }
+        public ICollection<Resume> list { get; set; }
+    }
     public class CreateJobModel
     {
         public CreateJobModel()

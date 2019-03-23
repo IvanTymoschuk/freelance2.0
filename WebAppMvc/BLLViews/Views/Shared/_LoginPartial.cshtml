@@ -27,9 +27,12 @@
                 @Html.ActionLink("My jobs", $"UserInfo/{User.Identity.GetUserId()}", "Account", routeValues: null, htmlAttributes: null)
             </li>
             <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">
-                @Html.ActionLink("Profile", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-
+                @Html.ActionLink("My Resumes", "MyResumes", "Account", routeValues: null, htmlAttributes: new { title = "Account" })
             </li>
+            <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">
+                @Html.ActionLink("Profile", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+
             <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">
                 <a href="~/support/MyTickets"> Support</a>
             </li>

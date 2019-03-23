@@ -1,0 +1,34 @@
+﻿@model IEnumerable<BLLViews.Models.Resume>
+@{
+    ViewBag.Title = "_Users";
+
+}
+<style>
+    .table-container {
+        width: 100%;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+</style>
+<div class="container">
+    <table class="table  striped table-container  table-border cell-border" id="Test1" data-role="table" data-show-search="true" data-show-activity="false" data-rownum="true">
+        <thead>
+            <tr>
+                <th>Job Name</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody class="fg-white" id="BTable">
+            @foreach (var el in Model)
+            {
+
+                <tr class="bd-darkRed">
+                    <td><a href='@Url.Action("JobView","Home",new {id=el.job.ID })' style="text-decoration:none; color:white">@el.job.Name</a></td>
+                    <td style="color:white">@el.Status</td>
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+</div>

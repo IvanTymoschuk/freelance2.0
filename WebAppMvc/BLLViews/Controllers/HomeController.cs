@@ -192,7 +192,7 @@ namespace BLLViews.Controllers
                 var model = new JobView()
                 {
 
-                    job = ctx.Jobs.Include("UserOwner").Include("Category").Include("City").SingleOrDefault(x => x.ID == id),
+                    job = ctx.Jobs.Include("UserOwner").Include("Resumes").Include("Category").Include("City").SingleOrDefault(x => x.ID == id),
                     Categories = ctx.Categories.ToList(),
                     Cities = ctx.Cities.ToList(),
                     Users=ctx.Users.ToList()
@@ -265,22 +265,38 @@ namespace BLLViews.Controllers
           
             return View(model);
         }
-        public ActionResult UpdateResume(int id, bool isTrue)
+        public ActionResult AcceptResume(int id)
         {
             
 
             using (ApplicationDbContext ctx = new ApplicationDbContext())
             {
-                if (ctx.Resumes.Include("job").FirstOrDefault(x => x.Id != id).job.UserOwner.Id == User.Identity.GetUserId())
+                int jid = ctx.Resumes.Include("job").FirstOrDefault(x => x.Id == id).job.ID;
+                if (ctx.Jobs.Include("UserOwner").FirstOrDefault(x => x.ID == jid).UserOwner.Id != User.Identity.GetUserId() || User.IsInRole("Admin")==false)
                     return RedirectToAction("notfound");
-                if (isTrue)
                     ctx.Resumes.FirstOrDefault(x => x.Id == id).Status = "ACCEPT";
-                else
-                    ctx.Resumes.FirstOrDefault(x => x.Id == id).Status = "DENIED";
                 ctx.SaveChanges();
+                return PartialView("ResumeList", GetResumeList(jid));
             }
-   
-            return new EmptyResult();
+
+         
+        }
+        public ActionResult DeinedResume(int id)
+        {
+
+
+            using (ApplicationDbContext ctx = new ApplicationDbContext())
+            {
+
+                int jid = ctx.Resumes.Include("job").FirstOrDefault(x => x.Id == id).job.ID;
+                if (ctx.Jobs.Include("UserOwner").FirstOrDefault(x => x.ID == jid).UserOwner.Id != User.Identity.GetUserId() || User.IsInRole("Admin")==false)
+                    return RedirectToAction("notfound");
+                ctx.Resumes.FirstOrDefault(x => x.Id == id).Status = "DEINED";
+                ctx.SaveChanges();
+                return PartialView("ResumeList", GetResumeList(jid));
+            }
+
+
         }
         public ActionResult SendResume(int id)
         {
@@ -291,7 +307,8 @@ namespace BLLViews.Controllers
 
                 string uid = User.Identity.GetUserId();
                 var u = UserManager.FindById(uid);
-                if (ctx.Jobs.Include("Resumes").FirstOrDefault(x => x.ID == id).Resumes.FirstOrDefault(x => x.path ==u.ResumePath) == null)
+                var resum = ctx.Resumes.Include("job").Include("own").FirstOrDefault(x => x.own.Id == u.Id && x.job.ID == id);
+                if (resum==null)
                 {
                     ctx.Resumes.Add(new Resume() {
                         job = ctx.Jobs.FirstOrDefault(x => x.ID == id),
@@ -307,11 +324,25 @@ namespace BLLViews.Controllers
                 }
                 else
                 {
-                    ctx.Jobs.Include("Resumes").FirstOrDefault(x => x.ID == id).Resumes.Remove(ctx.Resumes.FirstOrDefault(x => x.own.Id == uid));
+                    ctx.Resumes.Remove(ctx.Resumes.Include("own").FirstOrDefault(x=>x.own.Id==uid));
                     ctx.SaveChanges();
                     return Json(false, JsonRequestBehavior.AllowGet);
                 }
             }
+        }
+        ResumeListModel GetResumeList(int id)
+        {
+            ResumeListModel model = new ResumeListModel();
+            using (ApplicationDbContext ctx = new ApplicationDbContext())
+            {
+                model.list = ctx.Resumes.Include("job").Include("own").Where(x => x.job.ID == id&& x.Status== "PROCESSING").ToList();
+            }
+            return model;
+        }
+        public ActionResult GetResumes(int id)
+        {
+         
+            return PartialView("ResumeList", GetResumeList(id));
         }
         public ActionResult SubscribeManager(int id)
         {

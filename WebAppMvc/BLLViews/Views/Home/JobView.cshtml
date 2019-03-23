@@ -62,20 +62,40 @@
                 <ul class="bottom text-center" data-role="tabs">
                     <li class="bg-darkRed fg-white fg-yellow-hover"><a href="#MyJobs">Buttons</a></li>
                     <li class="bg-darkRed fg-white fg-yellow-hover"><a href="#MySubs">Chat</a></li>
+                    @if (Model.job.UserOwner.Id == User.Identity.GetUserId() || User.IsInRole("Admin"))
+                    {
+                        <li class="bg-darkRed fg-white fg-yellow-hover"><a href="#MyResumes">ResumeList</a></li>
+                    }
+
                 </ul>
                 <div class="border bd-default no-border-top p-2">
                     <div id="MyJobs">
                         <button id="btnsub" onclick="Ts1();" class="button cell-12 outline alert" style="margin-bottom:10px">SUBSCIBE</button>
-                        <button id="Resum" onclick="SendRes();" class="button cell-12 outline alert" style="margin-bottom:10px">SEND RESUME</button>
+
+
+                        @if (Model.job.Resumes.FirstOrDefault(x => x.own.Id == User.Identity.GetUserId()) != null)
+                        {
+                            <button id="Resum" onclick="SendRes();" class="button cell-12 outline alert" style="margin-bottom:10px">REMOVE RESUME</button>
+                        }
+                        else
+                        {
+                            <button id="Resum" onclick="SendRes();" class="button cell-12 outline alert" style="margin-bottom:10px">SEND RESUME</button>
+                        }
                         @if (Model.job.UserOwner.Id == User.Identity.GetUserId() || User.IsInRole("Admin"))
                         {
-                            @Html.ActionLink("REMOVE", "RemoveJob", "Home", new { id=Model.job.ID }, htmlAttributes: new { style="margin-bottom:10px", @class = "button alert outline cell-12" })
+                            @Html.ActionLink("REMOVE", "RemoveJob", "Home", new { id = Model.job.ID }, htmlAttributes: new { style = "margin-bottom:10px", @class = "button alert outline cell-12" })
                         }
                     </div>
                     <div id="MySubs">
                         <div id="Chat">
 
                         </div>
+                    </div>
+                    <div id="MyResumes">
+                        @if (Model.job.UserOwner.Id == User.Identity.GetUserId() || User.IsInRole("Admin"))
+                        {
+                            @Html.Action("GetResumes", new { id = Model.job.ID })
+                        }
                     </div>
                 </div>
             </div>
@@ -170,10 +190,10 @@
 
                 var res = objOperations;
                 if (res == true) {
-                    $("#resum").text("REMOVE RESUME");
+                    $("#Resum").text("REMOVE RESUME");
                 }
                 if (res == false) {
-                   $("#resum").text("SEND RESUME");
+                   $("#Resum").text("SEND RESUME");
                 }
             },
 

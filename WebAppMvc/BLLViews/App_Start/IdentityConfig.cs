@@ -20,21 +20,27 @@ namespace BLLViews
         public Task SendAsync(IdentityMessage message)
         {
 
-            var from = "customer.psyhoteam@gmail.com";
-            var pass = "5358254AaV";
+            //var from = "customer.psyhoteam@gmail.com";
+            //var pass = "5358254AaV";
 
       
-            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+            //SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
 
+
+            var from = "customer@penguin-team.info";
+            var pass = "5358254AaV";
+
+
+            SmtpClient client = new SmtpClient("91.238.103.67", 25);
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = false;
             client.Credentials = new System.Net.NetworkCredential(from, pass);
-            client.EnableSsl = true;
+            client.EnableSsl = false;
 
             // создаем письмо: message.Destination - адрес получателя
             var mail = new MailMessage(from, message.Destination);
             mail.Subject = message.Subject;
-            mail.Body = message.Body;
+            mail.Body = $"<html><body style='background: black; color:white;'><h1 style='text-align:center'>PenGuin-Team</h1><br><br><h3 style='text-align:center'>{message.Body}</h3></br></br><h2 style='text-align:center'>Sincerely, PenGuin - Team.</h2></body></html>";
             mail.IsBodyHtml = true;
 
             return client.SendMailAsync(mail);
