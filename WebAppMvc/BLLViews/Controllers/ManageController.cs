@@ -102,8 +102,8 @@ namespace BLLViews.Controllers
                 var userId = User.Identity.GetUserId();
                 if (model.Upload != null)
                 {
-
-                    if (db.Users.FirstOrDefault(x => x.Id == userId).AvaPath != null)
+               
+                    if (db.Users.FirstOrDefault(x => x.Id == userId).AvaPath != null && db.Users.FirstOrDefault(x => x.Id == userId).AvaPath.Contains("https")==false)
                     {
                         System.IO.File.Delete(Server.MapPath(db.Users.FirstOrDefault(x => x.Id == userId).AvaPath));
                     }
@@ -122,7 +122,7 @@ namespace BLLViews.Controllers
                 if (model.ResumeFile != null)
                 {
 
-                    if (db.Users.FirstOrDefault(x => x.Id == userId).ResumePath!=null)
+                    if (db.Users.FirstOrDefault(x => x.Id == userId).ResumePath != null)
                     {
                         System.IO.File.Delete(Server.MapPath(db.Users.FirstOrDefault(x => x.Id == userId).ResumePath));
                     }

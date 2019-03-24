@@ -26,7 +26,7 @@
         @Html.ValidationMessageFor(m => m.ListCities, "", new { @class = "fg-white" })
         @Html.LabelFor(m => m.ListCities)
 
-        @Html.DropDownListFor(Model => Model.CityID, Model.ListCities, new { data_role = "select", @class = "cell-12" })
+        @Html.DropDownListFor(x => x.CityID, new SelectList(Model.ListCities, "Value", "Text"), new { data_role = "select", @class="cell-12" })
         <br />
         // @Html.ValidationSummary("", new { @class = "fg-white" })
         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "fg-white" })

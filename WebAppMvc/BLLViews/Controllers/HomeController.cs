@@ -272,8 +272,6 @@ namespace BLLViews.Controllers
             using (ApplicationDbContext ctx = new ApplicationDbContext())
             {
                 int jid = ctx.Resumes.Include("job").FirstOrDefault(x => x.Id == id).job.ID;
-                if (ctx.Jobs.Include("UserOwner").FirstOrDefault(x => x.ID == jid).UserOwner.Id != User.Identity.GetUserId() || User.IsInRole("Admin")==false)
-                    return RedirectToAction("notfound");
                     ctx.Resumes.FirstOrDefault(x => x.Id == id).Status = "ACCEPT";
                 ctx.SaveChanges();
                 return PartialView("ResumeList", GetResumeList(jid));
@@ -289,8 +287,6 @@ namespace BLLViews.Controllers
             {
 
                 int jid = ctx.Resumes.Include("job").FirstOrDefault(x => x.Id == id).job.ID;
-                if (ctx.Jobs.Include("UserOwner").FirstOrDefault(x => x.ID == jid).UserOwner.Id != User.Identity.GetUserId() || User.IsInRole("Admin")==false)
-                    return RedirectToAction("notfound");
                 ctx.Resumes.FirstOrDefault(x => x.Id == id).Status = "DEINED";
                 ctx.SaveChanges();
                 return PartialView("ResumeList", GetResumeList(jid));

@@ -281,10 +281,10 @@ namespace BLLViews.Controllers
 
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                       var city =    db.Cities.FirstOrDefault(x => x.Id == model.CityID);
 
                     var ava = @"https://static.thenounproject.com/png/17241-200.png";
-                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, AvaPath = ava, FullName = model.FullName, City = city };
+                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, AvaPath = ava, FullName = model.FullName};
+
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
@@ -297,6 +297,9 @@ namespace BLLViews.Controllers
                         await UserManager.SendEmailAsync(user.Id, "Email Confirmation" + DateTime.Now,
                                    "To complete registration, go to the link:: <a href=\""
                                                                    + callbackUrl + "\">complete the registration </a>");
+
+                        db.Users.FirstOrDefault(x=>x.Id==user.Id).City = db.Cities.FirstOrDefault(x => x.Id == model.CityID);
+                        db.SaveChanges();
                         return RedirectToAction("Login", "Account");
                     }
                     AddErrors(result);
