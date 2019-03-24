@@ -37,12 +37,12 @@
 
         <div style="margin-left:50px"></div>
 
-        <a href="#" class="fg-white" id="sidebar-toggle-2" style="text-decoration:none">
-            <span >
+     
+            <span>
                 Pen.Guin
                 <sup>.com</sup>
             </span>
-        </a>
+ 
 
 
         <ul class="app-bar-menu">
@@ -61,20 +61,23 @@
             <ul class="app-bar-menu">
                 <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">@Html.ActionLink("Jobs", "JobsList", "Home")</li>
                 <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';">@Html.ActionLink("Create Job", "CreateJobs", "Home")</li>
-
-
             </ul>
-        }
-        else
-        {
+            <div class="pos-absolute pos-right-center bg-black">
+                <button class="button square bg-black" id="sidebar-toggle-2">
+                    <span class="mif-menu"></span>
+                </button>
+            </div>
+         }
+         else
+         {
 
-            <ul class="pos-absolute pos-right-center bg-black app-bar-menu">
-                <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';"> @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" }) </li>
-                <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';"> @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) </li>
-            </ul>
+                <ul class="pos-absolute pos-right-center bg-black app-bar-menu">
+                    <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';"> @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" }) </li>
+                    <li onmouseover="this.style.backgroundColor='#555';" onmouseout="this.style.backgroundColor='black';"> @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) </li>
+                </ul>
         }
 
-    </div>
+        </div>
     @using BLLViews.Models
 
     @if (User.Identity.IsAuthenticated)
